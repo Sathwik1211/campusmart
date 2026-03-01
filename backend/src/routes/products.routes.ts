@@ -43,7 +43,7 @@ router.get('/categories', async (_req: Request, res: Response) => {
 router.get('/:id', async (req: Request, res: Response) => {
     try {
         const product = await prisma.product.findFirst({
-            where: { OR: [{ id: Number(req.params.id) || 0 }, { slug: req.params.id }] },
+            where: { OR: [{ id: Number(req.params.id) || 0 }, { slug: String(req.params.id) }] },
             include: { category: true },
         });
         if (!product) { res.status(404).json({ error: 'Product not found' }); return; }

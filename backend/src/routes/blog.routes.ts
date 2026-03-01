@@ -26,7 +26,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:slug', async (req: Request, res: Response) => {
     try {
         const post = await prisma.blogPost.findFirst({
-            where: { OR: [{ slug: req.params.slug }, { id: Number(req.params.slug) || 0 }] },
+            where: { OR: [{ slug: String(req.params.slug) }, { id: Number(req.params.slug) || 0 }] },
         });
         if (!post) { res.status(404).json({ error: 'Post not found' }); return; }
         res.json(post);

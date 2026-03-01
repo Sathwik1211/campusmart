@@ -38,9 +38,9 @@ router.put('/', verifyToken, requireAdmin, async (req: AuthRequest, res: Respons
 router.put('/:key', verifyToken, requireAdmin, async (req: AuthRequest, res: Response) => {
     try {
         const content = await prisma.siteContent.upsert({
-            where: { key: req.params.key },
+            where: { key: String(req.params.key) },
             update: { value: req.body.value },
-            create: { key: req.params.key, value: req.body.value },
+            create: { key: String(req.params.key), value: req.body.value },
         });
         res.json(content);
     } catch {
