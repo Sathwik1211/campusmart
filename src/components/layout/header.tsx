@@ -49,22 +49,44 @@ const MainHeader = () => {
 
   const navItems = [
     { label: 'Home', href: '/' },
-    { 
-      label: 'Corporate', 
+    {
+      label: 'Corporate',
       href: '/corporate',
       hasDropdown: true,
       dropdownItems: [
         { label: 'About Us', href: '/corporate' },
         { label: 'Our Team', href: '/corporate#team' },
-        { label: 'Careers', href: '/corporate#careers' },
         { label: 'Partners', href: '/corporate#partners' },
+        { label: 'Careers', href: '/partnership' },
       ]
     },
-    { label: 'New Environments', href: '/new-environments' },
+    {
+      label: 'Services',
+      href: '/services', // non-clickable parent or links to first item
+      hasDropdown: true,
+      dropdownItems: [
+        { label: 'Campus Design & Execution', href: '/campus-design-execution' },
+        { label: 'Furniture Design & Supply', href: '/furniture-design-supply' },
+        { label: 'Sports Design & Execution', href: '/sports-design-execution' },
+        { label: 'AI/Digital Solutions', href: '/ai-digital-design-supply' },
+      ]
+    },
+    {
+      label: 'Solutions',
+      href: '/solutions',
+      hasDropdown: true,
+      dropdownItems: [
+        { label: 'Laboratories', href: '/labs' },
+        { label: 'Libraries', href: '/libraries' },
+        { label: 'Innovation Centres', href: '/innovation-centres' },
+        { label: 'Learning Environments', href: '/new-environments' },
+        { label: 'AI Stations', href: '/ai-stations' },
+      ]
+    },
     { label: 'Catalogues', href: '/catalogues' },
     { label: 'Shop', href: '/shop' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Contact Us', href: '/contact-us' },
-    { label: 'My Account', href: '/my-account' },
   ];
 
   const isActive = (path: string) => {

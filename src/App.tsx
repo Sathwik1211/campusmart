@@ -127,7 +127,13 @@ function App() {
             <Route path="/registration" element={<Layout><Registration /></Layout>} />
             <Route path="/admin/*" element={<AdminRoutes />} />
 
-            {/* Dynamic Catch-All Route matching DB Pages */}
+            {/* Static pages explicitly mapped so they always work */}
+            {Object.keys(PageTemplates).map((path) => {
+              const Component = PageTemplates[path];
+              return <Route key={path} path={`/${path}`} element={<Layout><Component /></Layout>} />
+            })}
+
+            {/* Dynamic Catch-All Route matching DB Pages (fallback) */}
             <Route path="/:slug" element={<Layout><DynamicPageRoute /></Layout>} />
           </Routes>
         </Suspense>
