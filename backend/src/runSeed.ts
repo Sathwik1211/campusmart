@@ -58,6 +58,62 @@ async function seed() {
     });
 
     console.log('✓ Homepage content seeded');
+
+    // ── Pages ─────────────────────────────────────────────────────────────
+    const corePages = [
+        { slug: 'about-us', title: 'About Us', template: 'corporate' },
+        { slug: 'ai-digital-design-supply', title: 'AI/Digital Design & Supply', template: 'ai-digital-design-supply' },
+        { slug: 'ai-guide', title: 'AI Guide', template: 'ai-guide' },
+        { slug: 'ai-ml', title: 'AI & ML Labs', template: 'ai-ml' },
+        { slug: 'ai-stations', title: 'AI Stations', template: 'ai-stations' },
+        { slug: 'assessment-system', title: 'Assessment System', template: 'assessment-system' },
+        { slug: 'blog', title: 'Blog', template: 'blog' },
+        { slug: 'campus-automation', title: 'Campus Automation', template: 'campus-automation' },
+        { slug: 'campus-design-execution', title: 'Campus Design & Execution', template: 'campus-design-execution' },
+        { slug: 'campus-design', title: 'Campus Design', template: 'campus-design' },
+        { slug: 'catalogues', title: 'Catalogues', template: 'catalogues' },
+        { slug: 'classifieds', title: 'Classifieds', template: 'classifieds' },
+        { slug: 'collaboration', title: 'Collaboration Spaces', template: 'collaboration' },
+        { slug: 'contact-us', title: 'Contact Us', template: 'contact-us' },
+        { slug: 'corporate', title: 'Corporate Identity', template: 'corporate' },
+        { slug: 'digital-transformation', title: 'Digital Transformation', template: 'digital-transformation' },
+        { slug: 'furniture-design-supply', title: 'Furniture Design & Supply', template: 'furniture-design-supply' },
+        { slug: 'furniture', title: 'Furniture Solutions', template: 'furniture' },
+        { slug: 'innovation-centres', title: 'Innovation Centres', template: 'innovation-centres' },
+        { slug: 'innovation', title: 'Innovation Ecosystems', template: 'innovation' },
+        { slug: 'labs', title: 'Laboratories', template: 'labs' },
+        { slug: 'libraries', title: 'Libraries', template: 'libraries' },
+        { slug: 'library-management', title: 'Library Management', template: 'library-management' },
+        { slug: 'lms', title: 'Learning Management System', template: 'lms' },
+        { slug: 'lookbook', title: 'Lookbook', template: 'lookbook' },
+        { slug: 'new-environments', title: 'New Learning Environments', template: 'new-environments' },
+        { slug: 'partnership', title: 'Partnership', template: 'partnership' },
+        { slug: 'privacy-policy', title: 'Privacy Policy', template: 'privacy-policy' },
+        { slug: 'setup-college', title: 'Setup Your College', template: 'setup-college' },
+        { slug: 'shop', title: 'Shop', template: 'shop' },
+        { slug: 'sports-design-execution', title: 'Sports Design & Execution', template: 'sports-design-execution' },
+        { slug: 'sports-infra', title: 'Sports Infrastructure', template: 'sports-infra' },
+        { slug: 'tech-infra', title: 'Tech Infrastructure', template: 'tech-infra' },
+        { slug: 'terms-of-use', title: 'Terms of Use', template: 'terms-of-use' },
+    ];
+
+    for (const page of corePages) {
+        await prisma.page.upsert({
+            where: { slug: page.slug },
+            update: { template: page.template, published: true }, // Ensure it stays linked to the right frontend template
+            create: {
+                title: page.title,
+                slug: page.slug,
+                template: page.template,
+                published: true,
+                content: '',
+                pageData: '{}'
+            }
+        });
+    }
+
+    console.log(`✓ ${corePages.length} Dynamic Pages seeded`);
+
     await prisma.$disconnect();
 }
 
