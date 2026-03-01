@@ -89,8 +89,8 @@ app.use('/api/pages', pagesRoutes);
 // Error handler must be last
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-    console.log(`🚀 CampusMart Backend running on http://localhost:${PORT}`);
+app.listen(Number(PORT), '0.0.0.0', () => {
+    console.log(`🚀 CampusMart Backend running on port ${PORT}`);
 });
 
 export default app;
