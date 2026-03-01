@@ -1,0 +1,1 @@
+import{a}from"./index-42ANG6Sg.js";const o="http://localhost:3001/api",r=a.create({baseURL:o});r.interceptors.request.use(t=>{const e=localStorage.getItem("cm_token");return e&&(t.headers.Authorization=`Bearer ${e}`),t});export{r as a};

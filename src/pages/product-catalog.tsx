@@ -1,0 +1,46 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { Download } from 'lucide-react';
+
+const ProductCatalog = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(heroRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <main className="min-h-screen">
+      <section ref={heroRef} className="bg-cm-yellow py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-cm-blue-dark mb-6">Product Catalog 2025</h1>
+          <p className="text-xl text-cm-blue-dark/70 max-w-3xl mx-auto">
+            Complete product range for educational institutions.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-white rounded-xl p-8 shadow-card">
+            <img 
+              src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+              alt="Catalog" 
+              className="w-full h-64 object-cover rounded-lg mb-6"
+            />
+            <h2 className="text-2xl font-bold text-cm-blue-dark mb-4">Download Our Latest Catalog</h2>
+            <p className="text-gray-600 mb-6">Browse our complete range of products and solutions.</p>
+            <button className="btn-primary inline-flex items-center gap-2">
+              <Download className="w-5 h-5" />
+              Download PDF
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default ProductCatalog;

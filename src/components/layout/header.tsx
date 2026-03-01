@@ -1,0 +1,202 @@
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+
+const MainHeader = () => {
+  const headerRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLUListElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      tl.fromTo(
+        headerRef.current,
+        { scaleX: 0, transformOrigin: 'left' },
+        { scaleX: 1, duration: 0.8, ease: 'power3.out' }
+      )
+        .fromTo(
+          logoRef.current,
+          { clipPath: 'circle(0% at 50% 50%)', opacity: 0 },
+          { clipPath: 'circle(100% at 50% 50%)', opacity: 1, duration: 0.6, ease: 'power3.out' },
+          '-=0.4'
+        )
+        .fromTo(
+          navRef.current?.children || [],
+          { y: -30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' },
+          '-=0.3'
+        );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const navItems = [
+    { label: 'Home', href: '/' },
+    { 
+      label: 'Corporate', 
+      href: '/corporate',
+      hasDropdown: true,
+      dropdownItems: [
+        { label: 'About Us', href: '/corporate' },
+        { label: 'Our Team', href: '/corporate#team' },
+        { label: 'Careers', href: '/corporate#careers' },
+        { label: 'Partners', href: '/corporate#partners' },
+      ]
+    },
+    { label: 'New Environments', href: '/new-environments' },
+    { label: 'Catalogues', href: '/catalogues' },
+    { label: 'Shop', href: '/shop' },
+    { label: 'Contact Us', href: '/contact-us' },
+    { label: 'My Account', href: '/my-account' },
+  ];
+
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
+
+  return (
+    <header
+      ref={headerRef}
+      className={`main-header ${isScrolled ? 'scrolled' : ''}`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`header-inner flex items-center justify-between ${isScrolled ? 'h-16' : 'h-20'}`}>
+          {/* Logo */}
+          <div ref={logoRef} className="flex-shrink-0">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="text-2xl md:text-3xl font-poppins font-bold text-cm-blue-dark">
+                <span className="block leading-none">CAMPUS</span>
+                <span className="block leading-none text-sm tracking-[0.3em]">MART</span>
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:block">
+            <ul ref={navRef} className="flex items-center gap-1">
+              {navItems.map((item) => (
+                <li key={item.label} className="relative">
+                  {item.hasDropdown ? (
+                    <div
+                      className="relative"
+                      onMouseEnter={() => setDropdownOpen(item.label)}
+                      onMouseLeave={() => setDropdownOpen(null)}
+                    >
+                      <Link
+                        to={item.href}
+                        className={`nav-link flex items-center gap-1 ${isActive(item.href) ? 'bg-cm-blue text-white rounded-full' : ''}`}
+                      >
+                        {item.label}
+                        <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen === item.label ? 'rotate-180' : ''}`} />
+                      </Link>
+                      {dropdownOpen === item.label && item.dropdownItems && (
+                        <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg py-2 z-50 animate-fade-in">
+                          {item.dropdownItems.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.label}
+                              to={dropdownItem.href}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-cm-blue hover:text-white transition-colors"
+                            >
+                              {dropdownItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`nav-link ${isActive(item.href) ? 'bg-cm-blue text-white rounded-full' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 rounded-lg hover:bg-black/10 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <nav className="lg:hidden py-4 border-t border-black/10">
+            <ul className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  {item.hasDropdown ? (
+                    <div>
+                      <button
+                        className={`w-full text-left px-4 py-2 text-sm font-semibold uppercase hover:bg-cm-blue hover:text-white rounded-lg transition-colors flex items-center justify-between ${isActive(item.href) ? 'bg-cm-blue text-white' : ''}`}
+                        onClick={() => setDropdownOpen(dropdownOpen === item.label ? null : item.label)}
+                      >
+                        {item.label}
+                        <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen === item.label ? 'rotate-180' : ''}`} />
+                      </button>
+                      {dropdownOpen === item.label && item.dropdownItems && (
+                        <div className="pl-4 mt-1 space-y-1">
+                          {item.dropdownItems.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.label}
+                              to={dropdownItem.href}
+                              className="block px-4 py-2 text-sm text-gray-600 hover:text-cm-blue transition-colors"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              {dropdownItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`block px-4 py-2 text-sm font-semibold uppercase hover:bg-cm-blue hover:text-white rounded-lg transition-colors ${isActive(item.href) ? 'bg-cm-blue text-white' : ''}`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default MainHeader;
