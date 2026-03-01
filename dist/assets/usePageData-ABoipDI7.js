@@ -1,0 +1,1 @@
+import{r as e,d as f}from"./index-B3mWwTY6.js";function p(r){const[n,a]=e.useState({}),[c,o]=e.useState(!0);return e.useEffect(()=>{let t=!0;return f.get(`/pages/${r}`).then(s=>{if(t)try{const u=s.data.pageData?JSON.parse(s.data.pageData):{};a(u)}catch{a({})}}).catch(()=>a({})).finally(()=>{t&&o(!1)}),()=>{t=!1}},[r]),{data:n,loading:c}}export{p as u};

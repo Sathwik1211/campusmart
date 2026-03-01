@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Save, RotateCcw, Plus, Trash2, Link as LinkIcon, Phone, Mail } from 'lucide-react';
+import { Save, RotateCcw, Plus, Trash2 } from 'lucide-react';
 import api from '../api/client';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

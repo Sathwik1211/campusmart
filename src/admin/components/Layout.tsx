@@ -1,8 +1,8 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
     LayoutDashboard, Package, BookOpen, ShoppingBag, Users, MessageSquare,
-    Tag, BookMarked, Settings, LogOut, GraduationCap, FileText, Image,
-    Globe, Star, Bell, Activity
+    Tag, BookMarked, Settings, LogOut, GraduationCap,
+    Globe, Star
 } from 'lucide-react';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -64,8 +64,8 @@ export default function Layout() {
                             key={to}
                             to={to}
                             className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${isActive(to)
-                                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                                ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                 }`}
                         >
                             <Icon className="w-3.5 h-3.5 flex-shrink-0" />
