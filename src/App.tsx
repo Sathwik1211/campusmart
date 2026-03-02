@@ -7,6 +7,7 @@ import api from '@/api/client';
 import TopBar from '@/components/layout/topbar';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import ScrollToTop from '@/components/layout/scroll-to-top';
 
 // Core Pages (Always present)
 const Home = lazy(() => import('@/pages/home'));
@@ -119,6 +120,7 @@ function App() {
   return (
     <SiteContentProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Core Pages */}
