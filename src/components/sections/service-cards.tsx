@@ -53,7 +53,7 @@ const ServiceCards = () => {
 
   return (
     <div ref={containerRef} className="w-full">
-      <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4">
+      <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4 w-full">
         {services.map(({ title, bgColor, textColor, href }) => (
           <Link
             key={title}
