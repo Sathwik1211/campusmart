@@ -58,22 +58,22 @@ const CollaborationsTicker = () => {
                 <div className="flex animate-marquee gap-12 md:gap-24 items-center whitespace-nowrap px-6">
                     {/* First set of items */}
                     {collaborations.map((collab, i) => (
-                        <div key={`collab-1-${i}`} className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 cursor-pointer">
-                            <collab.icon className="w-8 h-8 md:w-10 md:h-10 text-cm-blue" />
-                            <span className="text-lg md:text-xl font-bold text-gray-800">{collab.name}</span>
+                        <div key={`collab-1-${i}`} className="flex items-center gap-3">
+                            <collab.icon className="w-6 h-6 md:w-8 md:h-8 text-gray-400" />
+                            <span className="text-base md:text-lg font-semibold text-gray-400">{collab.name}</span>
                         </div>
                     ))}
                     {/* Duplicate set for seamless looping */}
                     {collaborations.map((collab, i) => (
-                        <div key={`collab-2-${i}`} className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 cursor-pointer">
-                            <collab.icon className="w-8 h-8 md:w-10 md:h-10 text-cm-blue" />
-                            <span className="text-lg md:text-xl font-bold text-gray-800">{collab.name}</span>
+                        <div key={`collab-2-${i}`} className="flex items-center gap-3">
+                            <collab.icon className="w-6 h-6 md:w-8 md:h-8 text-gray-400" />
+                            <span className="text-base md:text-lg font-semibold text-gray-400">{collab.name}</span>
                         </div>
                     ))}
                 </div>
 
                 {/* Right gradient mask */}
-                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#f4f3ef] to-transparent z-10 pointer-events-none" />
             </div>
         </section>
     );
