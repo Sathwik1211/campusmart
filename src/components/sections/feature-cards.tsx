@@ -102,83 +102,84 @@ const FeatureCards = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row gap-6 items-start">
 
-          {/* ─── Masonry Grid ─── */}
-          <div
-            className="flex-1 min-w-0"
-            style={{ columns: cols, columnGap: '16px' }}
-          >
-            {features.map(({ title, description, image, href, tag, color, h }: any) => (
-              <Link
-                key={title}
-                to={href}
-                className="fc-card group inline-block w-full mb-4 rounded-2xl overflow-hidden relative shadow-lg"
-                style={{ breakInside: 'avoid', height: cols === 2 ? Math.min(h, 240) : h }}
-              >
-                {/* Background image */}
-                <img
-                  src={image}
-                  alt={title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-
-                {/* Permanent subtle vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/5" />
-
-                {/* Category badge */}
-                <div
-                  className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm shadow"
-                  style={{ background: color + 'CC' }}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-white inline-block"
-                    style={{ boxShadow: '0 0 4px white' }}
-                  />
-                  {tag}
-                </div>
-
-                {/* Arrow icon — top right on hover */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400">
-                  <MoveUpRight className="w-4 h-4 text-white" />
-                </div>
-
-                {/* Bottom content — frosted glass panel slides up */}
-                <div className="absolute bottom-0 left-0 right-0 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out p-4">
-                  {/* Always visible title */}
-                  <h3
-                    className="text-white font-extrabold text-sm leading-snug drop-shadow-lg mb-0 group-hover:mb-2 transition-all duration-300"
-                    style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}
+          {/* ─── Masonry Grid (Pure Flexbox to fix WebKit bugs) ─── */}
+          <div className="flex-1 min-w-0 flex gap-4">
+            {Array.from({ length: cols }).map((_, colIndex) => (
+              <div key={colIndex} className="flex-1 flex flex-col gap-4">
+                {features.filter((_: any, i: number) => i % cols === colIndex).map(({ title, description, image, href, tag, color, h }: any) => (
+                  <Link
+                    key={title}
+                    to={href}
+                    className="fc-card group flex flex-col w-full rounded-2xl overflow-hidden relative shadow-lg"
+                    style={{ height: cols === 2 ? Math.min(h, 240) : h }}
                   >
-                    {title}
-                  </h3>
+                    {/* Background image */}
+                    <img
+                      src={image}
+                      alt={title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    />
 
-                  {/* Description — reveals on hover with max-height transition */}
-                  <div
-                    className="overflow-hidden transition-all duration-500 ease-out"
-                    style={{ maxHeight: 0 }}
-                    ref={(el) => {
-                      if (!el) return;
-                      (el as HTMLElement).style.maxHeight = '0px';
-                      (el as HTMLElement).closest('.group')?.addEventListener('mouseenter', () => {
-                        (el as HTMLElement).style.maxHeight = '80px';
-                      });
-                      (el as HTMLElement).closest('.group')?.addEventListener('mouseleave', () => {
-                        (el as HTMLElement).style.maxHeight = '0px';
-                      });
-                    }}
-                  >
-                    <p className="text-white/85 text-xs leading-relaxed mt-1">{description}</p>
-                    <span className="inline-flex items-center gap-1 mt-2 text-[11px] font-bold tracking-wide uppercase" style={{ color }}>
-                      Explore →
-                    </span>
-                  </div>
-                </div>
+                    {/* Permanent subtle vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/5" />
 
-                {/* Hover border ring */}
-                <div
-                  className="absolute inset-0 rounded-2xl ring-0 group-hover:ring-2 transition-all duration-400 pointer-events-none"
-                  style={{ '--tw-ring-color': color } as React.CSSProperties}
-                />
-              </Link>
+                    {/* Category badge */}
+                    <div
+                      className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm shadow"
+                      style={{ background: color + 'CC' }}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full bg-white inline-block"
+                        style={{ boxShadow: '0 0 4px white' }}
+                      />
+                      {tag}
+                    </div>
+
+                    {/* Arrow icon — top right on hover */}
+                    <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400">
+                      <MoveUpRight className="w-4 h-4 text-white" />
+                    </div>
+
+                    {/* Bottom content — frosted glass panel slides up */}
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out p-4">
+                      {/* Always visible title */}
+                      <h3
+                        className="text-white font-extrabold text-sm leading-snug drop-shadow-lg mb-0 group-hover:mb-2 transition-all duration-300"
+                        style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}
+                      >
+                        {title}
+                      </h3>
+
+                      {/* Description — reveals on hover with max-height transition */}
+                      <div
+                        className="overflow-hidden transition-all duration-500 ease-out"
+                        style={{ maxHeight: 0 }}
+                        ref={(el) => {
+                          if (!el) return;
+                          (el as HTMLElement).style.maxHeight = '0px';
+                          (el as HTMLElement).closest('.group')?.addEventListener('mouseenter', () => {
+                            (el as HTMLElement).style.maxHeight = '80px';
+                          });
+                          (el as HTMLElement).closest('.group')?.addEventListener('mouseleave', () => {
+                            (el as HTMLElement).style.maxHeight = '0px';
+                          });
+                        }}
+                      >
+                        <p className="text-white/85 text-xs leading-relaxed mt-1">{description}</p>
+                        <span className="inline-flex items-center gap-1 mt-2 text-[11px] font-bold tracking-wide uppercase" style={{ color }}>
+                          Explore →
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Hover border ring */}
+                    <div
+                      className="absolute inset-0 rounded-2xl ring-0 group-hover:ring-2 transition-all duration-400 pointer-events-none"
+                      style={{ '--tw-ring-color': color } as React.CSSProperties}
+                    />
+                  </Link>
+                ))}
+              </div>
             ))}
           </div>
 
