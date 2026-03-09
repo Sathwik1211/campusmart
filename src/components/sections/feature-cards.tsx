@@ -103,7 +103,7 @@ const FeatureCards = () => {
         <div className="flex flex-col md:flex-row gap-6 items-start">
 
           {/* ─── Masonry Grid (Pure Flexbox to fix WebKit bugs) ─── */}
-          <div className="flex-1 min-w-0 flex gap-4">
+          <div className="w-full md:flex-1 min-w-0 flex gap-4">
             {Array.from({ length: cols }).map((_, colIndex) => (
               <div key={colIndex} className="flex-1 flex flex-col gap-4">
                 {features.filter((_: any, i: number) => i % cols === colIndex).map(({ title, description, image, href, tag, color, h }: any) => (
