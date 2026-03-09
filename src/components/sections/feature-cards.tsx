@@ -110,8 +110,8 @@ const FeatureCards = () => {
                   <Link
                     key={title}
                     to={href}
-                    className="fc-card group flex flex-col w-full rounded-2xl overflow-hidden relative shadow-lg"
-                    style={{ height: cols === 2 ? Math.min(h, 240) : h }}
+                    className="fc-card group flex flex-col w-full min-h-[220px] rounded-2xl overflow-hidden relative shadow-lg"
+                    style={{ height: cols === 2 ? Math.min(h || 240, 240) : (h || 240) }}
                   >
                     {/* Background image */}
                     <img
