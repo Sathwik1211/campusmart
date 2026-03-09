@@ -140,35 +140,29 @@ const FeatureCards = () => {
                       <MoveUpRight className="w-4 h-4 text-white" />
                     </div>
 
-                    {/* Bottom content — frosted glass panel slides up */}
-                    <div className="absolute bottom-0 left-0 right-0 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out p-4">
-                      {/* Always visible title */}
+                    {/* Bottom content — always visible and readable */}
+                    <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                      {/* Always visible title, increased font size */}
                       <h3
-                        className="text-white font-extrabold text-sm leading-snug drop-shadow-lg mb-0 group-hover:mb-2 transition-all duration-300"
-                        style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}
+                        className="text-white font-extrabold text-lg md:text-xl leading-snug drop-shadow-lg mb-2"
+                        style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}
                       >
                         {title}
                       </h3>
 
-                      {/* Description — reveals on hover with max-height transition */}
-                      <div
-                        className="overflow-hidden transition-all duration-500 ease-out"
-                        style={{ maxHeight: 0 }}
-                        ref={(el) => {
-                          if (!el) return;
-                          (el as HTMLElement).style.maxHeight = '0px';
-                          (el as HTMLElement).closest('.group')?.addEventListener('mouseenter', () => {
-                            (el as HTMLElement).style.maxHeight = '80px';
-                          });
-                          (el as HTMLElement).closest('.group')?.addEventListener('mouseleave', () => {
-                            (el as HTMLElement).style.maxHeight = '0px';
-                          });
-                        }}
-                      >
-                        <p className="text-white/85 text-xs leading-relaxed mt-1">{description}</p>
-                        <span className="inline-flex items-center gap-1 mt-2 text-[11px] font-bold tracking-wide uppercase" style={{ color }}>
-                          Explore →
-                        </span>
+                      {/* Description and Explore — always visible */}
+                      <div>
+                        <p className="text-white/90 text-[13px] md:text-sm leading-relaxed font-medium">
+                          {description}
+                        </p>
+                        <div className="mt-3 flex items-center">
+                          <span
+                            className="inline-flex items-center gap-1 text-xs md:text-sm font-bold tracking-widest uppercase transition-transform group-hover:translate-x-1 duration-300"
+                            style={{ color }}
+                          >
+                            Explore <MoveUpRight className="w-4 h-4 ml-1" />
+                          </span>
+                        </div>
                       </div>
                     </div>
 
