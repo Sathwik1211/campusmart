@@ -7,6 +7,7 @@ import SearchBar from '@/components/sections/search-bar';
 import HeroBanner from '@/components/sections/hero-banner';
 import ServiceCards from '@/components/sections/service-cards';
 import FeatureCards from '@/components/sections/feature-cards';
+import CollaborationsTicker from '@/components/sections/collaborations-ticker';
 import Resources from '@/components/sections/resources';
 import PartnershipForm from '@/components/sections/partnership-form';
 
@@ -21,7 +22,7 @@ export default function Home() {
       <HeroBanner />
       <ServiceCards />
       <FeatureCards />
-      {/* New sections will go here */}
+      <CollaborationsTicker />
       <Resources />
       <PartnershipForm />
       <Footer />
