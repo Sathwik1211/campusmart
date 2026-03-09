@@ -22,9 +22,9 @@ export default function Home() {
       <HeroBanner />
       <ServiceCards />
       <FeatureCards />
-      <CollaborationsTicker />
       <Resources />
       <PartnershipForm />
+      <CollaborationsTicker />
       <Footer />
     </div>
   );
