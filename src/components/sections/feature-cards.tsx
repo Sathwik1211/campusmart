@@ -66,14 +66,9 @@ const FeatureCards = () => {
       if (!cards) return;
 
       if (isMobile) {
-        // Safe animation for mobile WebKit CSS columns: just fade in, no transforms
-        gsap.fromTo(cards,
-          { opacity: 0 },
-          {
-            opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out',
-            scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', toggleActions: 'play none none none' }
-          }
-        );
+        // Safe animation for mobile WebKit CSS columns: NO transforms, NO opacity 0 start
+        // Set explicitly to opacity 1 just to be safe
+        gsap.set(cards, { opacity: 1, clearProps: 'all' });
       } else {
         // Full animation for desktop
         gsap.fromTo(cards,
@@ -116,7 +111,7 @@ const FeatureCards = () => {
               <Link
                 key={title}
                 to={href}
-                className="fc-card group block mb-4 rounded-2xl overflow-hidden relative shadow-lg"
+                className="fc-card group inline-block w-full mb-4 rounded-2xl overflow-hidden relative shadow-lg"
                 style={{ breakInside: 'avoid', height: cols === 2 ? Math.min(h, 240) : h }}
               >
                 {/* Background image */}
