@@ -53,7 +53,7 @@ const ServiceCards = () => {
 
   return (
     <div ref={containerRef} className="w-full">
-      <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4">
         {services.map(({ title, bgColor, textColor, href }) => (
           <Link
             key={title}
@@ -61,7 +61,7 @@ const ServiceCards = () => {
             className="service-card group"
             style={{ backgroundColor: bgColor, color: textColor }}
           >
-            <h3 className="group-hover:tracking-wider transition-all duration-300 font-bold text-lg px-6 py-8">
+            <h3 className="group-hover:tracking-wider transition-all duration-300 font-bold text-sm sm:text-base lg:text-lg px-4 py-6 sm:px-6 sm:py-8 text-center sm:text-left">
               {title}
             </h3>
           </Link>

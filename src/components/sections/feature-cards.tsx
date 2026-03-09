@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
@@ -74,22 +74,36 @@ const FeatureCards = () => {
     return () => ctx.revert();
   }, []);
 
+  const [cols, setCols] = useState(3);
+
+  useLayoutEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 640) setCols(1);
+      else if (w < 1024) setCols(2);
+      else setCols(3);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   return (
-    <section ref={sectionRef} className="py-12 px-4 bg-[#f0f2f5]">
+    <section ref={sectionRef} className="py-8 sm:py-12 px-4 bg-[#f0f2f5]">
       <div className="max-w-7xl mx-auto">
-        <div className="flex gap-6 items-start">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
 
           {/* ─── Masonry Grid ─── */}
           <div
             className="flex-1 min-w-0"
-            style={{ columns: 3, columnGap: '16px' }}
+            style={{ columns: cols, columnGap: '16px' }}
           >
             {features.map(({ title, description, image, href, tag, color, h }: any) => (
               <Link
                 key={title}
                 to={href}
                 className="fc-card group block mb-4 rounded-2xl overflow-hidden relative shadow-lg"
-                style={{ breakInside: 'avoid', height: h }}
+                style={{ breakInside: 'avoid', height: cols === 1 ? Math.min(h, 220) : h }}
               >
                 {/* Background image */}
                 <img
@@ -160,7 +174,7 @@ const FeatureCards = () => {
           </div>
 
           {/* ─── Sidebar ─── */}
-          <div className="w-[230px] flex-shrink-0 flex flex-col gap-3">
+          <div className="w-full md:w-[230px] flex-shrink-0 flex flex-col gap-3">
 
             <Link
               to="/request-quote"
