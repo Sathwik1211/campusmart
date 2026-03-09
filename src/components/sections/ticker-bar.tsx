@@ -12,7 +12,7 @@ const TickerBar = () => {
     return (
         <div className="w-full relative overflow-hidden flex flex-col" style={{ backgroundColor: '#222b5c' }}>
             {/* Top Gold Bar */}
-            <div className="w-full h-1" style={{ backgroundColor: '#dca842' }} />
+            <div className="w-full h-[5px]" style={{ backgroundColor: '#dca842' }} />
 
             {/* Container */}
             <div className="relative w-full h-[40px] flex items-stretch">

@@ -41,8 +41,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div ref={containerRef} className="search-bar">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div ref={containerRef} className="bg-cm-yellow py-3 px-4">
+      <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
         <form onSubmit={handleSearch} className="relative">
           <input
             ref={inputRef}
