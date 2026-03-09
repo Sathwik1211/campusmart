@@ -61,9 +61,14 @@ const ServiceCards = () => {
             className="service-card group"
             style={{ backgroundColor: bgColor, color: textColor }}
           >
-            <h3 className="group-hover:tracking-wider transition-all duration-300 font-bold text-sm sm:text-base lg:text-lg px-4 py-6 sm:px-6 sm:py-8 text-center sm:text-left">
+            <h3 className="group-hover:tracking-wider transition-all duration-300">
               {title}
             </h3>
+            <span
+              className="mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 flex items-center gap-1"
+            >
+              Explore <span className="text-[14px]">→</span>
+            </span>
           </Link>
         ))}
       </div>
