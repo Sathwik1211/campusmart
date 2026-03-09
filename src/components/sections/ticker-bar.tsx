@@ -1,4 +1,4 @@
-import { Target } from 'lucide-react';
+
 
 const TickerBar = () => {
     const announcements = [
