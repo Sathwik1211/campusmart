@@ -2,6 +2,7 @@ import TopBar from '@/components/layout/topbar';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import CategoryBar from '@/components/sections/category-bar';
+import TickerBar from '@/components/sections/ticker-bar';
 import SearchBar from '@/components/sections/search-bar';
 import HeroBanner from '@/components/sections/hero-banner';
 import ServiceCards from '@/components/sections/service-cards';
@@ -15,6 +16,7 @@ export default function Home() {
       <TopBar />
       <Header />
       <CategoryBar />
+      <TickerBar />
       <SearchBar />
       <HeroBanner />
       <ServiceCards />
