@@ -59,17 +59,32 @@ const FeatureCards = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Only run animation on desktop to avoid WebKit column rendering bugs with transforms
+    const isMobile = window.innerWidth < 1024;
     const ctx = gsap.context(() => {
       const cards = sectionRef.current?.querySelectorAll('.fc-card');
       if (!cards) return;
-      gsap.fromTo(cards,
-        { opacity: 0, y: 50, scale: 0.96 },
-        {
-          opacity: 1, y: 0, scale: 1,
-          duration: 0.7, stagger: 0.06, ease: 'power3.out',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 78%', toggleActions: 'play none none none' },
-        }
-      );
+
+      if (isMobile) {
+        // Safe animation for mobile WebKit CSS columns: just fade in, no transforms
+        gsap.fromTo(cards,
+          { opacity: 0 },
+          {
+            opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', toggleActions: 'play none none none' }
+          }
+        );
+      } else {
+        // Full animation for desktop
+        gsap.fromTo(cards,
+          { opacity: 0, y: 50, scale: 0.96 },
+          {
+            opacity: 1, y: 0, scale: 1,
+            duration: 0.7, stagger: 0.06, ease: 'power3.out',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 78%', toggleActions: 'play none none none' },
+          }
+        );
+      }
     });
     return () => ctx.revert();
   }, []);
@@ -79,9 +94,8 @@ const FeatureCards = () => {
   useLayoutEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      if (w < 640) setCols(1);
-      else if (w < 1024) setCols(2);
-      else setCols(3);
+      // 2 columns on mobile/tablet, 3 on desktop
+      setCols(w < 1024 ? 2 : 3);
     };
     update();
     window.addEventListener('resize', update);
@@ -103,7 +117,7 @@ const FeatureCards = () => {
                 key={title}
                 to={href}
                 className="fc-card group block mb-4 rounded-2xl overflow-hidden relative shadow-lg"
-                style={{ breakInside: 'avoid', height: cols === 1 ? Math.min(h, 220) : h }}
+                style={{ breakInside: 'avoid', height: cols === 2 ? Math.min(h, 240) : h }}
               >
                 {/* Background image */}
                 <img
