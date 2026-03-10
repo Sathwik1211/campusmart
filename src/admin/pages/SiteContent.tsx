@@ -44,42 +44,49 @@ export default function SiteContent() {
     if (loading) return <div className="p-8 text-gray-400">Loading...</div>;
 
     return (
-        <div className="p-8 max-w-3xl">
-            <div className="flex items-center justify-between mb-6">
+        <div className="max-w-4xl mx-auto space-y-6 pb-20">
+            {/* Sticky Header Editor Actions */}
+            <div className="sticky top-0 z-[60] -mx-6 px-6 py-4 bg-white/90 backdrop-blur-md border-b border-gray-200 flex items-center justify-between mb-8 shadow-sm">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Site Content</h1>
-                    <p className="text-gray-500 text-sm mt-1">Edit website text, headings, and contact details</p>
+                    <h1 className="text-xl font-bold text-gray-900">Site Content</h1>
+                    <p className="text-xs text-gray-500 mt-0.5">Global website text, headings, and contact details</p>
                 </div>
                 <div className="flex items-center gap-3">
                     {hasChanges && (
-                        <button onClick={fetch} className="btn-secondary flex items-center gap-2">
+                        <button onClick={fetch} className="px-4 py-2 border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-all flex items-center gap-2">
                             <RotateCcw className="w-4 h-4" /> Reset
                         </button>
                     )}
-                    <button onClick={save} disabled={saving || !hasChanges} className="btn-primary flex items-center gap-2 disabled:opacity-50">
-                        <Save className="w-4 h-4" /> {saving ? 'Saving...' : saved ? '✓ Saved' : 'Save Changes'}
+                    <button onClick={save} disabled={saving || !hasChanges}
+                        className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95 ${saving || !hasChanges ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}>
+                        <Save className="w-4 h-4" /> {saving ? 'Saving...' : saved ? '✓ Changes Saved!' : 'Save All Changes'}
                     </button>
                 </div>
             </div>
 
-            <div className="space-y-6">
-                {/* Known content keys */}
-                <div className="card">
-                    <h2 className="text-base font-semibold text-gray-800 mb-4">Website Content</h2>
-                    <div className="space-y-4">
+            <div className="space-y-8">
+                {/* Website Settings Section */}
+                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div className="px-6 py-4 bg-gray-50/50 border-b border-gray-100">
+                        <h2 className="font-bold text-gray-900 flex items-center gap-2">
+                            <span className="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                            Website Content
+                        </h2>
+                    </div>
+                    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                         {Object.entries(CONTENT_LABELS).map(([key, label]) => (
-                            <div key={key}>
-                                <label className="label">{label}</label>
+                            <div key={key} className={key.includes('subtitle') || key.includes('text') || key.includes('address') ? "col-span-full space-y-1.5" : "space-y-1.5"}>
+                                <label className="block text-sm font-bold text-gray-700">{label}</label>
                                 {key.includes('subtitle') || key.includes('text') || key.includes('address') ? (
                                     <textarea
-                                        className="input"
+                                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none shadow-sm"
                                         rows={3}
                                         value={content[key] || ''}
                                         onChange={(e) => setContent({ ...content, [key]: e.target.value })}
                                     />
                                 ) : (
                                     <input
-                                        className="input"
+                                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm"
                                         value={content[key] || ''}
                                         onChange={(e) => setContent({ ...content, [key]: e.target.value })}
                                     />
@@ -89,36 +96,43 @@ export default function SiteContent() {
                     </div>
                 </div>
 
-                {/* Custom/extra content keys */}
-                <div className="card">
-                    <h2 className="text-base font-semibold text-gray-800 mb-4">Add Custom Content Key</h2>
-                    <p className="text-sm text-gray-500 mb-4">Add any custom key-value pairs for site configuration.</p>
-                    <div className="space-y-3">
-                        {Object.entries(content)
-                            .filter(([key]) => !CONTENT_LABELS[key])
-                            .map(([key, value]) => (
-                                <div key={key} className="flex gap-3 items-start">
-                                    <div className="flex-shrink-0 text-xs font-mono bg-gray-100 text-gray-600 px-3 py-2 rounded-lg mt-0.5">{key}</div>
-                                    <input
-                                        className="input flex-1"
-                                        value={value}
-                                        onChange={(e) => setContent({ ...content, [key]: e.target.value })}
-                                    />
-                                </div>
-                            ))}
-                        <div className="flex gap-3">
-                            <input id="new-key" className="input w-40" placeholder="new_key" />
-                            <input id="new-value" className="input flex-1" placeholder="value" />
-                            <button
-                                onClick={() => {
-                                    const k = (document.getElementById('new-key') as HTMLInputElement).value.trim();
-                                    const v = (document.getElementById('new-value') as HTMLInputElement).value.trim();
-                                    if (k) setContent({ ...content, [k]: v });
-                                }}
-                                className="btn-secondary"
-                            >
-                                + Add
-                            </button>
+                {/* Custom Content Section */}
+                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div className="px-6 py-4 bg-gray-50/50 border-b border-gray-100">
+                        <h2 className="font-bold text-gray-900 flex items-center gap-2">
+                            <span className="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                            Custom Content Keys
+                        </h2>
+                    </div>
+                    <div className="p-6 space-y-6">
+                        <p className="text-sm text-gray-500">Generic configuration keys for various site components.</p>
+                        <div className="space-y-3">
+                            {Object.entries(content)
+                                .filter(([key]) => !CONTENT_LABELS[key])
+                                .map(([key, value]) => (
+                                    <div key={key} className="flex gap-4 items-start bg-gray-50/50 p-4 rounded-xl border border-gray-100">
+                                        <div className="flex-shrink-0 w-32 truncate text-xs font-bold bg-blue-50 text-blue-700 px-3 py-2 rounded-lg mt-0.5 border border-blue-100 text-center">{key}</div>
+                                        <input
+                                            className="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm bg-white"
+                                            value={value}
+                                            onChange={(e) => setContent({ ...content, [key]: e.target.value })}
+                                        />
+                                    </div>
+                                ))}
+                            <div className="flex gap-3 bg-blue-50/30 p-4 rounded-xl border border-blue-100/50 mt-6">
+                                <input id="new-key" className="w-32 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none bg-white" placeholder="new_key" />
+                                <input id="new-value" className="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none bg-white" placeholder="value" />
+                                <button
+                                    onClick={() => {
+                                        const k = (document.getElementById('new-key') as HTMLInputElement).value.trim();
+                                        const v = (document.getElementById('new-value') as HTMLInputElement).value.trim();
+                                        if (k) setContent({ ...content, [k]: v });
+                                    }}
+                                    className="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
+                                >
+                                    + Add New Key
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -126,3 +140,4 @@ export default function SiteContent() {
         </div>
     );
 }
+

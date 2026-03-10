@@ -56,60 +56,76 @@ export default function Products() {
     const filtered = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 
     return (
-        <div className="p-8">
-            <div className="flex items-center justify-between mb-6">
+        <div className="max-w-6xl mx-auto space-y-6 pb-20">
+            <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Products</h1>
-                    <p className="text-gray-500 text-sm mt-1">{products.length} total products</p>
+                    <h1 className="text-2xl font-black text-slate-900 tracking-tight">Product Inventory</h1>
+                    <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">{products.length} Items cataloged</p>
                 </div>
-                <button onClick={openAdd} className="btn-primary flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> Add Product
+                <button onClick={openAdd} className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white text-sm font-black rounded-xl hover:bg-blue-700 transition-all shadow-lg active:scale-95">
+                    <Plus className="w-5 h-5" /> Add New Product
                 </button>
             </div>
 
             {/* Search */}
-            <div className="card mb-6 py-3">
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products..." className="input pl-9 max-w-xs" />
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
+                <div className="relative max-w-sm">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search catalog..." className="w-full border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" />
                 </div>
             </div>
 
             {/* Table */}
-            <div className="card p-0 overflow-hidden">
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-gray-50 border-b border-gray-100">
+                        <thead className="bg-slate-50 border-b border-gray-100">
                             <tr>
-                                {['Image', 'Product', 'Category', 'Price', 'Stock', 'Rating', 'Status', 'Actions'].map((h) => (
-                                    <th key={h} className="px-4 py-3 text-left font-semibold text-gray-600 text-xs uppercase tracking-wider">{h}</th>
+                                {['Image', 'Product details', 'Category', 'Pricing', 'Stock', 'Rating', 'Visibility', 'Actions'].map((h) => (
+                                    <th key={h} className="px-6 py-4 text-left font-black text-slate-400 text-[10px] uppercase tracking-[0.2em]">{h}</th>
                                 ))}
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-50">
+                        <tbody className="divide-y divide-gray-50 bg-white">
                             {loading ? (
-                                <tr><td colSpan={8} className="px-4 py-8 text-center text-gray-400">Loading...</td></tr>
+                                <tr><td colSpan={8} className="px-6 py-12 text-center text-slate-400 font-bold uppercase tracking-widest text-xs">Synchronizing Inventory...</td></tr>
+                            ) : filtered.length === 0 ? (
+                                <tr><td colSpan={8} className="px-6 py-12 text-center text-slate-400">No products match your search.</td></tr>
                             ) : filtered.map((p) => (
-                                <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                                    <td className="px-4 py-3">
-                                        <img src={p.imageUrl || 'https://via.placeholder.com/40'} alt={p.name} className="w-10 h-10 rounded-lg object-cover" />
+                                <tr key={p.id} className="hover:bg-blue-50/30 transition-colors group">
+                                    <td className="px-6 py-4">
+                                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+                                            <img src={p.imageUrl || 'https://via.placeholder.com/40'} alt={p.name} className="w-full h-full object-cover" />
+                                        </div>
                                     </td>
-                                    <td className="px-4 py-3">
-                                        <div className="font-medium text-gray-900">{p.name}</div>
-                                        <div className="text-gray-400 text-xs truncate max-w-[200px]">{p.description}</div>
+                                    <td className="px-6 py-4">
+                                        <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{p.name}</div>
+                                        <div className="text-slate-400 text-[10px] font-medium truncate max-w-[200px] uppercase tracking-wide mt-0.5">{p.description}</div>
                                     </td>
-                                    <td className="px-4 py-3 text-gray-600">{p.category?.name || '—'}</td>
-                                    <td className="px-4 py-3 font-semibold text-cm-blue">₹{p.price.toLocaleString('en-IN')}</td>
-                                    <td className="px-4 py-3">{p.stock}</td>
-                                    <td className="px-4 py-3">⭐ {p.rating} ({p.reviewCount})</td>
-                                    <td className="px-4 py-3">
-                                        <span className={p.active ? 'badge-green' : 'badge-red'}>{p.active ? 'Active' : 'Inactive'}</span>
-                                        {p.featured && <span className="badge-blue ml-1">Featured</span>}
+                                    <td className="px-6 py-4">
+                                        <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-lg uppercase tracking-widest">{p.category?.name || 'Unset'}</span>
                                     </td>
-                                    <td className="px-4 py-3">
+                                    <td className="px-6 py-4 font-black text-blue-600">₹{p.price.toLocaleString('en-IN')}</td>
+                                    <td className="px-6 py-4 text-slate-600 font-medium">{p.stock}</td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-1.5 font-bold text-orange-400">
+                                            <span>⭐</span>
+                                            <span className="text-slate-700">{p.rating}</span>
+                                            <span className="text-slate-300 text-[10px]">({p.reviewCount})</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <div className="flex flex-col gap-1">
+                                            <span className={`text-[10px] font-black uppercase text-center px-2 py-0.5 rounded-full border ${p.active ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-red-50 text-red-600 border-red-100'}`}>
+                                                {p.active ? 'Active' : 'Inactive'}
+                                            </span>
+                                            {p.featured && <span className="text-[10px] font-black uppercase text-center px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100">Featured</span>}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
                                         <div className="flex items-center gap-2">
-                                            <button onClick={() => openEdit(p)} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Pencil className="w-4 h-4" /></button>
-                                            <button onClick={() => deleteProduct(p.id)} className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 className="w-4 h-4" /></button>
+                                            <button onClick={() => openEdit(p)} className="p-2 text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all shadow-sm border border-transparent hover:border-blue-600 scale-90 hover:scale-100"><Pencil className="w-4 h-4" /></button>
+                                            <button onClick={() => deleteProduct(p.id)} className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-xl transition-all shadow-sm border border-transparent hover:border-red-600 scale-90 hover:scale-100"><Trash2 className="w-4 h-4" /></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -121,61 +137,68 @@ export default function Products() {
 
             {/* Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                        <div className="flex items-center justify-between p-6 border-b">
-                            <h2 className="text-lg font-bold">{editing.id ? 'Edit Product' : 'Add Product'}</h2>
-                            <button onClick={() => setShowModal(false)}><X className="w-5 h-5 text-gray-500" /></button>
+                <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[200] p-4 animate-in fade-in duration-300">
+                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col animate-in slide-in-from-bottom-4 duration-300">
+                        <div className="flex items-center justify-between p-8 border-b bg-slate-50/50">
+                            <div>
+                                <h2 className="text-xl font-black text-slate-900 tracking-tight">{editing.id ? 'Edit Product Details' : 'Onboard New Product'}</h2>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Catalog Management System</p>
+                            </div>
+                            <button onClick={() => setShowModal(false)} className="p-2 text-gray-400 hover:bg-red-50 hover:text-red-500 rounded-xl transition-all"><X className="w-6 h-6" /></button>
                         </div>
-                        <div className="p-6 grid grid-cols-2 gap-4">
-                            <div className="col-span-2">
-                                <label className="label">Product Name *</label>
-                                <input className="input" value={editing.name || ''} onChange={(e) => setEditing({ ...editing, name: e.target.value })} />
+
+                        <div className="p-8 grid grid-cols-2 gap-6 overflow-y-auto">
+                            <div className="col-span-2 space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Product Name *</label>
+                                <input className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium" value={editing.name || ''} onChange={(e) => setEditing({ ...editing, name: e.target.value })} />
                             </div>
-                            <div className="col-span-2">
-                                <label className="label">Description</label>
-                                <textarea className="input" rows={3} value={editing.description || ''} onChange={(e) => setEditing({ ...editing, description: e.target.value })} />
+                            <div className="col-span-2 space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Product Narrative</label>
+                                <textarea className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none h-24 font-medium" value={editing.description || ''} onChange={(e) => setEditing({ ...editing, description: e.target.value })} />
                             </div>
-                            <div>
-                                <label className="label">Price (₹) *</label>
-                                <input type="number" className="input" value={editing.price || ''} onChange={(e) => setEditing({ ...editing, price: Number(e.target.value) })} />
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Listing Price (₹) *</label>
+                                <input type="number" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-black text-blue-600" value={editing.price || ''} onChange={(e) => setEditing({ ...editing, price: Number(e.target.value) })} />
                             </div>
-                            <div>
-                                <label className="label">Category *</label>
-                                <select className="input" value={editing.categoryId || ''} onChange={(e) => setEditing({ ...editing, categoryId: Number(e.target.value) })}>
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Category Classification *</label>
+                                <select className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-white font-bold text-slate-600" value={editing.categoryId || ''} onChange={(e) => setEditing({ ...editing, categoryId: Number(e.target.value) })}>
                                     {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                                 </select>
                             </div>
-                            <div>
-                                <label className="label">Stock</label>
-                                <input type="number" className="input" value={editing.stock || ''} onChange={(e) => setEditing({ ...editing, stock: Number(e.target.value) })} />
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Stock Quantity</label>
+                                <input type="number" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" value={editing.stock || ''} onChange={(e) => setEditing({ ...editing, stock: Number(e.target.value) })} />
                             </div>
-                            <div>
-                                <label className="label">Image URL</label>
-                                <input className="input" value={editing.imageUrl || ''} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} />
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Cover Image URL</label>
+                                <input className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" value={editing.imageUrl || ''} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} />
                             </div>
-                            <div>
-                                <label className="label">Rating (0-5)</label>
-                                <input type="number" step="0.1" className="input" value={editing.rating || ''} onChange={(e) => setEditing({ ...editing, rating: Number(e.target.value) })} />
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Consumer Review Score (Rating)</label>
+                                <input type="number" step="0.1" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" value={editing.rating || ''} onChange={(e) => setEditing({ ...editing, rating: Number(e.target.value) })} />
                             </div>
-                            <div>
-                                <label className="label">Review Count</label>
-                                <input type="number" className="input" value={editing.reviewCount || ''} onChange={(e) => setEditing({ ...editing, reviewCount: Number(e.target.value) })} />
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-bold text-slate-700 uppercase tracking-widest text-[10px]">Total Engagements (Reviews)</label>
+                                <input type="number" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" value={editing.reviewCount || ''} onChange={(e) => setEditing({ ...editing, reviewCount: Number(e.target.value) })} />
                             </div>
-                            <div className="flex items-center gap-4">
-                                <label className="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" checked={!!editing.active} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} />
-                                    <span className="text-sm">Active</span>
+                            <div className="col-span-2 flex items-center gap-8 pt-4">
+                                <label className="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" checked={!!editing.active} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} />
+                                    <span className="text-xs font-black uppercase text-slate-400 group-hover:text-slate-900 transition-colors">Visible on storefront</span>
                                 </label>
-                                <label className="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" checked={!!editing.featured} onChange={(e) => setEditing({ ...editing, featured: e.target.checked })} />
-                                    <span className="text-sm">Featured</span>
+                                <label className="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" checked={!!editing.featured} onChange={(e) => setEditing({ ...editing, featured: e.target.checked })} />
+                                    <span className="text-xs font-black uppercase text-slate-400 group-hover:text-slate-900 transition-colors">Show in Featured Sections</span>
                                 </label>
                             </div>
                         </div>
-                        <div className="flex justify-end gap-3 p-6 border-t">
-                            <button onClick={() => setShowModal(false)} className="btn-secondary">Cancel</button>
-                            <button onClick={save} disabled={saving} className="btn-primary">{saving ? 'Saving...' : 'Save Product'}</button>
+
+                        <div className="flex justify-end gap-3 p-8 border-t bg-slate-50/50">
+                            <button onClick={() => setShowModal(false)} className="px-6 py-2.5 text-sm font-bold text-slate-400 hover:text-slate-900 transition-colors">Abort Changes</button>
+                            <button onClick={save} disabled={saving} className="px-8 py-2.5 bg-blue-600 text-white text-sm font-black rounded-xl hover:bg-blue-700 transition-all shadow-lg active:scale-95 disabled:opacity-50">
+                                {saving ? 'Processing...' : 'Sync with Database'}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -183,3 +206,4 @@ export default function Products() {
         </div>
     );
 }
+

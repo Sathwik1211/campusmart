@@ -4,11 +4,14 @@ import api from '../api/client';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-            <div className="px-6 py-4 border-b border-gray-100">
-                <h2 className="font-bold text-gray-900">{title}</h2>
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div className="px-6 py-4 bg-gray-50/50 border-b border-gray-100">
+                <h2 className="font-bold text-gray-900 flex items-center gap-2">
+                    <span className="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                    {title}
+                </h2>
             </div>
-            <div className="p-6">{children}</div>
+            <div className="p-6 space-y-6">{children}</div>
         </div>
     );
 }
@@ -18,13 +21,14 @@ function Field({ label, value, onChange, multiline = false, hint = '', placehold
     multiline?: boolean; hint?: string; placeholder?: string;
 }) {
     return (
-        <div className="space-y-1">
-            <label className="block text-sm font-semibold text-gray-700">
-                {label} {hint && <span className="text-gray-400 font-normal text-xs">({hint})</span>}
+        <div className="space-y-1.5">
+            <label className="block text-sm font-bold text-gray-700 flex items-center justify-between">
+                {label}
+                {hint && <span className="text-gray-400 font-normal text-[10px] uppercase tracking-wider bg-gray-100 px-1.5 py-0.5 rounded">{hint}</span>}
             </label>
             {multiline
-                ? <textarea rows={2} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 resize-none" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
-                : <input className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+                ? <textarea rows={3} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none shadow-sm" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+                : <input className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
             }
         </div>
     );
@@ -89,24 +93,25 @@ export default function HomepageEditor() {
     if (loading) return <div className="flex items-center justify-center h-64"><p className="text-gray-400 text-sm">Loading editor…</p></div>;
 
     return (
-        <div className="max-w-5xl mx-auto space-y-6">
-            {/* Header */}
-            <div className="flex items-center justify-between">
+        <div className="max-w-5xl mx-auto space-y-6 pb-20">
+            {/* Sticky Header Editor Actions */}
+            <div className="sticky top-0 z-[60] -mx-6 px-6 py-4 bg-white/90 backdrop-blur-md border-b border-gray-200 flex items-center justify-between mb-8 shadow-sm">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Hero / Banner Editor</h1>
-                    <p className="text-sm text-gray-500 mt-1">Edit all homepage sections — hero, service cards, masonry features, and sidebar</p>
+                    <h1 className="text-xl font-bold text-gray-900">Hero / Banner Editor</h1>
+                    <p className="text-xs text-gray-500 mt-0.5">Homepage hero, service cards, features, and sidebar</p>
                 </div>
-                <div className="flex items-center gap-2">
-                    <button onClick={fetchContent} className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition-colors">
+                <div className="flex items-center gap-3">
+                    <button onClick={fetchContent} className="px-4 py-2 border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-all flex items-center gap-2">
                         <RotateCcw className="w-4 h-4" /> Reset
                     </button>
                     <button onClick={saveContent} disabled={saving}
-                        className="flex items-center gap-2 px-5 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-60">
+                        className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95 ${saving ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}>
                         <Save className="w-4 h-4" />
-                        {saving ? 'Saving…' : saved ? '✓ All Saved!' : 'Save All Changes'}
+                        {saving ? 'Saving…' : saved ? '✓ Changes Saved!' : 'Save All Changes'}
                     </button>
                 </div>
             </div>
+
 
             {/* ── Hero Banner ── */}
             <Section title="🖼 Hero Banner">

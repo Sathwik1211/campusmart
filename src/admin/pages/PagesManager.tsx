@@ -36,18 +36,18 @@ function Field({ label, value, onChange, multiline = false, placeholder = '', hi
     multiline?: boolean; placeholder?: string; hint?: string;
 }) {
     return (
-        <div className="space-y-1">
-            <label className="block text-sm font-semibold text-gray-700">
+        <div className="space-y-1.5">
+            <label className="block text-sm font-bold text-gray-700 flex items-center justify-between">
                 {label}
-                {hint && <span className="text-gray-400 font-normal ml-1 text-xs">({hint})</span>}
+                {hint && <span className="text-gray-400 font-normal text-[10px] uppercase tracking-wider bg-gray-100 px-1.5 py-0.5 rounded">{hint}</span>}
             </label>
             {multiline ? (
                 <textarea rows={3}
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 resize-none bg-white"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all resize-none shadow-sm bg-white"
                     value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
             ) : (
                 <input type="text"
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 bg-white"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm bg-white"
                     value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
             )}
         </div>
@@ -94,105 +94,126 @@ function InlinePageEditor({ page, onClose, onSaved }: {
     };
 
     return (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm mt-4">
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-xl mt-6 overflow-hidden animate-in zoom-in-95 duration-200">
             {/* Editor Header */}
-            <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm flex flex-wrap gap-4 items-center justify-between px-6 py-4 border-b border-gray-100 rounded-t-xl shadow-[0_4px_10px_-4px_rgba(0,0,0,0.1)]">
-                <div>
-                    <h3 className="font-bold text-gray-900 text-lg">Edit Page</h3>
-                    <p className="text-sm text-gray-500 font-mono">/{page.slug}</p>
+            <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md flex flex-wrap gap-4 items-center justify-between px-8 py-5 border-b border-gray-100 shadow-sm">
+                <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-8 bg-blue-600 rounded-full"></div>
+                    <div>
+                        <h3 className="font-black text-gray-900 text-xl tracking-tight">Edit Page Content</h3>
+                        <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{page.slug}</p>
+                    </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     <a href={`/${page.slug}`} target="_blank" rel="noreferrer"
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
-                        <LinkIcon className="w-3 h-3" /> View Live
+                        className="flex items-center gap-2 px-4 py-2 text-xs font-bold border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-all shadow-sm">
+                        <LinkIcon className="w-3.5 h-3.5" /> View Live
                     </a>
                     <button onClick={save} disabled={saving}
-                        className="flex items-center gap-1.5 px-4 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-60">
-                        <Save className="w-3.5 h-3.5" />
-                        {saving ? 'Saving…' : saved ? '✓ Saved!' : 'Save Changes'}
+                        className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-black shadow-lg transition-all active:scale-95 ${saving ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}>
+                        <Save className="w-4 h-4" />
+                        {saving ? 'Saving…' : saved ? '✓ Changes Saved!' : 'Save Page Changes'}
                     </button>
-                    <button onClick={onClose} className="p-1.5 text-gray-400 border border-transparent hover:border-gray-200 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors ml-2">
-                        <X className="w-5 h-5" />
+                    <button onClick={onClose} className="p-2 text-gray-400 border border-gray-100 hover:border-red-200 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all ml-2">
+                        <X className="w-6 h-6" />
                     </button>
                 </div>
             </div>
 
-            <div className="p-6 space-y-8">
+            <div className="p-8 space-y-12">
                 {/* Basic Info */}
-                <section>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Basic Information</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Field label="Page Title *" value={title} onChange={setTitle} />
-                        <div className="space-y-1">
-                            <label className="block text-sm font-semibold text-gray-700">Status</label>
+                <section className="space-y-6">
+                    <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+                        <h4 className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">General Configuration</h4>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="md:col-span-2">
+                            <Field label="Browser Title *" value={title} onChange={setTitle} hint="shown in navigation and tabs" />
+                        </div>
+                        <div className="space-y-1.5">
+                            <label className="block text-sm font-bold text-gray-700">Publishing Status</label>
                             <button onClick={() => setPublished(p => !p)}
-                                className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-colors ${published ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-500 border-gray-200'}`}>
-                                {published ? '● Published' : '○ Draft'}
+                                className={`w-full px-4 py-2.5 rounded-xl text-xs font-black border-2 transition-all shadow-sm ${published
+                                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                    : 'bg-slate-50 text-slate-500 border-slate-200'}`}>
+                                {published ? '● PUBLISHED & VISIBLE' : '○ SAVED AS DRAFT'}
                             </button>
                         </div>
                     </div>
                 </section>
 
                 {/* Hero */}
-                <section>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Hero Section</h4>
-                    <div className="space-y-4">
-                        <Field label="Hero Title *" value={data.heroTitle ?? ''} onChange={v => set('heroTitle', v)} placeholder="e.g. AI & Machine Learning" />
-                        <Field label="Hero Subtitle" value={data.heroSubtitle ?? ''} onChange={v => set('heroSubtitle', v)} multiline placeholder="Supporting subtitle text…" />
-                        <Field label="Hero Background Image URL" value={data.heroImage ?? ''} onChange={v => set('heroImage', v)} placeholder="https://images.unsplash.com/..." hint="paste any image URL" />
+                <section className="space-y-6">
+                    <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+                        <h4 className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">Hero Banner Content</h4>
+                    </div>
+                    <div className="space-y-6">
+                        <Field label="Hero Heading *" value={data.heroTitle ?? ''} onChange={v => set('heroTitle', v)} placeholder="Headline for the page..." />
+                        <Field label="Hero Sub-heading" value={data.heroSubtitle ?? ''} onChange={v => set('heroSubtitle', v)} multiline placeholder="Supporting text displayed below the headline…" />
+                        <Field label="Hero Image Backdrop" value={data.heroImage ?? ''} onChange={v => set('heroImage', v)} placeholder="https://images.unsplash.com/..." hint="supports Unsplash, CDN images" />
                         {data.heroImage && (
-                            <div className="h-32 rounded-lg overflow-hidden border border-gray-200">
+                            <div className="h-48 rounded-2xl overflow-hidden border border-gray-200 shadow-inner group relative">
                                 <img src={data.heroImage} alt="hero preview" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                                    <span className="text-white text-xs font-bold px-3 py-1 bg-black/40 rounded-full backdrop-blur-md">Preview Mode</span>
+                                </div>
                             </div>
                         )}
                     </div>
                 </section>
 
                 {/* Section Headings */}
-                <section>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Section Headings</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Field label="Section 1 Heading" value={data.section1Title ?? ''} onChange={v => set('section1Title', v)} placeholder="e.g. Our Services" />
-                        <Field label="Section 2 Heading" value={data.section2Title ?? ''} onChange={v => set('section2Title', v)} placeholder="e.g. Why Choose Us?" />
+                <section className="space-y-6">
+                    <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+                        <h4 className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">Custom Section Labels</h4>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Field label="Content Section Title" value={data.section1Title ?? ''} onChange={v => set('section1Title', v)} placeholder="e.g. Solutions" />
+                        <Field label="Features Section Title" value={data.section2Title ?? ''} onChange={v => set('section2Title', v)} placeholder="e.g. Benefits" />
                     </div>
                 </section>
 
                 {/* Cards */}
-                <section>
-                    <div className="flex items-center justify-between mb-4">
-                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                            Cards / Items <span className="text-blue-500">({(data.cards ?? []).length})</span>
+                <section className="space-y-6">
+                    <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <h4 className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">
+                            Interactive Cards <span className="text-blue-500 ml-2">({(data.cards ?? []).length})</span>
                         </h4>
                         <button onClick={addCard}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">
-                            <Plus className="w-3.5 h-3.5" /> Add Card
+                            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider rounded-xl hover:bg-blue-700 transition-all shadow-md">
+                            <Plus className="w-4 h-4" /> New Card
                         </button>
                     </div>
 
                     {(data.cards ?? []).length === 0 && (
-                        <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center text-gray-400 text-sm">
-                            No cards yet. Click "Add Card" to start adding content cards.
+                        <div className="border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center text-gray-400 text-sm font-medium bg-gray-50/50">
+                            No cards defined for this template yet.
                         </div>
                     )}
 
-                    <div className="space-y-3">
+                    <div className="grid grid-cols-1 gap-6">
                         {(data.cards ?? []).map((card, i) => (
-                            <div key={i} className="border border-gray-200 rounded-xl p-4 bg-gray-50/50">
-                                <div className="flex items-center justify-between mb-3">
-                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">Card {i + 1}</span>
+                            <div key={i} className="border border-gray-200 rounded-2xl p-6 bg-gray-50/30 hover:bg-white hover:shadow-lg hover:border-blue-200 transition-all group">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="flex items-center gap-3">
+                                        <span className="w-8 h-8 rounded-lg bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs">{i + 1}</span>
+                                        <span className="text-xs font-black text-slate-500 uppercase tracking-widest">{card.title || 'Untitled Card'}</span>
+                                    </div>
                                     <button onClick={() => removeCard(i)}
-                                        className="flex items-center gap-1 px-2 py-1 text-red-500 hover:bg-red-50 rounded-lg transition-colors text-xs">
-                                        <Trash2 className="w-3.5 h-3.5" /> Remove
+                                        className="flex items-center gap-1.5 px-3 py-1.5 text-red-400 hover:bg-red-50 border border-transparent hover:border-red-100 rounded-xl transition-all text-[10px] font-black uppercase tracking-wider opacity-0 group-hover:opacity-100">
+                                        <Trash2 className="w-3.5 h-3.5" /> Delete
                                     </button>
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <Field label="Title" value={card.title ?? ''} onChange={v => setCard(i, 'title', v)} />
-                                    <Field label="Description" value={card.description ?? ''} onChange={v => setCard(i, 'description', v)} />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <Field label="Card Title" value={card.title ?? ''} onChange={v => setCard(i, 'title', v)} />
+                                    <Field label="Card Description" value={card.description ?? ''} onChange={v => setCard(i, 'description', v)} />
                                 </div>
-                                <div className="mt-3">
-                                    <Field label="Image URL" value={card.image ?? ''} onChange={v => setCard(i, 'image', v)} placeholder="https://images.unsplash.com/..." />
+                                <div className="mt-6 flex gap-6 items-start">
+                                    <div className="flex-1">
+                                        <Field label="Image URL link" value={card.image ?? ''} onChange={v => setCard(i, 'image', v)} placeholder="https://..." />
+                                    </div>
                                     {card.image && (
-                                        <div className="mt-2 h-20 rounded-lg overflow-hidden border border-gray-200">
+                                        <div className="w-32 h-20 rounded-xl overflow-hidden border border-gray-200 shadow-sm flex-shrink-0">
                                             <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
                                         </div>
                                     )}
@@ -203,32 +224,32 @@ function InlinePageEditor({ page, onClose, onSaved }: {
                 </section>
 
                 {/* Features */}
-                <section>
-                    <div className="flex items-center justify-between mb-4">
-                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                            Feature List <span className="text-emerald-500">({(data.features ?? []).length})</span>
+                <section className="space-y-6">
+                    <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+                        <h4 className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">
+                            Key Feature Bullets <span className="text-emerald-500 ml-2">({(data.features ?? []).length})</span>
                         </h4>
                         <button onClick={addFeature}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg hover:bg-emerald-700 transition-colors">
-                            <Plus className="w-3.5 h-3.5" /> Add Feature
+                            className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider rounded-xl hover:bg-emerald-700 transition-all shadow-md">
+                            <Plus className="w-4 h-4" /> Add Bullet
                         </button>
                     </div>
 
                     {(data.features ?? []).length === 0 && (
-                        <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center text-gray-400 text-sm">
-                            No bullet features defined.
+                        <div className="border-2 border-dashed border-gray-200 rounded-2xl p-10 text-center text-gray-400 text-sm font-medium bg-gray-50/50">
+                            List specialized features or highlights.
                         </div>
                     )}
 
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {(data.features ?? []).map((f, i) => (
-                            <div key={i} className="flex items-center gap-2">
-                                <span className="text-emerald-500 font-bold text-sm">✓</span>
-                                <input className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30 bg-white"
-                                    value={f} onChange={e => setFeature(i, e.target.value)} />
+                            <div key={i} className="flex items-center gap-3 bg-white p-3 rounded-2xl border border-gray-100 shadow-sm hover:border-emerald-200 transition-all">
+                                <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xs flex-shrink-0">✓</div>
+                                <input className="flex-1 border-none focus:ring-0 text-sm font-medium text-slate-700 placeholder:text-slate-300"
+                                    value={f} onChange={e => setFeature(i, e.target.value)} placeholder="Feature description..." />
                                 <button onClick={() => removeFeature(i)}
-                                    className="p-1.5 text-red-400 hover:bg-red-50 rounded-lg transition-colors">
-                                    <Trash2 className="w-3.5 h-3.5" />
+                                    className="p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all">
+                                    <Trash2 className="w-4 h-4" />
                                 </button>
                             </div>
                         ))}
@@ -236,18 +257,21 @@ function InlinePageEditor({ page, onClose, onSaved }: {
                 </section>
 
                 {/* CTA */}
-                <section>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Call-to-Action Section</h4>
-                    <div className="space-y-4">
-                        <Field label="CTA Heading" value={data.ctaTitle ?? ''} onChange={v => set('ctaTitle', v)} placeholder="e.g. Ready to get started?" />
-                        <Field label="CTA Subtitle" value={data.ctaSubtitle ?? ''} onChange={v => set('ctaSubtitle', v)} multiline placeholder="Supporting CTA text…" />
+                <section className="space-y-6">
+                    <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+                        <h4 className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">Conversion / CTA Footer</h4>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Field label="Call-to-Action Text" value={data.ctaTitle ?? ''} onChange={v => set('ctaTitle', v)} placeholder="Heading for footer..." />
+                        <Field label="Sub-text Description" value={data.ctaSubtitle ?? ''} onChange={v => set('ctaSubtitle', v)} multiline placeholder="Actionable subtitle text…" />
                     </div>
                 </section>
 
-                {/* Bottom Save */}
-                <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <button onClick={onClose} className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 transition-colors">
-                        ← Back to Pages List
+                {/* Bottom Back Button */}
+                <div className="flex justify-between items-center pt-8 mt-4 border-t border-gray-100">
+                    <button onClick={onClose} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-all flex items-center gap-2">
+                        ← Close Editor
+
                     </button>
                     <button onClick={save} disabled={saving}
                         className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-60 shadow-md">
