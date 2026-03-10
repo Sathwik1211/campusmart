@@ -42,9 +42,9 @@ const CollaborationsTicker = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="py-6 bg-cm-blue-dark border-t border-white/10 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 flex justify-center">
-                <h3 className="text-xs md:text-sm font-bold text-white/40 tracking-[0.2em] uppercase">
+        <section ref={containerRef} className="py-8 bg-gray-50 border-y border-gray-200 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex justify-center">
+                <h3 className="text-xs md:text-sm font-bold text-gray-500 tracking-[0.2em] uppercase">
                     Trusted By Leading Institutions Worldwide
                 </h3>
             </div>
@@ -52,28 +52,28 @@ const CollaborationsTicker = () => {
             {/* Infinite scrolling marquee container */}
             <div className="relative flex overflow-hidden">
                 {/* Left gradient mask */}
-                <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-cm-blue-dark to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
 
                 {/* Marquee Track */}
                 <div className="flex animate-marquee gap-12 md:gap-24 items-center whitespace-nowrap px-6">
                     {/* First set of items */}
                     {collaborations.map((collab, i) => (
                         <div key={`collab-1-${i}`} className="flex items-center gap-3">
-                            <collab.icon className="w-5 h-5 md:w-6 md:h-6 text-white/50" />
-                            <span className="text-sm md:text-base font-semibold text-white/50">{collab.name}</span>
+                            <collab.icon className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />
+                            <span className="text-sm md:text-base font-semibold text-gray-400">{collab.name}</span>
                         </div>
                     ))}
                     {/* Duplicate set for seamless looping */}
                     {collaborations.map((collab, i) => (
                         <div key={`collab-2-${i}`} className="flex items-center gap-3">
-                            <collab.icon className="w-5 h-5 md:w-6 md:h-6 text-white/50" />
-                            <span className="text-sm md:text-base font-semibold text-white/50">{collab.name}</span>
+                            <collab.icon className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />
+                            <span className="text-sm md:text-base font-semibold text-gray-400">{collab.name}</span>
                         </div>
                     ))}
                 </div>
 
                 {/* Right gradient mask */}
-                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-cm-blue-dark to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
             </div>
         </section>
     );
