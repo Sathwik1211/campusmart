@@ -42,8 +42,8 @@ const CollaborationsTicker = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="py-12 bg-white border-y border-gray-100 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
+        <section ref={containerRef} className="py-8 bg-[#f4f3ef] border-y border-gray-200 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
                 <h3 className="text-sm md:text-base font-bold text-gray-400 tracking-widest uppercase">
                     Trusted By Leading Institutions Worldwide
                 </h3>
