@@ -42,7 +42,7 @@ const CollaborationsTicker = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="py-6 bg-[#002855] border-t border-white/10 overflow-hidden">
+        <section ref={containerRef} className="py-6 bg-cm-blue-dark border-t border-white/10 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 flex justify-center">
                 <h3 className="text-xs md:text-sm font-bold text-white/40 tracking-[0.2em] uppercase">
                     Trusted By Leading Institutions Worldwide
@@ -52,7 +52,7 @@ const CollaborationsTicker = () => {
             {/* Infinite scrolling marquee container */}
             <div className="relative flex overflow-hidden">
                 {/* Left gradient mask */}
-                <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#002855] to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-cm-blue-dark to-transparent z-10 pointer-events-none" />
 
                 {/* Marquee Track */}
                 <div className="flex animate-marquee gap-12 md:gap-24 items-center whitespace-nowrap px-6">
@@ -73,7 +73,7 @@ const CollaborationsTicker = () => {
                 </div>
 
                 {/* Right gradient mask */}
-                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#002855] to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-cm-blue-dark to-transparent z-10 pointer-events-none" />
             </div>
         </section>
     );
