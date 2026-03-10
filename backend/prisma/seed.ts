@@ -121,6 +121,55 @@ async function main() {
         });
     }
 
+    // Pages (CMS)
+    const pages = [
+        { title: 'Home', slug: 'home' },
+        { title: 'AI Digital Design Supply', slug: 'ai-digital-design-supply' },
+        { title: 'AI Guide', slug: 'ai-guide' },
+        { title: 'AI & ML', slug: 'ai-ml' },
+        { title: 'AI Stations', slug: 'ai-stations' },
+        { title: 'Assessment System', slug: 'assessment-system' },
+        { title: 'Campus Automation', slug: 'campus-automation' },
+        { title: 'Campus Design Execution', slug: 'campus-design-execution' },
+        { title: 'Campus Design', slug: 'campus-design' },
+        { title: 'Collaboration', slug: 'collaboration' },
+        { title: 'Corporate', slug: 'corporate' },
+        { title: 'Digital Transformation', slug: 'digital-transformation' },
+        { title: 'Furniture Design Supply', slug: 'furniture-design-supply' },
+        { title: 'Furniture', slug: 'furniture' },
+        { title: 'Innovation Centres', slug: 'innovation-centres' },
+        { title: 'Innovation', slug: 'innovation' },
+        { title: 'Labs', slug: 'labs' },
+        { title: 'Libraries', slug: 'libraries' },
+        { title: 'Library Management', slug: 'library-management' },
+        { title: 'Learning Management System', slug: 'lms' },
+        { title: 'Lookbook', slug: 'lookbook' },
+        { title: 'New Environments', slug: 'new-environments' },
+        { title: 'Partnership', slug: 'partnership' },
+        { title: 'Privacy Policy', slug: 'privacy-policy' },
+        { title: 'Product Catalog', slug: 'product-catalog' },
+        { title: 'Setup College', slug: 'setup-college' },
+        { title: 'Sports Design Execution', slug: 'sports-design-execution' },
+        { title: 'Sports Infrastructure', slug: 'sports-infra' },
+        { title: 'Tech Infrastructure', slug: 'tech-infra' },
+        { title: 'Terms of Use', slug: 'terms-of-use' },
+        { title: 'UGC Guidelines', slug: 'ugc-guidelines' },
+    ];
+
+    for (const page of pages) {
+        await prisma.page.upsert({
+            where: { slug: page.slug },
+            update: {},
+            create: {
+                title: page.title,
+                slug: page.slug,
+                template: page.slug,
+                pageData: '{}',
+                published: true,
+            },
+        });
+    }
+
     console.log('✅ Database seeded successfully!');
     console.log('📧 Admin: admin@campusmart.in / Admin@1234');
     console.log('📧 Demo User: demo@campusmart.in / User@1234');

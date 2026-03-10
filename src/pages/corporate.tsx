@@ -2,12 +2,20 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Building2, Users, Target, Award, Handshake, TrendingUp } from 'lucide-react';
+import { usePageData } from '@/hooks/usePageData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Corporate = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const { data } = usePageData('corporate');
+
+  const heroTitle = data.heroTitle ?? 'About Campus Mart';
+  const heroSubtitle = data.heroSubtitle ?? 'We are a consortium of architects, designers, and campus innovators who strive to bring learning outcomes through the latest infrastructure and edtech solutions.';
+  const section1Title = data.section1Title ?? 'Our Mission';
+  const section2Title = data.section2Title ?? 'Our Core Values';
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -77,11 +85,10 @@ const Corporate = () => {
       <section ref={heroRef} className="bg-cm-blue py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            About Campus Mart
+            {heroTitle}
           </h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            We are a consortium of architects, designers, and campus innovators who strive 
-            to bring learning outcomes through the latest infrastructure and edtech solutions.
+            {heroSubtitle}
           </p>
         </div>
       </section>
@@ -108,15 +115,15 @@ const Corporate = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">Our Mission</h2>
+              <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section1Title}</h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                To transform educational infrastructure across India by providing comprehensive 
-                campus solutions that blend physical spaces with cutting-edge digital technology. 
-                We aim to create learning environments that inspire, engage, and empower students 
+                To transform educational infrastructure across India by providing comprehensive
+                campus solutions that blend physical spaces with cutting-edge digital technology.
+                We aim to create learning environments that inspire, engage, and empower students
                 and educators alike.
               </p>
               <p className="text-gray-600 text-lg leading-relaxed">
-                As the first company in Asia to bring curriculum-mapped innovations to the campus 
+                As the first company in Asia to bring curriculum-mapped innovations to the campus
                 industry, we continue to lead the way in educational transformation.
               </p>
             </div>
@@ -135,7 +142,7 @@ const Corporate = () => {
       <section className="py-16 bg-cm-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">
-            Our Core Values
+            {section2Title}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map(({ icon: Icon, title, description }) => (
@@ -182,7 +189,7 @@ const Corporate = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Join Our Team</h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
-            We're always looking for talented individuals who are passionate about 
+            We're always looking for talented individuals who are passionate about
             transforming education. Explore our open positions and become part of our journey.
           </p>
           <a href="/partnership" className="btn-secondary inline-block">

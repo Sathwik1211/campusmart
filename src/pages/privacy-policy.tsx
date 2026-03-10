@@ -1,10 +1,15 @@
+import { usePageData } from '@/hooks/usePageData';
+
 const PrivacyPolicy = () => {
+  const { data } = usePageData('privacy-policy');
+  const heroTitle = data.heroTitle ?? 'Privacy Policy';
+
   return (
     <main className="min-h-screen bg-cm-gray py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl p-8 shadow-card">
-          <h1 className="text-3xl font-bold text-cm-blue-dark mb-8">Privacy Policy</h1>
-          
+          <h1 className="text-3xl font-bold text-cm-blue-dark mb-8">{heroTitle}</h1>
+
           <div className="space-y-6 text-gray-700">
             <section>
               <h2 className="text-xl font-bold text-cm-blue-dark mb-3">1. Introduction</h2>
