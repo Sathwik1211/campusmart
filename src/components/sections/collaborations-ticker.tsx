@@ -55,7 +55,7 @@ const CollaborationsTicker = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
 
                 {/* Marquee Track */}
-                <div className="flex animate-marquee gap-12 md:gap-24 items-center whitespace-nowrap px-6">
+                <div className="flex animate-marquee gap-8 md:gap-12 items-center whitespace-nowrap px-6">
                     {/* First set of items */}
                     {collaborations.map((collab, i) => (
                         <div key={`collab-1-${i}`} className="flex items-center gap-3">
