@@ -55,7 +55,7 @@ export default function Catalogues() {
                                 <div className="text-xs text-gray-400 mt-2">{new Date(c.createdAt).toLocaleDateString('en-IN')}</div>
                             </div>
                             <div className="flex items-center gap-2 mt-4">
-                                <a href={`http://localhost:3001${c.fileUrl}`} target="_blank" rel="noreferrer" className="btn-secondary flex items-center gap-1 text-xs flex-1 justify-center">
+                                <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}${c.fileUrl}`} target="_blank" rel="noreferrer" className="btn-secondary flex items-center gap-1 text-xs flex-1 justify-center">
                                     <ExternalLink className="w-3.5 h-3.5" /> View PDF
                                 </a>
                                 <button onClick={() => deleteCatalogue(c.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg border border-red-200"><Trash2 className="w-4 h-4" /></button>

@@ -3,11 +3,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Download, FileText, BookOpen, ArrowRight } from 'lucide-react';
+import { usePageData } from '@/hooks/usePageData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Catalogues = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const { data } = usePageData('catalogues');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -95,11 +97,10 @@ const Catalogues = () => {
       <section ref={heroRef} className="bg-cm-blue py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Product Catalogues
+            {data.heroTitle ?? 'Product Catalogues'}
           </h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Browse our comprehensive catalogues featuring furniture, equipment, 
-            and infrastructure solutions for educational institutions.
+            {data.heroSubtitle ?? 'Browse our comprehensive catalogues featuring furniture, equipment, and infrastructure solutions for educational institutions.'}
           </p>
         </div>
       </section>

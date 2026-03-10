@@ -115,7 +115,8 @@ router.post('/login', async (req: Request, res: Response) => {
             user: { id: user.id, name: user.name, email: user.email, role: user.role, phone: user.phone, institution: user.institution, emailVerified: user.emailVerified },
             ...tokens,
         });
-    } catch {
+    } catch (err) {
+        console.error('Login error:', err);
         res.status(500).json({ error: 'Login failed' });
     }
 });

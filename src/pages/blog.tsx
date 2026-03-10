@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar } from 'lucide-react';
 import api from '@/api/client';
+import { usePageData } from '@/hooks/usePageData';
 
 interface Post { id: number; title: string; excerpt: string; publishedAt?: string; imageUrl?: string; slug: string; }
 
@@ -10,6 +11,7 @@ const Blog = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const { data } = usePageData('blog');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -28,9 +30,9 @@ const Blog = () => {
     <main className="min-h-screen">
       <section ref={heroRef} className="bg-cm-blue py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Blog</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{data.heroTitle ?? 'Blog'}</h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Insights, trends, and best practices in educational infrastructure.
+            {data.heroSubtitle ?? 'Insights, trends, and best practices in educational infrastructure.'}
           </p>
         </div>
       </section>
