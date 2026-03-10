@@ -96,7 +96,7 @@ function InlinePageEditor({ page, onClose, onSaved }: {
     return (
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm mt-4">
             {/* Editor Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+            <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm flex flex-wrap gap-4 items-center justify-between px-6 py-4 border-b border-gray-100 rounded-t-xl shadow-[0_4px_10px_-4px_rgba(0,0,0,0.1)]">
                 <div>
                     <h3 className="font-bold text-gray-900 text-lg">Edit Page</h3>
                     <p className="text-sm text-gray-500 font-mono">/{page.slug}</p>
@@ -111,7 +111,7 @@ function InlinePageEditor({ page, onClose, onSaved }: {
                         <Save className="w-3.5 h-3.5" />
                         {saving ? 'Saving…' : saved ? '✓ Saved!' : 'Save Changes'}
                     </button>
-                    <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                    <button onClick={onClose} className="p-1.5 text-gray-400 border border-transparent hover:border-gray-200 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors ml-2">
                         <X className="w-5 h-5" />
                     </button>
                 </div>

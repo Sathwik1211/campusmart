@@ -157,9 +157,9 @@ export default function PageEditor() {
     if (!page) return <div className="p-8 text-red-500">Page not found.</div>;
 
     return (
-        <div className="p-6 max-w-4xl mx-auto space-y-8">
+        <div className="p-6 max-w-4xl mx-auto space-y-8 relative">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="sticky top-0 z-50 -mx-6 -mt-6 px-6 py-4 mb-2 bg-white/90 backdrop-blur-md border-b border-gray-200 flex items-center justify-between shadow-sm rounded-t-xl">
                 <div className="flex items-center gap-3">
                     <button onClick={() => navigate('/admin/pages')} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                         <ArrowLeft className="w-5 h-5 text-gray-500" />
@@ -171,11 +171,11 @@ export default function PageEditor() {
                 </div>
                 <div className="flex items-center gap-3">
                     <a href={`/${page.slug}`} target="_blank" rel="noreferrer"
-                        className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-gray-600">
+                        className="px-4 py-2 text-sm border border-gray-200 bg-white rounded-lg hover:bg-gray-50 transition-colors text-gray-600 shadow-sm">
                         View Live ↗
                     </a>
                     <button onClick={save} disabled={saving}
-                        className="flex items-center gap-2 px-5 py-2 bg-cm-blue text-white rounded-lg text-sm font-semibold hover:bg-cm-blue-dark transition-colors disabled:opacity-60">
+                        className="flex items-center gap-2 px-5 py-2 bg-cm-blue text-white rounded-lg text-sm font-semibold hover:bg-cm-blue-dark transition-colors disabled:opacity-60 shadow-md">
                         <Save className="w-4 h-4" />
                         {saving ? 'Saving...' : saved ? '✓ Saved!' : 'Save Changes'}
                     </button>
