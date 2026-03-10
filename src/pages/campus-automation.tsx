@@ -1,9 +1,23 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-// Imports
+import { usePageData } from '@/hooks/usePageData';
+
+interface CardItem { title: string; description: string; }
+
+const DEFAULTS = {
+  heroTitle: 'Campus Automation',
+  heroSubtitle: 'Transform your campus into a smart, automated environment. Admissions, attendance, finance, and research tracking - all in one place.',
+  cards: [
+    { title: 'Admissions', description: 'Automated and streamlined processes.' },
+    { title: 'Attendance', description: 'Automated and streamlined processes.' },
+    { title: 'Finance', description: 'Automated and streamlined processes.' }
+  ] as CardItem[]
+};
 
 const CampusAutomation = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const { data } = usePageData('campus-automation');
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(heroRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
@@ -11,14 +25,17 @@ const CampusAutomation = () => {
     return () => ctx.revert();
   }, []);
 
+  const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
+  const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
+  const cards: CardItem[] = (data.cards && data.cards.length > 0) ? data.cards : DEFAULTS.cards;
+
   return (
     <main className="min-h-screen">
       <section ref={heroRef} className="bg-cm-cyan py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Campus Automation</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{heroTitle}</h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Transform your campus into a smart, automated environment. Admissions, attendance, 
-            finance, and research tracking - all in one place.
+            {heroSubtitle}
           </p>
         </div>
       </section>
@@ -26,10 +43,10 @@ const CampusAutomation = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {['Admissions', 'Attendance', 'Finance'].map((f) => (
-              <div key={f} className="bg-white rounded-xl p-8 shadow-card text-center">
-                <h3 className="text-xl font-bold text-cm-blue-dark mb-4">{f}</h3>
-                <p className="text-gray-600">Automated and streamlined processes.</p>
+            {cards.map((c: CardItem) => (
+              <div key={c.title} className="bg-white rounded-xl p-8 shadow-card text-center transition-shadow hover:shadow-card-hover duration-300">
+                <h3 className="text-xl font-bold text-cm-blue-dark mb-4">{c.title}</h3>
+                <p className="text-gray-600">{c.description}</p>
               </div>
             ))}
           </div>

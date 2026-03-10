@@ -3,30 +3,16 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, Sun, Wind, Droplets, Recycle } from 'lucide-react';
+import { usePageData } from '@/hooks/usePageData';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const NewEnvironments = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        heroRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        }
-      );
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  const environments = [
+const DEFAULTS = {
+  heroTitle: 'New Learning Environments',
+  heroSubtitle: 'Create innovative spaces that inspire learning, foster creativity, and adapt to the evolving needs of modern education.',
+  heroImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+  section1Title: 'Specialized Learning Spaces',
+  environments: [
     {
       title: 'Wondergarten Room',
       description: 'A magical space designed for early childhood development with interactive learning elements.',
@@ -63,7 +49,43 @@ const NewEnvironments = () => {
       image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       href: '/collaboration',
     },
-  ];
+  ]
+};
+
+const NewEnvironments = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { data } = usePageData('new-environments');
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        heroRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
+  const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
+  const heroImage = data.heroImage ?? DEFAULTS.heroImage;
+  const section1Title = data.section1Title ?? DEFAULTS.section1Title;
+
+  // Merge CMS cards with DEFAULTS.environments for images and hrefs
+  const environments = (data.cards && data.cards.length > 0)
+    ? data.cards.map((c: any, i: number) => ({
+      ...c,
+      image: DEFAULTS.environments[i]?.image || DEFAULTS.environments[0].image,
+      href: DEFAULTS.environments[i]?.href || '/furniture'
+    }))
+    : DEFAULTS.environments;
 
   const sustainabilityFeatures = [
     { icon: Leaf, title: 'Green Building', description: 'Eco-friendly construction materials and practices' },
@@ -78,19 +100,18 @@ const NewEnvironments = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-[500px] overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-          alt="New Environments"
+          src={heroImage}
+          alt={heroTitle}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-cm-blue/90 to-cm-blue/60" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              New Learning Environments
+              {heroTitle}
             </h1>
             <p className="text-xl text-white/90">
-              Create innovative spaces that inspire learning, foster creativity, 
-              and adapt to the evolving needs of modern education.
+              {heroSubtitle}
             </p>
           </div>
         </div>
@@ -100,14 +121,14 @@ const NewEnvironments = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-4">
-            Specialized Learning Spaces
+            {section1Title}
           </h2>
           <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">
-            We design and build purpose-specific environments that cater to different 
+            We design and build purpose-specific environments that cater to different
             learning styles and educational needs.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {environments.map((env) => (
+            {environments.map((env: any) => (
               <Link
                 key={env.title}
                 to={env.href}
@@ -145,7 +166,7 @@ const NewEnvironments = () => {
                 Sustainable Campus Design
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Our commitment to sustainability ensures that every new environment 
+                Our commitment to sustainability ensures that every new environment
                 we create is eco-friendly, energy-efficient, and designed for the future.
               </p>
               <div className="space-y-4">
@@ -180,7 +201,7 @@ const NewEnvironments = () => {
             NEP 2020 Ready Environments
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
-            Our learning spaces are designed in alignment with the National Education Policy 2020, 
+            Our learning spaces are designed in alignment with the National Education Policy 2020,
             supporting holistic development, flexibility, and multidisciplinary learning.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">

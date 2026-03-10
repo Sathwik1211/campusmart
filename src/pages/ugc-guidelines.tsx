@@ -1,9 +1,25 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Download } from 'lucide-react';
+import { usePageData } from '@/hooks/usePageData';
+
+const DEFAULTS = {
+  heroTitle: 'UGC Guidelines for Digital Campus',
+  heroSubtitle: 'Latest UGC guidelines for digital transformation of campuses.',
+  section1Title: 'Key Guidelines',
+  features: [
+    'Digital Infrastructure Requirements',
+    'Online Learning Standards',
+    'Data Security Protocols',
+    'Student Privacy Guidelines',
+    'Compliance Checklist'
+  ]
+};
 
 const UGCGuidelines = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const { data } = usePageData('ugc-guidelines');
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(heroRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
@@ -11,13 +27,18 @@ const UGCGuidelines = () => {
     return () => ctx.revert();
   }, []);
 
+  const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
+  const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
+  const section1Title = data.section1Title ?? DEFAULTS.section1Title;
+  const features = (data.features && data.features.length > 0) ? data.features : DEFAULTS.features;
+
   return (
     <main className="min-h-screen">
       <section ref={heroRef} className="bg-cm-blue-dark py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">UGC Guidelines for Digital Campus</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{heroTitle}</h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Latest UGC guidelines for digital transformation of campuses.
+            {heroSubtitle}
           </p>
         </div>
       </section>
@@ -25,13 +46,11 @@ const UGCGuidelines = () => {
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-xl p-8 shadow-card">
-            <h2 className="text-2xl font-bold text-cm-blue-dark mb-6">Key Guidelines</h2>
+            <h2 className="text-2xl font-bold text-cm-blue-dark mb-6">{section1Title}</h2>
             <ul className="space-y-4 text-gray-700 mb-8">
-              <li>• Digital Infrastructure Requirements</li>
-              <li>• Online Learning Standards</li>
-              <li>• Data Security Protocols</li>
-              <li>• Student Privacy Guidelines</li>
-              <li>• Compliance Checklist</li>
+              {features.map((feature: string) => (
+                <li key={feature}>• {feature}</li>
+              ))}
             </ul>
             <button className="btn-primary inline-flex items-center gap-2">
               <Download className="w-5 h-5" />
