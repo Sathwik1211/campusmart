@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "prisma generate && tsc",
-    "start": "sh -c 'npx prisma migrate deploy; node dist/runSeed.js; node dist/index.js'",
+    "start": "sh -c 'npx prisma db push --accept-data-loss; node dist/runSeed.js; node dist/index.js'",
     "db:migrate": "npx prisma migrate dev --name init",
     "db:seed": "ts-node-dev --transpile-only prisma/seed.ts",
     "db:reset": "npx prisma migrate reset --force",

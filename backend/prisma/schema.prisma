@@ -60,12 +60,22 @@ model BlogPost {
   slug        String   @unique
   excerpt     String
   body        String
+  categoryId  Int?
   imageUrl    String?
   published   Boolean  @default(false)
   publishedAt DateTime?
   authorId    Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  category    BlogCategory? @relation(fields: [categoryId], references: [id])
+}
+
+model BlogCategory {
+  id    Int        @id @default(autoincrement())
+  name  String
+  slug  String     @unique
+  posts BlogPost[]
 }
 
 model Order {
