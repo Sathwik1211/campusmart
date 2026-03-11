@@ -117,17 +117,17 @@ export default function Blog() {
                             <button onClick={() => setShowModal(false)}><X className="w-5 h-5 text-gray-500" /></button>
                         </div>
                         <div className="p-6 space-y-4">
-                            <div><label className="label">Title *</label><input className="input" value={editing.title || ''} onChange={(e) => setEditing({ ...editing, title: e.target.value })} /></div>
+                            <div><label className="form-label">Title *</label><input className="form-input" value={editing.title || ''} onChange={(e) => setEditing({ ...editing, title: e.target.value })} /></div>
                             <div>
-                                <label className="label">Category</label>
-                                <select className="input bg-white" value={editing.categoryId || ''} onChange={(e) => setEditing({ ...editing, categoryId: e.target.value ? Number(e.target.value) : undefined })}>
+                                <label className="form-label">Category</label>
+                                <select className="form-input bg-white" value={editing.categoryId || ''} onChange={(e) => setEditing({ ...editing, categoryId: e.target.value ? Number(e.target.value) : undefined })}>
                                     <option value="">-- Uncategorized --</option>
                                     {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                 </select>
                             </div>
-                            <div><label className="label">Excerpt *</label><textarea className="input" rows={2} value={editing.excerpt || ''} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} /></div>
-                            <div><label className="label">Body (HTML supported) *</label><textarea className="input" rows={10} value={editing.body || ''} onChange={(e) => setEditing({ ...editing, body: e.target.value })} style={{ fontFamily: 'monospace' }} /></div>
-                            <div><label className="label">Image URL</label><input className="input" value={editing.imageUrl || ''} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} /></div>
+                            <div><label className="form-label">Excerpt *</label><textarea className="form-input" rows={2} value={editing.excerpt || ''} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} /></div>
+                            <div><label className="form-label">Body (HTML supported) *</label><textarea className="form-input" rows={10} value={editing.body || ''} onChange={(e) => setEditing({ ...editing, body: e.target.value })} style={{ fontFamily: 'monospace' }} /></div>
+                            <div><label className="form-label">Image URL</label><input className="form-input" value={editing.imageUrl || ''} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} /></div>
                             <label className="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" checked={!!editing.published} onChange={(e) => setEditing({ ...editing, published: e.target.checked })} />
                                 <span className="text-sm font-medium">Published</span>
@@ -161,7 +161,7 @@ export default function Blog() {
                             </ul>
                             <div className="border-t pt-5">
                                 <form onSubmit={saveCategory} className="flex gap-2">
-                                    <input required placeholder="New Category Name" className="input flex-1" value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} />
+                                    <input required placeholder="New Category Name" className="form-input flex-1" value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} />
                                     <button disabled={saving} type="submit" className="btn-primary px-4 whitespace-nowrap">Add</button>
                                 </form>
                             </div>
