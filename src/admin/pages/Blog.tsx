@@ -110,8 +110,8 @@ export default function Blog() {
 
             {/* Post Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col">
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 sm:p-6 overflow-hidden">
+                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col max-h-full">
                         <div className="flex items-center justify-between p-6 border-b shrink-0">
                             <h2 className="text-lg font-bold">{editing.id ? 'Edit Post' : 'New Blog Post'}</h2>
                             <button onClick={() => setShowModal(false)}><X className="w-5 h-5 text-gray-500" /></button>
