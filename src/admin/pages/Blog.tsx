@@ -110,8 +110,8 @@ export default function Blog() {
 
             {/* Post Modal */}
             {showModal && (
-                <div className="fixed inset-0 bg-black/50 flex flex-col items-center justify-start sm:justify-center z-50 p-4 sm:p-6 overflow-hidden">
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col h-[calc(100vh-2rem)] sm:h-[calc(100vh-3rem)]">
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[200] p-4">
+                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
                         <div className="flex items-center justify-between p-6 border-b shrink-0">
                             <h2 className="text-lg font-bold">{editing.id ? 'Edit Post' : 'New Blog Post'}</h2>
                             <button onClick={() => setShowModal(false)}><X className="w-5 h-5 text-gray-500" /></button>
@@ -128,10 +128,12 @@ export default function Blog() {
                             <div><label className="form-label">Excerpt *</label><textarea className="form-input" rows={2} value={editing.excerpt || ''} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} /></div>
                             <div><label className="form-label">Body (HTML supported) *</label><textarea className="form-input" rows={10} value={editing.body || ''} onChange={(e) => setEditing({ ...editing, body: e.target.value })} style={{ fontFamily: 'monospace' }} /></div>
                             <div><label className="form-label">Image URL</label><input className="form-input" value={editing.imageUrl || ''} onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })} /></div>
-                            <label className="flex items-center gap-2 cursor-pointer pb-2">
-                                <input type="checkbox" checked={!!editing.published} onChange={(e) => setEditing({ ...editing, published: e.target.checked })} />
-                                <span className="text-sm font-medium">Published</span>
-                            </label>
+                            <div className="pb-2">
+                                <label className="flex items-center gap-2 cursor-pointer inline-flex">
+                                    <input type="checkbox" checked={!!editing.published} onChange={(e) => setEditing({ ...editing, published: e.target.checked })} />
+                                    <span className="text-sm font-medium">Published</span>
+                                </label>
+                            </div>
                         </div>
                         <div className="flex justify-end gap-3 p-6 border-t shrink-0">
                             <button onClick={() => setShowModal(false)} className="btn-secondary">Cancel</button>
