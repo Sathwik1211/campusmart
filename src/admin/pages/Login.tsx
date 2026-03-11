@@ -53,7 +53,7 @@ export default function Login() {
 
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
-                            <label className="label">Email Address</label>
+                            <label className="form-label">Email Address</label>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                 <input
@@ -68,7 +68,7 @@ export default function Login() {
                         </div>
 
                         <div>
-                            <label className="label">Password</label>
+                            <label className="form-label">Password</label>
                             <div className="relative">
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                 <input

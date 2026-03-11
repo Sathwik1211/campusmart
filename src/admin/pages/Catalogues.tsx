@@ -74,10 +74,10 @@ export default function Catalogues() {
                             <button onClick={() => setShowModal(false)}><X className="w-5 h-5 text-gray-500" /></button>
                         </div>
                         <div className="p-6 space-y-4">
-                            <div><label className="label">Title *</label><input className="input" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} /></div>
-                            <div><label className="label">Description</label><textarea className="input" rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></div>
-                            <div><label className="label">File URL (PDF)</label><input className="input" value={form.fileUrl} onChange={(e) => setForm({ ...form, fileUrl: e.target.value })} placeholder="/uploads/catalogues/file.pdf" /></div>
-                            <div><label className="label">Thumbnail URL</label><input className="input" value={form.thumbnailUrl} onChange={(e) => setForm({ ...form, thumbnailUrl: e.target.value })} /></div>
+                            <div><label className="form-label">Title *</label><input className="form-input" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} /></div>
+                            <div><label className="form-label">Description</label><textarea className="form-input" rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></div>
+                            <div><label className="form-label">File URL (PDF)</label><input className="form-input" value={form.fileUrl} onChange={(e) => setForm({ ...form, fileUrl: e.target.value })} placeholder="/uploads/catalogues/file.pdf" /></div>
+                            <div><label className="form-label">Thumbnail URL</label><input className="form-input" value={form.thumbnailUrl} onChange={(e) => setForm({ ...form, thumbnailUrl: e.target.value })} /></div>
                         </div>
                         <div className="flex justify-end gap-3 p-6 border-t">
                             <button onClick={() => setShowModal(false)} className="btn-secondary">Cancel</button>
