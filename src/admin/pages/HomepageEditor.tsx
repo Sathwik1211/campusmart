@@ -39,6 +39,8 @@ export default function HomepageEditor() {
     const [features, setFeatures] = useState<any[]>([]);
     const [services, setServices] = useState<any[]>([]);
     const [sidebar, setSidebar] = useState<any>({ classifieds: [], resources: [], completedProjects: [], contacts: [] });
+    const [tickerAnnouncements, setTickerAnnouncements] = useState<string[]>([]);
+    const [collaborations, setCollaborations] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
@@ -51,6 +53,23 @@ export default function HomepageEditor() {
             try { setFeatures(data.home_features ? JSON.parse(data.home_features) : []); } catch { /**/ }
             try { setServices(data.home_services ? JSON.parse(data.home_services) : []); } catch { /**/ }
             try { setSidebar(data.home_sidebar ? JSON.parse(data.home_sidebar) : { classifieds: [], resources: [], completedProjects: [], contacts: [] }); } catch { /**/ }
+            try { setTickerAnnouncements(data.ticker_announcements ? JSON.parse(data.ticker_announcements) : [
+                "Digital Transformation Summit: 15 May 2026",
+                "New AI-Powered Learning Stations now available for pre-order",
+                "Join our upcoming Campus Design Webinar on 15th April 2026",
+                "Latest UGC Guidelines for Digital Campus implemented across 50+ institutions",
+                "Explore our new range of ergonomic Campus Furniture in the Lookbook",
+            ]); } catch { /**/ }
+            try { setCollaborations(data.collaborations ? JSON.parse(data.collaborations) : [
+                { name: 'Stanford University' },
+                { name: 'MIT Labs' },
+                { name: 'Oxford Library' },
+                { name: 'Cambridge Tech' },
+                { name: 'Harvard Research' },
+                { name: 'Yale Architecture' },
+                { name: 'Princeton Science' },
+                { name: 'Columbia Design' },
+            ]); } catch { /**/ }
         } catch (e) { console.error(e); }
         setLoading(false);
     };
@@ -65,6 +84,8 @@ export default function HomepageEditor() {
                 home_features: JSON.stringify(features),
                 home_services: JSON.stringify(services),
                 home_sidebar: JSON.stringify(sidebar),
+                ticker_announcements: JSON.stringify(tickerAnnouncements),
+                collaborations: JSON.stringify(collaborations),
             });
             setSaved(true);
             setTimeout(() => setSaved(false), 2500);
@@ -288,6 +309,41 @@ export default function HomepageEditor() {
                             ))}
                         </div>
                     </div>
+                </div>
+            </Section>
+            
+            {/* ── Ticker & Collaborations ── */}
+            <Section title="📣 Latest Updates Ticker">
+                <p className="text-xs text-gray-400 mb-4">Each line here will scroll across the top bar under the header.</p>
+                <div className="space-y-2">
+                    {tickerAnnouncements.map((ann, i) => (
+                        <div key={i} className="flex gap-2 items-center">
+                            <input className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none" value={ann} onChange={e => {
+                                const a = [...tickerAnnouncements]; a[i] = e.target.value; setTickerAnnouncements(a);
+                            }} />
+                            <button onClick={() => setTickerAnnouncements(tickerAnnouncements.filter((_, idx) => idx !== i))} className="p-2 text-red-400 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                        </div>
+                    ))}
+                    <button onClick={() => setTickerAnnouncements([...tickerAnnouncements, 'New announcement text'])} className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                        <Plus className="w-3.5 h-3.5" /> Add Announcement
+                    </button>
+                </div>
+            </Section>
+
+            <Section title="🤝 Institutions / Collaborations">
+                <p className="text-xs text-gray-400 mb-4">The scrolling logo/name bar for trusted institutions.</p>
+                <div className="space-y-2">
+                    {collaborations.map((collab, i) => (
+                        <div key={i} className="flex gap-2 items-center">
+                            <input placeholder="Institution Name" className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none" value={collab.name} onChange={e => {
+                                const a = [...collaborations]; a[i] = { ...a[i], name: e.target.value }; setCollaborations(a);
+                            }} />
+                            <button onClick={() => setCollaborations(collaborations.filter((_, idx) => idx !== i))} className="p-2 text-red-400 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                        </div>
+                    ))}
+                    <button onClick={() => setCollaborations([...collaborations, { name: 'New Institution' }])} className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                        <Plus className="w-3.5 h-3.5" /> Add Institution
+                    </button>
                 </div>
             </Section>
 

@@ -3,10 +3,12 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Building2, Landmark, GraduationCap, Library, TestTube } from 'lucide-react';
 
+import { useSiteContent } from '../../contexts/SiteContentContext';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Mock data for collaborations - using icons as placeholders for logos
-const collaborations = [
+const defaultCollaborations = [
     { name: 'Stanford University', icon: Landmark },
     { name: 'MIT Labs', icon: TestTube },
     { name: 'Oxford Library', icon: Library },
@@ -18,7 +20,16 @@ const collaborations = [
 ];
 
 const CollaborationsTicker = () => {
+    const { content } = useSiteContent();
     const containerRef = useRef<HTMLDivElement>(null);
+
+    // Merge CMS names with default icons or fallback to Building2
+    const collaborations = (content.collaborations || []).length > 0
+        ? content.collaborations.map((c: any, i: number) => ({
+            name: c.name,
+            icon: defaultCollaborations[i]?.icon || Building2
+        }))
+        : defaultCollaborations;
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -57,14 +68,14 @@ const CollaborationsTicker = () => {
                 {/* Marquee Track */}
                 <div className="flex animate-marquee gap-4 md:gap-8 items-center whitespace-nowrap px-6">
                     {/* First set of items */}
-                    {collaborations.map((collab, i) => (
+                    {collaborations.map((collab: any, i: number) => (
                         <div key={`collab-1-${i}`} className="flex items-center gap-3">
                             <collab.icon className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />
                             <span className="text-sm md:text-base font-semibold text-gray-400">{collab.name}</span>
                         </div>
                     ))}
                     {/* Duplicate set for seamless looping */}
-                    {collaborations.map((collab, i) => (
+                    {collaborations.map((collab: any, i: number) => (
                         <div key={`collab-2-${i}`} className="flex items-center gap-3">
                             <collab.icon className="w-5 h-5 md:w-6 md:h-6 text-gray-400" />
                             <span className="text-sm md:text-base font-semibold text-gray-400">{collab.name}</span>

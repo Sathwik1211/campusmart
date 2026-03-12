@@ -1,7 +1,10 @@
 
 
+import { useSiteContent } from '../../contexts/SiteContentContext';
+
 const TickerBar = () => {
-    const announcements = [
+    const { content } = useSiteContent();
+    const announcements = content.ticker_announcements || [
         "Digital Transformation Summit: 15 May 2026",
         "New AI-Powered Learning Stations now available for pre-order",
         "Join our upcoming Campus Design Webinar on 15th April 2026",
@@ -40,11 +43,11 @@ const TickerBar = () => {
                 {/* Scrolling Ticker Area */}
                 <div className="flex-1 overflow-hidden flex items-center relative">
                     <div className="animate-marquee whitespace-nowrap flex items-center gap-12 text-[13px] md:text-sm font-medium" style={{ color: '#f8f9fa' }}>
-                        {announcements.map((item, i) => (
+                        {announcements.map((item: string, i: number) => (
                             <span key={i} className="hover:text-[#dca842] transition-colors cursor-pointer">{item}</span>
                         ))}
                         {/* Duplicate for seamless looping */}
-                        {announcements.map((item, i) => (
+                        {announcements.map((item: string, i: number) => (
                             <span key={`dup-${i}`} aria-hidden="true" className="hover:text-[#dca842] transition-colors cursor-pointer">{item}</span>
                         ))}
                     </div>
