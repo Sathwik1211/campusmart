@@ -105,7 +105,7 @@ const NewEnvironments = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-cm-blue/90 to-cm-blue/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               {heroTitle}
@@ -118,21 +118,21 @@ const NewEnvironments = () => {
       </section>
 
       {/* Environment Types */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
           <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-4">
             {section1Title}
           </h2>
-          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-6">
             We design and build purpose-specific environments that cater to different
             learning styles and educational needs.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {environments.map((env: any) => (
               <Link
                 key={env.title}
                 to={env.href}
-                className="group bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2"
+                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="h-48 overflow-hidden">
                   <img
@@ -158,14 +158,14 @@ const NewEnvironments = () => {
       </section>
 
       {/* Sustainability Section */}
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
               <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">
                 Sustainable Campus Design
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+              <p className="text-gray-600 text-lg leading-relaxed mb-2">
                 Our commitment to sustainability ensures that every new environment
                 we create is eco-friendly, energy-efficient, and designed for the future.
               </p>
@@ -187,7 +187,7 @@ const NewEnvironments = () => {
               <img
                 src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Sustainable Campus"
-                className="rounded-2xl shadow-xl"
+                className="rounded-lg shadow-sm w-full"
               />
             </div>
           </div>
@@ -195,16 +195,16 @@ const NewEnvironments = () => {
       </section>
 
       {/* NEP Ready Section */}
-      <section className="py-16 bg-cm-blue">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-4 bg-cm-blue">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
             NEP 2020 Ready Environments
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-2">
             Our learning spaces are designed in alignment with the National Education Policy 2020,
             supporting holistic development, flexibility, and multidisciplinary learning.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-12">
             {[
               { title: 'Holistic Development', description: 'Spaces that nurture cognitive, physical, and emotional growth' },
               { title: 'Flexibility', description: 'Adaptable environments for diverse learning activities' },
@@ -220,12 +220,12 @@ const NewEnvironments = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">
             Ready to Transform Your Campus?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-2">
             Let us help you create learning environments that inspire and empower.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

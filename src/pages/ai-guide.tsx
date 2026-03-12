@@ -34,8 +34,8 @@ const AIGuide = () => {
 
   return (
     <main className="min-h-screen">
-      <section ref={heroRef} className="bg-cm-purple py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section ref={heroRef} className="bg-cm-purple py-6">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{heroTitle}</h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
             {heroSubtitle}
@@ -43,11 +43,11 @@ const AIGuide = () => {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-4">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl p-8 shadow-card">
+          <div className="bg-white rounded-xl p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-cm-blue-dark mb-6">{section1Title}</h2>
-            <ul className="space-y-4 text-gray-700 mb-8">
+            <ul className="space-y-4 text-gray-700 mb-2">
               {features.map((feature: string) => (
                 <li key={feature} className="flex items-center gap-2">
                   <Check className="w-5 h-5 text-cm-purple flex-shrink-0" />

@@ -20,8 +20,8 @@ const RequestQuote = () => {
 
   if (submitted) {
     return (
-      <main className="min-h-screen bg-cm-gray flex items-center justify-center py-16">
-        <div className="bg-white rounded-2xl p-8 shadow-card max-w-md w-full mx-4 text-center">
+      <main className="min-h-screen bg-cm-gray flex items-center justify-center py-4">
+        <div className="bg-white rounded-lg p-8 shadow-sm max-w-md w-full mx-4 text-center">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-cm-blue-dark mb-4">Quote Request Submitted!</h2>
           <p className="text-gray-600">We'll get back to you within 24 hours.</p>
@@ -31,11 +31,11 @@ const RequestQuote = () => {
   }
 
   return (
-    <main className="min-h-screen bg-cm-gray py-16">
+    <main className="min-h-screen bg-cm-gray py-4">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl p-8 shadow-card">
+        <div className="bg-white rounded-lg p-8 shadow-sm">
           <h1 className="text-3xl font-bold text-cm-blue-dark mb-2 text-center">Request a Quote</h1>
-          <p className="text-gray-600 text-center mb-8">Tell us about your requirements and we'll get back to you.</p>
+          <p className="text-gray-600 text-center mb-2">Tell us about your requirements and we'll get back to you.</p>
           
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

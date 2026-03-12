@@ -58,10 +58,10 @@ const SportsInfra = () => {
       <section ref={heroRef} className="relative h-[500px] overflow-hidden">
         <img src={heroImage} alt={heroTitle} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-cm-cyan/90 to-cm-cyan/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-8">
+            <p className="text-xl text-white/90 mb-2">
               {heroSubtitle}
             </p>
             <Link to="/request-quote" className="btn-secondary inline-flex items-center gap-2">
@@ -72,14 +72,14 @@ const SportsInfra = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">{section1Title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {cards.map((s: any, i: number) => {
               const image = DEFAULTS._cardImages[i % DEFAULTS._cardImages.length];
               return (
-                <div key={s.title} className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2">
+                <div key={s.title} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2">
                   <div className="h-56 overflow-hidden">
                     <img src={image} alt={s.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                   </div>
@@ -93,12 +93,12 @@ const SportsInfra = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-cm-blue-dark mb-8">{section2Title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
+          <h2 className="text-3xl font-bold text-cm-blue-dark mb-2">{section2Title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {features.map((feature: string) => (
-              <div key={feature} className="bg-white rounded-xl p-8 shadow-card">
+              <div key={feature} className="bg-white rounded-xl p-8 shadow-sm">
                 <CheckCircle className="w-12 h-12 text-cm-cyan mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-cm-blue-dark">{feature}</h3>
               </div>

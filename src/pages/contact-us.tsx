@@ -56,8 +56,8 @@ const ContactUs = () => {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-cm-blue py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-cm-blue py-6">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Contact Us
           </h1>
@@ -68,11 +68,11 @@ const ContactUs = () => {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="w-full mx-auto px-2 sm:px-4 py-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl p-8 shadow-card">
+            <div className="bg-white rounded-xl p-8 shadow-sm">
               <h2 className="text-2xl font-bold text-cm-blue-dark mb-6">
                 Send us a Message
               </h2>
@@ -161,7 +161,7 @@ const ContactUs = () => {
           <div>
             <div className="space-y-6">
               {contactInfo.map(({ icon: Icon, title, content }) => (
-                <div key={title} className="bg-white rounded-xl p-6 shadow-card">
+                <div key={title} className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-cm-blue/10 flex items-center justify-center flex-shrink-0">
                       <Icon className="w-6 h-6 text-cm-blue" />
@@ -198,12 +198,12 @@ const ContactUs = () => {
       </div>
 
       {/* Map Section */}
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
           <h2 className="text-2xl font-bold text-cm-blue-dark mb-6 text-center">
             Our Location
           </h2>
-          <div className="bg-white rounded-xl overflow-hidden shadow-card h-[400px]">
+          <div className="bg-white rounded-xl overflow-hidden shadow-sm h-[400px]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.038042988!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzE3LjgiTiA3N8KwMzUnNDAuNiJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
               width="100%"

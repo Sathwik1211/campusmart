@@ -36,8 +36,8 @@ const FurnitureDesign = () => {
 
   return (
     <main className="min-h-screen">
-      <section ref={heroRef} className="bg-cm-red py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section ref={heroRef} className="bg-cm-red py-6">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{heroTitle}</h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
             {heroSubtitle}
@@ -45,9 +45,9 @@ const FurnitureDesign = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
               <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section1Title}</h2>
               <ul className="space-y-4">
@@ -64,7 +64,7 @@ const FurnitureDesign = () => {
               </Link>
             </div>
             <div>
-              <img src={heroImage} alt={heroTitle} className="rounded-2xl shadow-xl w-full h-auto object-cover" />
+              <img src={heroImage} alt={heroTitle} className="rounded-lg shadow-sm w-full h-auto object-cover" />
             </div>
           </div>
         </div>

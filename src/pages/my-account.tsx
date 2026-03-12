@@ -41,7 +41,7 @@ const MyAccount = () => {
 
   if (!isLoggedIn) {
     return (
-      <main className="min-h-screen bg-cm-gray flex items-center justify-center py-16">
+      <main className="min-h-screen bg-cm-gray flex items-center justify-center py-4">
         <div className="bg-white rounded-2xl p-8 shadow-card max-w-md w-full mx-4 text-center">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-cm-blue/10 flex items-center justify-center">
             <User className="w-10 h-10 text-cm-blue" />
@@ -67,10 +67,10 @@ const MyAccount = () => {
 
   return (
     <main className="min-h-screen bg-cm-gray py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-2 sm:px-4">
         <h1 className="text-3xl font-bold text-cm-blue-dark mb-8">My Account</h1>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-2">
           {/* Sidebar */}
           <aside className="lg:w-64 flex-shrink-0">
             <div className="bg-white rounded-xl shadow-card overflow-hidden">

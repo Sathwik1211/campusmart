@@ -82,8 +82,8 @@ const Corporate = () => {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="bg-cm-blue py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section ref={heroRef} className="bg-cm-blue py-6">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {heroTitle}
           </h1>
@@ -94,9 +94,9 @@ const Corporate = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cm-blue/10 flex items-center justify-center">
@@ -111,9 +111,9 @@ const Corporate = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
               <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section1Title}</h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
@@ -131,7 +131,7 @@ const Corporate = () => {
               <img
                 src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Campus Mart Team"
-                className="rounded-2xl shadow-xl"
+                className="rounded-lg shadow-sm w-full"
               />
             </div>
           </div>
@@ -139,14 +139,14 @@ const Corporate = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">
             {section2Title}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {values.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-shadow">
+              <div key={title} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-sm-hover transition-shadow">
                 <div className="w-14 h-14 rounded-full bg-cm-blue/10 flex items-center justify-center mb-6">
                   <Icon className="w-7 h-7 text-cm-blue" />
                 </div>
@@ -159,12 +159,12 @@ const Corporate = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">
+      <section id="team" className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">
             Our Leadership Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {[
               { name: 'Rajesh Kumar', role: 'Founder & CEO', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
               { name: 'Priya Sharma', role: 'Chief Design Officer', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80' },
@@ -185,10 +185,10 @@ const Corporate = () => {
       </section>
 
       {/* Careers Section */}
-      <section id="careers" className="py-16 bg-cm-blue">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section id="careers" className="py-4 bg-cm-blue">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Join Our Team</h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-2">
             We're always looking for talented individuals who are passionate about
             transforming education. Explore our open positions and become part of our journey.
           </p>
@@ -199,12 +199,12 @@ const Corporate = () => {
       </section>
 
       {/* Partners Section */}
-      <section id="partners" className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">
+      <section id="partners" className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">
             Our Partners
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
             {[
               'European Educational Group',
               'MAXHUB',
@@ -219,7 +219,7 @@ const Corporate = () => {
               'ICTS',
               'INFINITI',
             ].map((partner) => (
-              <div key={partner} className="bg-white rounded-lg p-4 flex items-center justify-center h-20 shadow-card">
+              <div key={partner} className="bg-white rounded-lg p-4 flex items-center justify-center h-20 shadow-sm">
                 <span className="text-sm font-semibold text-gray-600 text-center">{partner}</span>
               </div>
             ))}

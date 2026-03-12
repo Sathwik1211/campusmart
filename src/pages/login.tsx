@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#f0f4f8] flex items-center justify-center py-16 px-4">
+    <main className="min-h-screen bg-[#f0f4f8] flex items-center justify-center py-4 px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -46,7 +46,7 @@ const Login = () => {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+        <div className="bg-white rounded-lg shadow-sm w-full border border-gray-100 p-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
           <p className="text-sm text-gray-500 mb-6">Sign in to your CampusMart account</p>
 

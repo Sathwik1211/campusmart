@@ -94,8 +94,8 @@ const Catalogues = () => {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="bg-cm-blue py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section ref={heroRef} className="bg-cm-blue py-6">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {data.heroTitle ?? 'Product Catalogues'}
           </h1>
@@ -106,16 +106,16 @@ const Catalogues = () => {
       </section>
 
       {/* Catalogues Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark mb-12 text-center">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark mb-6 text-center">
             Download Our Catalogues
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {catalogues.map((catalogue) => (
               <div
                 key={catalogue.title}
-                className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2"
+                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="h-48 overflow-hidden">
                   <img
@@ -148,19 +148,19 @@ const Catalogues = () => {
       </section>
 
       {/* Case Studies */}
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
           <h2 className="text-3xl font-bold text-cm-blue-dark mb-4 text-center">
             Case Studies & Projects
           </h2>
-          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-6">
             Explore our completed projects and see how we've transformed educational institutions.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {caseStudies.map((study) => (
               <div
                 key={study.title}
-                className="bg-white rounded-xl overflow-hidden shadow-card"
+                className="bg-white rounded-xl overflow-hidden shadow-sm"
               >
                 <div className="h-48 overflow-hidden">
                   <img
@@ -193,12 +193,12 @@ const Catalogues = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-cm-yellow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-4 bg-cm-yellow">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">
             Need a Custom Solution?
           </h2>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-2">
             Our team can create customized catalogues based on your specific requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

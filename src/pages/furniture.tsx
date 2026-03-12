@@ -54,10 +54,10 @@ const Furniture = () => {
       <section ref={heroRef} className="relative h-[500px] overflow-hidden">
         <img src={heroImage} alt="Furniture" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-cm-red/90 to-cm-red/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-8">{heroSubtitle}</p>
+            <p className="text-xl text-white/90 mb-2">{heroSubtitle}</p>
             <Link to="/shop" className="btn-secondary inline-flex items-center gap-2">
               Browse Collection <ArrowRight className="w-5 h-5" />
             </Link>
@@ -65,12 +65,12 @@ const Furniture = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">{section1Title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {cards.map((cat) => (
-              <Link key={cat.title} to="/shop" className="group bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2">
+              <Link key={cat.title} to="/shop" className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2">
                 {cat.image && (
                   <div className="h-56 overflow-hidden">
                     <img src={cat.image} alt={cat.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -86,9 +86,9 @@ const Furniture = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
               <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section2Title}</h2>
               <ul className="space-y-4">
@@ -101,7 +101,7 @@ const Furniture = () => {
               </ul>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Furniture" className="rounded-2xl shadow-xl" />
+              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Furniture" className="rounded-lg shadow-sm w-full" />
             </div>
           </div>
         </div>

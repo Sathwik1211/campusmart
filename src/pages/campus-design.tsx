@@ -63,10 +63,10 @@ const CampusDesign = () => {
       <section ref={heroRef} className="relative h-[500px] overflow-hidden">
         <img src={heroImage} alt="Campus Design" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-cm-blue/90 to-cm-blue/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-8">{heroSubtitle}</p>
+            <p className="text-xl text-white/90 mb-2">{heroSubtitle}</p>
             <Link to="/request-quote" className="btn-secondary inline-flex items-center gap-2">
               Get Started <ArrowRight className="w-5 h-5" />
             </Link>
@@ -74,12 +74,12 @@ const CampusDesign = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">{section1Title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             {cards.map((service) => (
-              <div key={service.title} className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2">
+              <div key={service.title} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2">
                 {service.image && (
                   <div className="h-48 overflow-hidden">
                     <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -95,10 +95,10 @@ const CampusDesign = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">Our Design Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">Our Design Process</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
             {PROCESS_STEPS.map((step, index) => (
               <div key={step.title} className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cm-blue/10 flex items-center justify-center">
@@ -113,9 +113,9 @@ const CampusDesign = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
               <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section2Title}</h2>
               <ul className="space-y-4">
@@ -128,16 +128,16 @@ const CampusDesign = () => {
               </ul>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Campus Design" className="rounded-2xl shadow-xl" />
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Campus Design" className="rounded-lg shadow-sm w-full" />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-cm-blue">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-4 bg-cm-blue">
+        <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">{ctaTitle}</h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">{ctaSubtitle}</p>
+          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-2">{ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/request-quote" className="btn-secondary">Request a Quote</Link>
             <Link to="/contact-us" className="px-6 py-3 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition-colors">Contact Us</Link>

@@ -43,10 +43,10 @@ const Innovation = () => {
       <section ref={heroRef} className="relative h-[500px] overflow-hidden">
         <img src={heroImage} alt="Innovation" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/90 to-yellow-400/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-8">{heroSubtitle}</p>
+            <p className="text-xl text-white/90 mb-2">{heroSubtitle}</p>
             <Link to="/request-quote" className="btn-secondary inline-flex items-center gap-2">
               Start Innovating <ArrowRight className="w-5 h-5" />
             </Link>
@@ -54,14 +54,14 @@ const Innovation = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">{section1Title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             {cards.map((f, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
-                <div key={f.title} className="bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 text-center">
+                <div key={f.title} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2 text-center">
                   {f.image
                     ? <img src={f.image} alt={f.title} className="w-16 h-16 mx-auto mb-4 object-cover rounded-xl" />
                     : <Icon className="w-16 h-16 text-yellow-600 mx-auto mb-4" />

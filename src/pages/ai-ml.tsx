@@ -46,10 +46,10 @@ const AIML = () => {
       <section ref={heroRef} className="relative h-[500px] overflow-hidden">
         <img src={heroImage} alt="AI/ML" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-cm-purple/90 to-cm-purple/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
           <div className="text-white max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-8">{heroSubtitle}</p>
+            <p className="text-xl text-white/90 mb-2">{heroSubtitle}</p>
             <Link to="/request-quote" className="btn-secondary inline-flex items-center gap-2">
               Explore Solutions
               <ArrowRight className="w-5 h-5" />
@@ -58,14 +58,14 @@ const AIML = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-12">{section1Title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="py-4">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             {cards.map((s, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
-                <div key={s.title} className="bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 text-center">
+                <div key={s.title} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2 text-center">
                   {s.image
                     ? <img src={s.image} alt={s.title} className="w-16 h-16 mx-auto mb-4 object-cover rounded-xl" />
                     : <Icon className="w-16 h-16 text-cm-purple mx-auto mb-4" />
@@ -79,9 +79,9 @@ const AIML = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-cm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-4 bg-cm-gray">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div>
               <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section2Title}</h2>
               <p className="text-gray-600 text-lg leading-relaxed">
@@ -91,7 +91,7 @@ const AIML = () => {
               </p>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI/ML" className="rounded-2xl shadow-xl" />
+              <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI/ML" className="rounded-lg shadow-sm w-full" />
             </div>
           </div>
         </div>

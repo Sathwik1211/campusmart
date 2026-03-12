@@ -33,7 +33,7 @@ const Shop = () => {
   return (
     <main className="min-h-screen bg-cm-gray">
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="w-full mx-auto px-2 sm:px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1 max-w-xl">
               <div className="relative">
@@ -54,11 +54,11 @@ const Shop = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="w-full mx-auto px-2 sm:px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-2">
           {/* Sidebar */}
           <aside className="lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-xl p-6 shadow-card">
+            <div className="bg-white rounded-xl p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
                 <Filter className="w-5 h-5 text-cm-blue" />
                 <h3 className="font-bold text-cm-blue-dark">Categories</h3>
@@ -101,13 +101,13 @@ const Shop = () => {
             </div>
 
             {loading ? (
-              <div className="flex justify-center py-20">
+              <div className="flex justify-center py-6">
                 <div className="w-8 h-8 border-4 border-cm-blue border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1">
+                  <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-1">
                     <div className="h-48 overflow-hidden">
                       <img
                         src={product.imageUrl || 'https://via.placeholder.com/400x300'}
