@@ -21,7 +21,6 @@ const mockArticles = [
   { title: "Smart Libraries: Digital Transformation Strategies", image: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=400", href: "#" },
 ];
 
-const mockSubCategories = ["Overview", "Trending Projects", "Case Studies", "Top Suppliers", "Guidelines"];
 
 const categories = [
   { icon: Ruler, label: 'Campus Design', href: '/campus-design' },
@@ -95,14 +94,6 @@ const CategoryBar = () => {
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
-          {/* Subcategories Line */}
-          <div className="flex gap-6 border-b border-gray-300 pb-3 mb-6">
-            {mockSubCategories.map((sub, i) => (
-              <Link key={i} to="#" className="text-[#12395b] font-bold hover:text-cm-blue transition-colors text-[13px] md:text-sm">
-                {sub}
-              </Link>
-            ))}
-          </div>
 
           {/* Article Cards Grid */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
