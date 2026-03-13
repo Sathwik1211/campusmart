@@ -158,6 +158,47 @@ const Corporate = () => {
         </div>
       </section>
 
+      {/* Why Sign Up Section */}
+      <section className="py-12 bg-cm-yellow/20">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-8">
+              Why should you sign up with Campus Mart?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-cm-blue flex-shrink-0" />
+                  <p className="text-gray-700 font-medium">India's leading Consortium for Campus Infrastructure</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-cm-blue flex-shrink-0" />
+                  <p className="text-gray-700 font-medium">Bespoke Design to Delivery across 100+ categories</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-cm-blue flex-shrink-0" />
+                  <p className="text-gray-700 font-medium">Strategic Planning for new Campuses from scratch</p>
+                </li>
+              </ul>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-cm-blue flex-shrink-0" />
+                  <p className="text-gray-700 font-medium">4000+ Partner Campuses across India</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-cm-blue flex-shrink-0" />
+                  <p className="text-gray-700 font-medium">Exclusive access to global educational brands</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-cm-blue flex-shrink-0" />
+                  <p className="text-gray-700 font-medium">NEP 2020 aligned innovation & digital tools</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section id="team" className="py-4">
         <div className="w-full mx-auto px-2 sm:px-4">
@@ -201,9 +242,12 @@ const Corporate = () => {
       {/* Partners Section */}
       <section id="partners" className="py-4 bg-cm-gray">
         <div className="w-full mx-auto px-2 sm:px-4">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">
-            Our Partners
+          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-2">
+            Quality Partners
           </h2>
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+            We collaborate with the world's most trusted educational equipment manufacturers and design houses.
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
             {[
               'European Educational Group',

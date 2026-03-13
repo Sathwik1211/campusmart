@@ -44,9 +44,9 @@ const defaultSidebar = {
     { label: 'Athletic complexes', href: '/catalogues' },
   ],
   contacts: [
-    { bg: '#FFD700', title: 'Design & Architecture', contact: 'info@campusmart.in', href: 'mailto:info@campusmart.in', isEmail: true },
-    { bg: '#00c4cc', title: 'Campus Innovations', contact: '9966109191', href: 'tel:+919966109191', isEmail: false },
-    { bg: '#C8FF00', title: 'Partner Campus', contact: '9866091111', href: 'tel:+919866091111', isEmail: false },
+    { bg: '#FFD700', title: 'DESIGN & ARCHITECTURE', contact: 'info@campusmart.in', href: 'mailto:info@campusmart.in', isEmail: true, queryText: 'FOR QUERIES ON' },
+    { bg: '#00c4cc', title: 'CAMPUS INNOVATIONS', contact: 'call us on 9966109191', href: 'tel:+919966109191', isEmail: false, queryText: 'FOR QUERIES ON' },
+    { bg: '#C8FF00', title: 'PARTNER CAMPUS', contact: 'call us on 9866091111', href: 'tel:+919866091111', isEmail: false, queryText: 'FOR QUERIES ON' },
   ]
 };
 
@@ -245,16 +245,16 @@ const FeatureCards = () => {
               </div>
             </div>
 
-            {contacts.map(({ bg, title, contact, href }: any) => (
+            {contacts.map(({ bg, title, contact, href, queryText }: any) => (
               <a
                 key={title}
                 href={href}
-                className="block w-full py-3.5 px-4 rounded-xl text-center transition-all hover:brightness-95 hover:-translate-y-0.5 shadow-md"
+                className="block w-full py-4 px-4 rounded-xl text-center transition-all hover:brightness-95 hover:-translate-y-0.5 shadow-md border-b-4 border-black/10"
                 style={{ background: bg }}
               >
-                <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-black/70">For Queries on</p>
-                <p className="text-[13px] font-black uppercase tracking-wide text-black leading-tight mt-0.5">{title}</p>
-                <p className="text-[11px] text-black/80 mt-1 font-medium">{contact}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60">{queryText}</p>
+                <p className="text-[14px] font-black uppercase tracking-wider text-black leading-tight mt-1">{title}</p>
+                <p className="text-[12px] text-black/80 mt-1.5 font-bold">{contact}</p>
               </a>
             ))}
 

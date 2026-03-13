@@ -16,6 +16,9 @@ const Login = lazy(() => import('@/pages/login'));
 const Registration = lazy(() => import('@/pages/registration'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 const AdminRoutes = lazy(() => import('@/admin/AdminRoutes'));
+const PaymentPolicy = lazy(() => import('@/pages/payment-policy'));
+const OrderRejection = lazy(() => import('@/pages/order-rejection'));
+const ReplacementReturn = lazy(() => import('@/pages/replacement-return'));
 
 // Existing page templates map
 const PageTemplates: Record<string, any> = {
@@ -46,6 +49,9 @@ const PageTemplates: Record<string, any> = {
   'my-account': lazy(() => import('@/pages/my-account')),
   'new-environments': lazy(() => import('@/pages/new-environments')),
   'partnership': lazy(() => import('@/pages/partnership')),
+  'payment-policy': PaymentPolicy,
+  'order-rejection': OrderRejection,
+  'replacement-return': ReplacementReturn,
   'privacy-policy': lazy(() => import('@/pages/privacy-policy')),
   'product-catalog': lazy(() => import('@/pages/product-catalog')),
   'request-quote': lazy(() => import('@/pages/request-quote')),
@@ -56,6 +62,8 @@ const PageTemplates: Record<string, any> = {
   'tech-infra': lazy(() => import('@/pages/tech-infra')),
   'terms-of-use': lazy(() => import('@/pages/terms-of-use')),
   'ugc-guidelines': lazy(() => import('@/pages/ugc-guidelines')),
+  'services': lazy(() => import('@/pages/services')),
+  'solutions': lazy(() => import('@/pages/solutions')),
 };
 
 function PageLoader() {

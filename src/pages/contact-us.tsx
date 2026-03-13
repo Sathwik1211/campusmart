@@ -7,6 +7,11 @@ const ContactUs = () => {
     name: '',
     email: '',
     phone: '',
+    collegeName: '',
+    authorisedPerson: '',
+    address: '',
+    pincode: '',
+    coursesOffered: '',
     subject: '',
     message: '',
   });
@@ -22,7 +27,18 @@ const ContactUs = () => {
     try {
       await api.post('/contact/enquiry', formData);
       setSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ 
+        name: '', 
+        email: '', 
+        phone: '', 
+        collegeName: '',
+        authorisedPerson: '',
+        address: '',
+        pincode: '',
+        coursesOffered: '',
+        subject: '', 
+        message: '' 
+      });
     } catch {
       setSubmitError('Failed to send message. Please try again.');
     } finally {
@@ -89,6 +105,30 @@ const ContactUs = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
+                    <label className="form-label">College / University Name *</label>
+                    <input
+                      type="text"
+                      value={formData.collegeName}
+                      onChange={(e) => setFormData({ ...formData, collegeName: e.target.value })}
+                      className="form-input"
+                      placeholder="Name of Institution"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">Authorised Person *</label>
+                    <input
+                      type="text"
+                      value={formData.authorisedPerson}
+                      onChange={(e) => setFormData({ ...formData, authorisedPerson: e.target.value })}
+                      className="form-input"
+                      placeholder="Principal / Director / HOD"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
                     <label className="form-label">Full Name *</label>
                     <input
                       type="text"
@@ -113,14 +153,54 @@ const ContactUs = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="form-label">Phone Number</label>
+                    <label className="form-label">Phone Number *</label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="form-input"
                       placeholder="+91 98765 43210"
+                      required
                     />
+                  </div>
+                  <div>
+                    <label className="form-label">Pincode *</label>
+                    <input
+                      type="text"
+                      value={formData.pincode}
+                      onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
+                      className="form-input"
+                      placeholder="6-digit pincode"
+                      required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="form-label">Full Address *</label>
+                  <input
+                    type="text"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    className="form-input"
+                    placeholder="Physical address of the institution"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="form-label">Courses Offered</label>
+                    <select
+                      value={formData.coursesOffered}
+                      onChange={(e) => setFormData({ ...formData, coursesOffered: e.target.value })}
+                      className="form-input"
+                    >
+                      <option value="">Select Category</option>
+                      <option value="engineering">Engineering</option>
+                      <option value="medical">Medical</option>
+                      <option value="k12">K-12 School</option>
+                      <option value="degree">Degree College</option>
+                      <option value="others">Others</option>
+                    </select>
                   </div>
                   <div>
                     <label className="form-label">Subject *</label>

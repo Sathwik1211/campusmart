@@ -78,6 +78,34 @@ const Labs = () => {
           </div>
         </div>
       </section>
+      <section className="py-12 bg-cm-gray/50">
+        <div className="w-full mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-green-600">
+              <h2 className="text-2xl font-bold text-cm-blue-dark mb-4">The Traditional Lab System</h2>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Conventional laboratories often focus on isolated experiments. However, modern educational requirements demand an integrated approach where theory and practice blend seamlessly.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Our solutions transition your institution from traditional static labs to <strong>Curriculum Mapped Innovation Centres</strong>, providing students with hands-on experience that aligns with NEP 2020 objectives.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { title: 'Lab Design to Execution', desc: 'Space planning & 3D modeling' },
+                { title: 'Build & Supply', desc: 'Premium equipment & furniture' },
+                { title: 'Installation & Training', desc: 'Expert setup & teacher workshops' },
+                { title: 'Support & Audit', desc: 'Regular maintenance & safety audits' },
+              ].map((service) => (
+                <div key={service.title} className="bg-green-600 p-6 rounded-xl text-white shadow-md">
+                  <h4 className="font-bold text-sm mb-1">{service.title}</h4>
+                  <p className="text-white/80 text-xs">{service.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
