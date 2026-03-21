@@ -99,7 +99,7 @@ const FeatureCards = () => {
 
   return (
     <section ref={sectionRef} className="py-8 sm:py-12 px-4 bg-[#f0f2f5]">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row gap-6 items-start">
 
           {/* ─── Masonry Grid (Pure Flexbox to fix WebKit bugs) ─── */}
@@ -110,7 +110,7 @@ const FeatureCards = () => {
                   <Link
                     key={title}
                     to={href}
-                    className="fc-card group flex flex-col w-full min-h-[220px] rounded-2xl overflow-hidden relative shadow-lg"
+                    className="fc-card group flex flex-col w-full rounded-2xl overflow-hidden relative shadow-lg"
                     style={{ height: cols === 2 ? Math.min(h || 240, 240) : (h || 240) }}
                   >
                     {/* Background image */}
@@ -125,7 +125,7 @@ const FeatureCards = () => {
 
                     {/* Category badge */}
                     <div
-                      className="absolute top-2.5 left-2.5 md:top-3 md:left-3 flex items-center gap-1.5 px-2 py-0.5 md:px-2.5 md:py-1 rounded-full text-white text-[9px] md:text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm shadow"
+                      className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-white text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm shadow"
                       style={{ background: color + 'CC' }}
                     >
                       <span
@@ -136,31 +136,29 @@ const FeatureCards = () => {
                     </div>
 
                     {/* Arrow icon — top right on hover */}
-                    <div className="absolute top-2.5 right-2.5 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400">
-                      <MoveUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
+                    <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400">
+                      <MoveUpRight className="w-4 h-4 text-white" />
                     </div>
 
                     {/* Bottom content — always visible and readable */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                      {/* Always visible title, increased font size */}
+                    <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                       <h3
-                        className="text-white font-extrabold text-base md:text-xl leading-snug drop-shadow-lg mb-1.5 md:mb-2 break-words"
+                        className="text-white font-extrabold text-[14px] md:text-lg leading-snug drop-shadow-lg mb-2 break-words"
                         style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}
                       >
                         {title}
                       </h3>
 
-                      {/* Description and Explore — always visible */}
-                      <div>
-                        <p className="text-white/90 text-[11px] md:text-sm leading-snug md:leading-relaxed font-medium line-clamp-3 md:line-clamp-none">
+                      <div className="overflow-hidden">
+                        <p className="text-white/90 text-[11px] md:text-sm leading-snug md:leading-relaxed font-medium line-clamp-2 md:line-clamp-none">
                           {description}
                         </p>
-                        <div className="mt-2.5 md:mt-3 flex items-center">
+                        <div className="mt-3 flex items-center">
                           <span
                             className="inline-flex items-center gap-1 text-[11px] md:text-sm font-bold tracking-widest uppercase transition-transform group-hover:translate-x-1 duration-300"
                             style={{ color }}
                           >
-                            Explore <MoveUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-0.5 md:ml-1" />
+                            Explore <MoveUpRight className="w-4 h-4 ml-1" />
                           </span>
                         </div>
                       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
 
 const DEFAULTS = {
@@ -36,11 +36,29 @@ const DEFAULTS = {
 
 const SportsInfra = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
   const { data } = usePageData('sports-infra');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(heroRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+      gsap.fromTo(heroRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: 'power4.out' });
+      
+      const cards = cardsRef.current?.children;
+      if (cards) {
+        gsap.fromTo(cards, 
+          { scale: 0.8, opacity: 0 }, 
+          { 
+            scale: 1, opacity: 1, 
+            duration: 0.6, 
+            stagger: 0.1, 
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: 'top 85%',
+            }
+          }
+        );
+      }
     });
     return () => ctx.revert();
   }, []);
@@ -54,37 +72,58 @@ const SportsInfra = () => {
   const features = (data.features && data.features.length > 0) ? data.features : DEFAULTS.features;
 
   return (
-    <main className="min-h-screen">
-      <section ref={heroRef} className="relative h-[500px] overflow-hidden">
-        <img src={heroImage} alt={heroTitle} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-cm-cyan/90 to-cm-cyan/60" />
-        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
-          <div className="text-white max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-2">
+    <main className="min-h-screen bg-white text-opensans">
+      {/* High-Performance Hero */}
+      <section ref={heroRef} className="bg-cm-blue py-10 md:py-14 overflow-hidden relative shadow-inner">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10 px-4">
+          <div className="lg:w-1/2 text-left text-white">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
+              {heroTitle}
+            </h1>
+            <p className="text-lg text-white/80 leading-relaxed max-w-xl">
               {heroSubtitle}
             </p>
-            <Link to="/request-quote" className="btn-secondary inline-flex items-center gap-2">
-              Get Quote
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link to="/request-proposal" className="btn-secondary px-8 py-3 text-base font-bold">
+                Request Proposal
+              </Link>
+            </div>
+          </div>
+          <div className="lg:w-1/2 relative">
+             <div className="absolute -inset-4 bg-cm-blue-dark/20 rounded-[3rem] blur-2xl" />
+             <img src={heroImage} alt={heroTitle} className="rounded-2xl shadow-xl w-full h-[380px] object-cover border-4 border-cm-blue-dark relative z-10" />
           </div>
         </div>
       </section>
 
-      <section className="py-4">
-        <div className="w-full mx-auto px-2 sm:px-4">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+      {/* Grid of Facilities */}
+      <section className="py-10 md:py-14">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-cm-blue-dark tracking-tighter">{section1Title}</h2>
+            <div className="hidden md:block h-1 w-32 bg-cm-yellow rounded-full" />
+          </div>
+
+          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cards.map((s: any, i: number) => {
               const image = DEFAULTS._cardImages[i % DEFAULTS._cardImages.length];
               return (
-                <div key={s.title} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2">
-                  <div className="h-56 overflow-hidden">
-                    <img src={image} alt={s.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                <div key={s.title} className="group bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-100 flex flex-col">
+                  <div className="aspect-[16/10] overflow-hidden relative">
+                    <img src={image} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-cm-blue-dark/5 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-cm-blue-dark">{s.title}</h3>
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-lg font-bold text-cm-blue-dark mb-4 group-hover:text-cm-blue transition-colors tracking-tight">{s.title}</h3>
+                    <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="h-1 w-4 bg-cm-yellow rounded-full" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-cm-blue/60">Professional</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-cm-blue font-bold text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                        View Specs <ArrowRight className="w-3 h-3" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
@@ -93,17 +132,42 @@ const SportsInfra = () => {
         </div>
       </section>
 
-      <section className="py-4 bg-cm-gray">
-        <div className="w-full mx-auto px-2 sm:px-4 text-center">
-          <h2 className="text-3xl font-bold text-cm-blue-dark mb-2">{section2Title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            {features.map((feature: string) => (
-              <div key={feature} className="bg-white rounded-xl p-8 shadow-sm">
-                <CheckCircle className="w-12 h-12 text-cm-cyan mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-cm-blue-dark">{feature}</h3>
+      {/* Modern Features Section */}
+      <section className="py-10 bg-cm-gray/30 border-y border-cm-gray rounded-[2rem] mx-4 mb-16 overflow-hidden shadow-sm">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-cm-blue-dark leading-tight mb-4 tracking-tighter">
+                {section2Title}
+              </h2>
+              <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                From concept to completion, we deliver turnkey solutions for elite athletic performance.
+              </p>
+            </div>
+            
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {features.map((feature: string) => (
+                  <div key={feature} className="bg-white p-6 rounded-2xl shadow-md border border-gray-50 transform hover:-translate-y-1 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-cm-blue/10 mb-4 flex items-center justify-center rounded-xl border border-cm-blue/10">
+                      <CheckCircle className="w-6 h-6 text-cm-blue" />
+                    </div>
+                    <h3 className="text-sm font-bold text-cm-blue-dark mb-1 tracking-tight">{feature}</h3>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Action Footer */}
+      <section className="py-16 text-center rounded-t-[4rem] bg-cm-blue-dark text-white border-t-4 border-cm-yellow/50">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-8 tracking-tighter">Ready to Build Your Arena?</h2>
+          <Link to="/contact-us" className="btn-secondary px-10 py-3 text-lg font-bold transition-all inline-block shadow-lg">
+            Get Project Audit
+          </Link>
         </div>
       </section>
     </main>

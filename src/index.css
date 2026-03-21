@@ -85,11 +85,11 @@
   }
 
   .main-header.scrolled .header-inner {
-    @apply h-16;
+    @apply h-14;
   }
 
   .header-inner {
-    @apply h-20 transition-all duration-300;
+    @apply h-16 transition-all duration-300;
   }
 
   /* Navigation Styles */
@@ -138,7 +138,7 @@
 
   /* Service Card Styles */
   .service-card {
-    @apply relative flex flex-col items-center justify-center p-6 sm:py-8 cursor-pointer overflow-hidden transition-all duration-300;
+    @apply relative flex flex-col items-center justify-center p-4 sm:py-6 cursor-pointer overflow-hidden transition-all duration-300;
   }
 
   .service-card:hover {
@@ -146,7 +146,7 @@
   }
 
   .service-card h3 {
-    @apply text-lg sm:text-xl font-bold uppercase text-center leading-tight;
+    @apply text-base sm:text-lg font-bold uppercase text-center leading-tight;
   }
 
   /* Feature Card Styles */
@@ -187,8 +187,8 @@
 
   /* Hero Section */
   .hero-section {
-    @apply relative overflow-hidden rounded-2xl mx-4;
-    height: 500px;
+    @apply relative overflow-hidden rounded-2xl mx-1;
+    height: 420px;
   }
 
   .hero-overlay {
@@ -200,7 +200,7 @@
   }
 
   .hero-title {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-tight mb-4 break-words;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide leading-tight mb-4 break-words;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
 

@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 interface ServiceItem { title: string; bgColor: string; textColor: string; href: string; }
 
 const defaultServices: ServiceItem[] = [
-  { title: 'Furniture Design+ Supply', bgColor: '#ef4444', textColor: '#ffffff', href: '/furniture-design-supply' },
-  { title: 'Campus Design+ Execution', bgColor: '#a3e635', textColor: '#000000', href: '/campus-design-execution' },
-  { title: 'Sports Design+ Execution', bgColor: '#06b6d4', textColor: '#ffffff', href: '/sports-design-execution' },
-  { title: 'AI/Digital Design+ Supply', bgColor: '#a855f7', textColor: '#ffffff', href: '/ai-digital-design-supply' },
+  { title: 'Furniture Design+ Supply', bgColor: '#ef4444', textColor: '#ffffff', href: '/furniture' },
+  { title: 'Campus Design+ Execution', bgColor: '#a3e635', textColor: '#000000', href: '/campus-design' },
+  { title: 'Sports Design+ Execution', bgColor: '#06b6d4', textColor: '#ffffff', href: '/sports-infra' },
+  { title: 'AI/Digital Design+ Supply', bgColor: '#a855f7', textColor: '#ffffff', href: '/digital-transformation' },
 ];
 
 const ServiceCards = () => {
@@ -33,9 +33,9 @@ const ServiceCards = () => {
       Array.from(cards).forEach((card, i) => {
         gsap.fromTo(
           card,
-          { [axes[i]]: directions[i], opacity: 0 },
+          { [axes[i] as any]: directions[i], opacity: 0 },
           {
-            [axes[i]]: 0, opacity: 1, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
+            [axes[i] as any]: 0, opacity: 1, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
             scrollTrigger: { trigger: containerRef.current, start: 'top 80%', toggleActions: 'play none none none' },
           }
         );
@@ -77,3 +77,4 @@ const ServiceCards = () => {
 };
 
 export default ServiceCards;
+

@@ -7,28 +7,10 @@ import { usePageData } from '@/hooks/usePageData';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Catalogues = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { data } = usePageData('catalogues');
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        heroRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        }
-      );
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  const catalogues = [
+const DEFAULTS = {
+  heroTitle: 'Product Catalogues',
+  heroSubtitle: 'Browse our comprehensive catalogues featuring furniture, equipment, and infrastructure solutions for educational institutions.',
+  cards: [
     {
       title: 'NEP READY CLASSROOM FURNITURE',
       description: 'Furniture solutions specifically designed to align with New Education Policy guidelines for modern classrooms.',
@@ -64,9 +46,8 @@ const Catalogues = () => {
       downloadLink: '#',
       size: '25 MB',
     },
-  ];
-
-  const caseStudies = [
+  ],
+  caseStudies: [
     {
       title: 'Campus Master Planning',
       description: 'Complete campus transformation for a leading university in Bangalore.',
@@ -82,7 +63,34 @@ const Catalogues = () => {
       description: 'State-of-the-art STEM lab setup for a prestigious school chain.',
       image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     },
-  ];
+  ]
+};
+
+const Catalogues = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { data } = usePageData('catalogues');
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        heroRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
+  const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
+  const catalogues = (data.cards && data.cards.length > 0) ? data.cards : DEFAULTS.cards;
+  const caseStudies = (data.caseStudies && data.caseStudies.length > 0) ? data.caseStudies : DEFAULTS.caseStudies;
 
   return (
     <main className="min-h-screen">
@@ -90,10 +98,10 @@ const Catalogues = () => {
       <section ref={heroRef} className="bg-cm-blue py-6">
         <div className="w-full mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            {data.heroTitle ?? 'Product Catalogues'}
+            {heroTitle}
           </h1>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            {data.heroSubtitle ?? 'Browse our comprehensive catalogues featuring furniture, equipment, and infrastructure solutions for educational institutions.'}
+            {heroSubtitle}
           </p>
         </div>
       </section>
@@ -105,7 +113,7 @@ const Catalogues = () => {
             Download Our Catalogues
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {catalogues.map((catalogue) => (
+            {catalogues.map((catalogue: any) => (
               <div
                 key={catalogue.title}
                 className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2"
@@ -150,7 +158,7 @@ const Catalogues = () => {
             Explore our completed projects and see how we've transformed educational institutions.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            {caseStudies.map((study) => (
+            {caseStudies.map((study: any) => (
               <div
                 key={study.title}
                 className="bg-white rounded-xl overflow-hidden shadow-sm"

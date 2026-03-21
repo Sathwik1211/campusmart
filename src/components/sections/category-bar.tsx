@@ -53,20 +53,20 @@ const CategoryBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={iconsRef}
-          className="flex items-center justify-between gap-4 overflow-x-auto min-w-max pt-6 pb-4 [&::-webkit-scrollbar]:hidden"
+          className="flex items-center justify-between gap-6 overflow-x-auto min-w-max pt-2 pb-2 [&::-webkit-scrollbar]:hidden"
         >
           {categories.map(({ icon: Icon, label, href }) => (
             <div key={label} className="relative group cursor-pointer">
-              <Link to={href} className="flex flex-col items-center justify-center gap-2 px-2 hover:text-cm-blue transition-colors">
-                <div className="p-3 rounded-xl transition-all duration-300 bg-gray-50 text-gray-600 group-hover:bg-blue-50 group-hover:text-cm-blue">
-                  <Icon className="w-6 h-6" />
+              <Link to={href} className="flex flex-col items-center justify-center gap-1.5 px-2 hover:text-cm-blue transition-colors">
+                <div className="p-3 rounded-2xl transition-all duration-300 bg-gray-50 text-gray-600 group-hover:bg-blue-50 group-hover:text-cm-blue">
+                  <Icon className="w-6 h-6 md:w-7 h-7" />
                 </div>
-                <span className="text-[10px] md:text-xs font-semibold whitespace-nowrap text-gray-700 group-hover:text-cm-blue transition-colors">
+                <span className="text-[10px] md:text-[12px] font-bold whitespace-nowrap text-gray-700 tracking-tight group-hover:text-cm-blue transition-colors uppercase">
                   {label}
                 </span>
 
                 {/* Active Underline Indicator */}
-                <div className="absolute -bottom-[17px] left-0 w-full h-[3px] bg-cm-yellow transition-transform duration-300 origin-center scale-x-0 group-hover:scale-x-100" />
+                <div className="absolute -bottom-[10px] left-0 w-full h-[3px] bg-cm-yellow transition-transform duration-300 origin-center scale-x-0 group-hover:scale-x-100" />
               </Link>
             </div>
           ))}

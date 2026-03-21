@@ -12,7 +12,7 @@ const DEFAULTS = {
   heroSubtitle: 'Create innovative spaces that inspire learning, foster creativity, and adapt to the evolving needs of modern education.',
   heroImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
   section1Title: 'Specialized Learning Spaces',
-  environments: [
+  cards: [
     {
       title: 'Wondergarten Room',
       description: 'A magical space designed for early childhood development with interactive learning elements.',
@@ -78,14 +78,13 @@ const NewEnvironments = () => {
   const heroImage = data.heroImage ?? DEFAULTS.heroImage;
   const section1Title = data.section1Title ?? DEFAULTS.section1Title;
 
-  // Merge CMS cards with DEFAULTS.environments for images and hrefs
-  const environments = (data.cards && data.cards.length > 0)
+  const cards = (data.cards && data.cards.length > 0)
     ? data.cards.map((c: any, i: number) => ({
       ...c,
-      image: DEFAULTS.environments[i]?.image || DEFAULTS.environments[0].image,
-      href: DEFAULTS.environments[i]?.href || '/furniture'
+      image: c.image || DEFAULTS.cards[i]?.image || DEFAULTS.cards[0].image,
+      href: c.href || DEFAULTS.cards[i]?.href || '/furniture'
     }))
-    : DEFAULTS.environments;
+    : DEFAULTS.cards;
 
   const sustainabilityFeatures = [
     { icon: Leaf, title: 'Green Building', description: 'Eco-friendly construction materials and practices' },
@@ -128,7 +127,7 @@ const NewEnvironments = () => {
             learning styles and educational needs.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {environments.map((env: any) => (
+            {cards.map((env: any) => (
               <Link
                 key={env.title}
                 to={env.href}

@@ -6,7 +6,10 @@ backend/.env
 backend/dist/
 backend/prisma/dev.db
 backend/prisma/dev.db-journal
+backend/test_extract/
+backend/testout.txt
 dist/
 *.db
 *.db-journal
 uploads/
+scripts/

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, Ruler, PenTool, CheckCircle } from 'lucide-react';
+import { Building2, Ruler, PenTool, CheckCircle } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
 
 interface Card { title: string; description: string; image?: string; }
@@ -39,11 +39,28 @@ const PROCESS_STEPS = [
 
 const CampusDesign = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
   const { data } = usePageData('campus-design');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(heroRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+      gsap.fromTo(heroRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+      
+      const cards = cardsRef.current?.children;
+      if (cards) {
+        gsap.fromTo(cards, 
+          { opacity: 0, y: 30 }, 
+          { 
+            opacity: 1, y: 0, 
+            duration: 0.6, 
+            stagger: 0.1, 
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: 'top 85%',
+            }
+          }
+        );
+      }
     });
     return () => ctx.revert();
   }, []);
@@ -59,35 +76,64 @@ const CampusDesign = () => {
   const features: string[] = (data.features && data.features.length > 0) ? data.features : DEFAULTS.features;
 
   return (
-    <main className="min-h-screen">
-      <section ref={heroRef} className="relative h-[500px] overflow-hidden">
-        <img src={heroImage} alt="Campus Design" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-cm-blue/90 to-cm-blue/60" />
-        <div className="relative w-full mx-auto px-2 sm:px-4 h-full flex items-center">
-          <div className="text-white max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">{heroTitle}</h1>
-            <p className="text-xl text-white/90 mb-2">{heroSubtitle}</p>
-            <Link to="/request-quote" className="btn-secondary inline-flex items-center gap-2">
-              Get Started <ArrowRight className="w-5 h-5" />
-            </Link>
+    <main className="min-h-screen bg-white">
+      {/* Standard Corporate Hero - Side by Side */}
+      <section ref={heroRef} className="bg-cm-blue py-10 px-4 sm:px-6 lg:px-8 overflow-hidden relative shadow-inner">
+         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10">
+          <div className="lg:w-1/2 text-left text-white">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
+              {heroTitle}
+            </h1>
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed font-opensans max-w-xl">
+              {heroSubtitle}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link to="/request-quote" className="btn-secondary px-8 py-3 text-base">
+                Start Planning
+              </Link>
+            </div>
+          </div>
+          <div className="lg:w-1/2 relative">
+            <div className="absolute -inset-4 bg-cm-blue-dark/20 rounded-[3rem] blur-2xl" />
+            <img src={heroImage} alt={heroTitle} className="rounded-[2rem] shadow-2xl w-full h-[400px] object-cover border-4 border-cm-blue-dark relative z-10" />
           </div>
         </div>
       </section>
 
-      <section className="py-4">
-        <div className="w-full mx-auto px-2 sm:px-4">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">{section1Title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+      {/* Structured Masonry Services Grid */}
+      <section id="services" className="py-10 md:py-14">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-8">
+            <div className="max-w-xl">
+              <h2 className="text-2xl md:text-3xl font-bold text-cm-blue-dark tracking-tighter">
+                {section1Title}
+              </h2>
+            </div>
+            <p className="hidden md:block text-gray-400 font-bold border-l-4 border-cm-blue pl-4 py-1 text-sm">
+              Architecture that breeds Innovation.
+            </p>
+          </div>
+
+          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cards.map((service) => (
-              <div key={service.title} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2">
-                {service.image && (
-                  <div className="h-48 overflow-hidden">
-                    <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <div 
+                key={service.title} 
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-100 flex flex-col"
+              >
+                <div className="aspect-[16/10] overflow-hidden relative">
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-cm-blue-dark/10 group-hover:bg-transparent transition-colors duration-500" />
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-lg font-bold text-cm-blue-dark mb-2 group-hover:text-cm-blue transition-colors tracking-tight">{service.title}</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 font-opensans flex-grow">{service.description}</p>
+                  <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                       <div className="h-1 w-4 bg-cm-yellow rounded-full" />
+                       <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-cm-blue">Architecture</span>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-cm-blue opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">View Details</span>
                   </div>
-                )}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-cm-blue-dark mb-2">{service.title}</h3>
-                  <p className="text-gray-600">{service.description}</p>
                 </div>
               </div>
             ))}
@@ -95,53 +141,63 @@ const CampusDesign = () => {
         </div>
       </section>
 
-      <section className="py-4 bg-cm-gray">
-        <div className="w-full mx-auto px-2 sm:px-4">
-          <h2 className="text-3xl font-bold text-cm-blue-dark text-center mb-6">Our Design Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-            {PROCESS_STEPS.map((step, index) => (
-              <div key={step.title} className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cm-blue/10 flex items-center justify-center">
-                  <step.icon className="w-8 h-8 text-cm-blue" />
+      {/* Refined Process Strategy */}
+      <section className="py-10 bg-cm-blue-dark text-white rounded-[2rem] mx-4 mb-10 overflow-hidden shadow-2xl border-4 border-cm-blue/20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-center text-2xl md:text-3xl font-bold mb-10 tracking-tighter">The Evolutionary Path</h2>
+          <div className="relative">
+            <div className="absolute top-1/2 left-0 w-full h-1 bg-white/10 hidden md:block" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 text-center">
+              {PROCESS_STEPS.map((step) => (
+                <div key={step.title} className="group flex flex-col items-center">
+                  <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 group-hover:bg-white group-hover:rotate-12 transition-all duration-500 shadow-xl">
+                    <step.icon className="w-7 h-7 text-cm-yellow group-hover:text-cm-blue-dark" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 tracking-tighter">{step.title}</h3>
+                  <p className="text-white/50 text-xs leading-relaxed max-w-[200px] font-opensans">{step.description}</p>
                 </div>
-                <div className="text-cm-blue font-bold mb-2">Step {index + 1}</div>
-                <h3 className="text-lg font-bold text-cm-blue-dark mb-2">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Showcase Segment */}
+      <section className="py-12 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-cm-gray/30 rounded-[3rem] p-10 md:p-20 shadow-xl overflow-hidden relative border border-cm-gray">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div>
+                <h2 className="text-2xl md:text-4xl font-bold text-cm-blue-dark mb-6 leading-tight tracking-tight">{section2Title}</h2>
+                <div className="grid grid-cols-1 gap-6 font-opensans">
+                  {features.map((feature) => (
+                    <div key={feature} className="flex items-center gap-6 group">
+                      <div className="w-10 h-10 rounded-xl bg-cm-blue/10 flex items-center justify-center group-hover:bg-cm-blue transition-all border border-cm-blue/10">
+                        <CheckCircle className="w-6 h-6 text-cm-blue group-hover:text-cm-yellow" />
+                      </div>
+                      <span className="text-lg text-gray-700 font-bold">{feature}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-4">
-        <div className="w-full mx-auto px-2 sm:px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-cm-blue-dark mb-6">{section2Title}</h2>
-              <ul className="space-y-4">
-                {features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-cm-lime flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Campus Design" className="rounded-lg shadow-sm w-full" />
+              <div className="relative p-4 bg-white rounded-[3rem] shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Architecture" className="rounded-[2.5rem] shadow-2xl w-full h-[500px] object-cover" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-4 bg-cm-blue">
-        <div className="w-full mx-auto px-2 sm:px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">{ctaTitle}</h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-2">{ctaSubtitle}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/request-quote" className="btn-secondary">Request a Quote</Link>
-            <Link to="/contact-us" className="px-6 py-3 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition-colors">Contact Us</Link>
-          </div>
+      {/* Branding Call to Action */}
+      <section className="py-16 text-center bg-cm-blue-dark text-white rounded-t-[5rem] border-t-8 border-cm-yellow/50">
+        <div className="max-w-4xl mx-auto px-6">
+           <Building2 className="w-20 h-20 text-cm-yellow mx-auto mb-10 opacity-50" />
+           <h2 className="text-4xl md:text-7xl font-bold mb-10 tracking-tighter">{ctaTitle}</h2>
+           <p className="text-2xl text-white/70 mb-12 font-bold leading-relaxed font-opensans text-pretty">{ctaSubtitle}</p>
+           <Link to="/request-quote" className="btn-secondary px-16 py-5 text-2xl">
+             Elevate Your Space
+           </Link>
         </div>
       </section>
     </main>

@@ -51,12 +51,12 @@ const MainHeader = () => {
     { label: 'Home', href: '/' },
     {
       label: 'Corporate',
-      href: '/corporate',
+      href: '/about-us',
       hasDropdown: true,
       dropdownItems: [
-        { label: 'About Us', href: '/corporate' },
-        { label: 'Our Team', href: '/corporate#team' },
-        { label: 'Partners', href: '/corporate#partners' },
+        { label: 'About Us', href: '/about-us' },
+        { label: 'Our Team', href: '/about-us#team' },
+        { label: 'Partners', href: '/about-us#partners' },
         { label: 'Careers', href: '/partnership' },
       ]
     },

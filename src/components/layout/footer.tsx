@@ -61,7 +61,7 @@ const Footer = () => {
   ];
 
   const businessLinks = [
-    { label: 'About Us', href: '/corporate' },
+    { label: 'About Us', href: '/about-us' },
     { label: 'Contact Us', href: '/contact-us' },
     { label: 'Report Issue', href: '/contact-us' },
     { label: 'Blog', href: '/blog' },

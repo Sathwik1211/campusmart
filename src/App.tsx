@@ -35,6 +35,7 @@ const PageTemplates: Record<string, any> = {
   'classifieds': lazy(() => import('@/pages/classifieds')),
   'collaboration': lazy(() => import('@/pages/collaboration')),
   'contact-us': lazy(() => import('@/pages/contact-us')),
+  'about-us': lazy(() => import('@/pages/corporate')),
   'corporate': lazy(() => import('@/pages/corporate')),
   'digital-transformation': lazy(() => import('@/pages/digital-transformation')),
   'furniture-design-supply': lazy(() => import('@/pages/furniture-design-supply')),
