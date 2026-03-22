@@ -190,14 +190,85 @@ const Innovation = () => {
                   <div className="space-y-1">
                      <label className="text-xs font-bold text-slate-700">Hero Main Title</label>
                      <textarea 
-                       className="w-full border border-slate-200 rounded-xl px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 h-24" 
+                       className="w-full border border-slate-200 rounded-xl px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 h-20" 
                        value={editData.heroTitle ?? heroTitle}
                        onChange={(e) => setEditData({...editData, heroTitle: e.target.value})}
                      />
                   </div>
-                  
-                  {/* Additional section edit grids can be expanded here simply as inputs binds nodes easily */}
-                  <p className="text-[10px] text-center text-slate-400">Save edits to apply instantly to the frontend screen layouts feed nodes securely.</p>
+
+                  {/* Edit Grid Cards */}
+                  <div className="space-y-2">
+                     <h3 className="text-xs font-black text-slate-900 border-b pb-1 uppercase tracking-tight">1. Grid Cards (4 items)</h3>
+                     <div className="grid grid-cols-2 gap-3">
+                        {(editData.cards || DEFAULTS.cards).map((c: any, i: number) => (
+                            <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1.5">
+                                <span className="text-[10px] font-black text-slate-400">Card {i+1}</span>
+                                <input 
+                                  value={c.title}
+                                  placeholder="Title"
+                                  className="w-full border border-slate-200 p-1.5 text-xs font-bold rounded-lg focus:outline-none"
+                                  onChange={e => {
+                                     const list = JSON.parse(JSON.stringify(editData.cards || DEFAULTS.cards));
+                                     list[i].title = e.target.value;
+                                     setEditData({...editData, cards: list});
+                                  }}
+                                />
+                                <input 
+                                  value={c.description}
+                                  placeholder="Subtitle"
+                                  className="w-full border border-slate-200 p-1.5 text-xs rounded-lg focus:outline-none"
+                                  onChange={e => {
+                                     const list = JSON.parse(JSON.stringify(editData.cards || DEFAULTS.cards));
+                                     list[i].description = e.target.value;
+                                     setEditData({...editData, cards: list});
+                                  }}
+                                />
+                            </div>
+                        ))}
+                     </div>
+                  </div>
+
+                  {/* Edit Rows Sections */}
+                  <div className="space-y-2">
+                     <h3 className="text-xs font-black text-slate-900 border-b pb-1 uppercase tracking-tight">2. Body Sections Rows</h3>
+                     <div className="space-y-3">
+                        {(editData.sections || DEFAULTS.sections).map((s: any, i: number) => (
+                            <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1.5">
+                                <span className="text-[10px] font-black text-slate-400">Section {i+1}</span>
+                                <input 
+                                  value={s.title}
+                                  placeholder="Title"
+                                  className="w-full border border-slate-200 p-1.5 text-xs font-bold rounded-lg focus:outline-none"
+                                  onChange={e => {
+                                     const list = JSON.parse(JSON.stringify(editData.sections || DEFAULTS.sections));
+                                     list[i].title = e.target.value;
+                                     setEditData({...editData, sections: list});
+                                  }}
+                                />
+                                <textarea 
+                                  value={s.description}
+                                  placeholder="Description paragraph..."
+                                  className="w-full border border-slate-200 p-1.5 text-xs rounded-lg focus:outline-none h-14"
+                                  onChange={e => {
+                                     const list = JSON.parse(JSON.stringify(editData.sections || DEFAULTS.sections));
+                                     list[i].description = e.target.value;
+                                     setEditData({...editData, sections: list});
+                                  }}
+                                />
+                                <input 
+                                  value={s.image || ''}
+                                  placeholder="Image URL index cover..."
+                                  className="w-full border border-slate-200 p-1.5 text-[10px] rounded-lg focus:outline-none font-mono"
+                                  onChange={e => {
+                                     const list = JSON.parse(JSON.stringify(editData.sections || DEFAULTS.sections));
+                                     list[i].image = e.target.value;
+                                     setEditData({...editData, sections: list});
+                                  }}
+                                />
+                            </div>
+                        ))}
+                     </div>
+                  </div>
                </div>
 
                <div className="p-6 border-t flex justify-end gap-3 bg-slate-50/50">
