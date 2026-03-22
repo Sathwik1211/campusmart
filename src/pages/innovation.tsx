@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Rocket, Target, Zap, PenSquare, X, CheckCircle2 } from 'lucide-react';
+import { PenSquare, X, CheckCircle2 } from 'lucide-react';
 import api from '@/api/client';
 
 interface Card { title: string; description: string; }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Star, Check, Share2, Award, Truck, ShieldCheck, Heart } from 'lucide-react';
+import { ShoppingCart, Check, Share2, Award, Truck, ShieldCheck, Heart } from 'lucide-react';
 import api from '@/api/client';
 
 interface Product {
