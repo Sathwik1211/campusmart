@@ -99,7 +99,7 @@ const MainHeader = () => {
   return (
     <header
       ref={headerRef}
-      className={`main-header ${isScrolled ? 'scrolled' : ''}`}
+      className={`main-header relative z-[70] ${isScrolled ? 'scrolled' : ''}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`header-inner flex items-center justify-between ${isScrolled ? 'h-16' : 'h-20'}`}>
@@ -132,16 +132,18 @@ const MainHeader = () => {
                         <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen === item.label ? 'rotate-180' : ''}`} />
                       </Link>
                       {dropdownOpen === item.label && item.dropdownItems && (
-                        <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg py-2 z-50 animate-fade-in">
-                          {item.dropdownItems.map((dropdownItem) => (
-                            <Link
-                              key={dropdownItem.label}
-                              to={dropdownItem.href}
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-cm-blue hover:text-white transition-colors"
-                            >
-                              {dropdownItem.label}
-                            </Link>
-                          ))}
+                        <div className="absolute top-full left-0 pt-2 w-48 z-[100] animate-fade-in">
+                          <div className="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            {item.dropdownItems.map((dropdownItem) => (
+                              <Link
+                                key={dropdownItem.label}
+                                to={dropdownItem.href}
+                                className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-cm-blue hover:text-white transition-colors font-medium"
+                              >
+                                {dropdownItem.label}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>

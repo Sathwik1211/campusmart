@@ -127,6 +127,8 @@ const DynamicPageRoute = () => {
   );
 };
 
+const ProductDetail = lazy(() => import('@/pages/product-detail'));
+
 function App() {
   return (
     <SiteContentProvider>
@@ -138,6 +140,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Layout><Login /></Layout>} />
             <Route path="/registration" element={<Layout><Registration /></Layout>} />
+            <Route path="/product/:slug" element={<Layout><ProductDetail /></Layout>} />
             <Route path="/admin/*" element={<AdminRoutes />} />
 
             {/* Static pages explicitly mapped so they always work */}

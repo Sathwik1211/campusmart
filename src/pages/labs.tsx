@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Microscope, FlaskConical, Atom, Monitor, CheckCircle } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
+import api from '@/api/client';
 
 interface Card { title: string; description: string; image?: string; name?: string; }
 
@@ -25,6 +26,16 @@ const Labs = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const { data } = usePageData('labs');
+
+  const [dbProducts, setDbProducts] = useState<any[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+
+  useEffect(() => {
+    api.get('/products', { params: { category: 'labs', limit: '4' } })
+      .then(({ data }) => setDbProducts(data.products || []))
+      .catch(() => setDbProducts([]))
+      .finally(() => setLoadingProducts(false));
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -96,26 +107,57 @@ const Labs = () => {
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  
                   <div className="p-6 flex-grow flex flex-col">
                     <h3 className="text-lg font-bold text-cm-blue-dark mb-2 tracking-tighter group-hover:text-cm-blue transition-colors leading-tight">{lab.title}</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 font-opensans flex-grow">
-                      {lab.description || 'Specialized turnkey solutions for advanced institutional learning.'}
-                    </p>
+                    <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 font-opensans flex-grow">{lab.description || 'Specialized turnkey solutions for advanced institutional learning.'}</p>
                     <div className="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
-                       <div className="flex items-center gap-1.5">
-                          <div className="h-1 w-3 bg-cm-yellow rounded-full" />
-                          <span className="text-[10px] font-bold uppercase tracking-tight text-cm-blue/60">Research Ready</span>
-                       </div>
-                       <div className="text-cm-blue opacity-0 group-hover:opacity-100 transition-all transform translate-x-1 group-hover:translate-x-0">
-                          <ArrowRight className="w-4 h-4" />
-                       </div>
+                       <span className="text-[10px] font-bold uppercase tracking-tight text-cm-blue/60">Module</span>
                     </div>
                   </div>
                 </div>
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Dynamic Products Grid Loaded from DB */}
+      <section className="py-12 md:py-16 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Available Equipment & Lab Supplies</h2>
+            <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1">Directly from our catalog</p>
+          </div>
+
+          {loadingProducts ? (
+            <div className="flex justify-center py-12">
+              <div className="w-8 h-8 border-4 border-cm-blue border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : dbProducts.length === 0 ? (
+            <div className="text-center py-12 bg-white rounded-3xl border border-gray-100 shadow-sm">
+              <p className="text-gray-500 font-bold">No listed products found in this category yet.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {dbProducts.map((p) => (
+                <div key={p.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100 group flex flex-col">
+                  <div className="aspect-square overflow-hidden relative bg-slate-100">
+                    <img src={p.imageUrl || 'https://via.placeholder.com/300'} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div className="p-4 flex-grow flex flex-col">
+                    <h3 className="font-bold text-slate-900 text-sm group-hover:text-cm-blue transition-colors mb-1 line-clamp-1">{p.name}</h3>
+                    <div className="flex items-center gap-1 mb-2">
+                       <span className="text-xs font-bold text-orange-400">⭐ {p.rating || '4.0'}</span>
+                    </div>
+                    <div className="mt-auto pt-3 border-t border-slate-50 flex items-center justify-between">
+                       <span className="font-black text-cm-blue text-sm">₹{Number(p.price).toLocaleString('en-IN')}</span>
+                       <Link to="/contact-us" className="p-2 bg-slate-100 group-hover:bg-cm-blue rounded-xl text-slate-600 group-hover:text-white transition-all"><ArrowRight className="w-4 h-4" /></Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

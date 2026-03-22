@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -34,18 +34,21 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  slug        String   @unique
-  description String?
-  price       Float
-  categoryId  Int
-  imageUrl    String?
-  rating      Float    @default(0)
-  reviewCount Int      @default(0)
-  stock       Int      @default(100)
-  active      Boolean  @default(true)
-  featured    Boolean  @default(false)
+  id             Int      @id @default(autoincrement())
+  name           String
+  slug           String   @unique
+  sku            String?  @unique
+  description    String?
+  price          Float
+  categoryId     Int
+  imageUrl       String?
+  images         String?  // JSON array of URLs
+  specifications String?  // JSON object of specs
+  rating         Float    @default(0)
+  reviewCount    Int      @default(0)
+  stock          Int      @default(100)
+  active         Boolean  @default(true)
+  featured       Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

@@ -39,6 +39,142 @@ router.get('/categories', async (_req: Request, res: Response) => {
     }
 });
 
+// POST /api/products/categories (admin)
+router.post('/categories', verifyToken, requireAdmin, async (req: AuthRequest, res: Response) => {
+    try {
+        const { name, slug } = req.body;
+        const finalSlug = slug || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const category = await prisma.category.create({
+            data: { name, slug: finalSlug }
+        });
+        res.status(201).json(category);
+    } catch (err: any) {
+        res.status(500).json({ error: err.message || 'Failed to create category' });
+    }
+});
+
+// PUT /api/products/categories/:id (admin)
+router.put('/categories/:id', verifyToken, requireAdmin, async (req: AuthRequest, res: Response) => {
+    try {
+        const { name, slug } = req.body;
+        const category = await prisma.category.update({
+            where: { id: Number(req.params.id) },
+            data: { name, slug }
+        });
+        res.json(category);
+    } catch (err: any) {
+        res.status(500).json({ error: err.message || 'Failed to update category' });
+    }
+});
+
+// DELETE /api/products/categories/:id (admin)
+router.delete('/categories/:id', verifyToken, requireAdmin, async (req: AuthRequest, res: Response) => {
+    try {
+        const id = Number(req.params.id);
+        const productsCount = await prisma.product.count({ where: { categoryId: id } });
+        if (productsCount > 0) {
+            return res.status(400).json({ error: 'Cannot delete category that has products' });
+        }
+        await prisma.category.delete({ where: { id } });
+        res.json({ message: 'Category deleted' });
+    } catch (err: any) {
+        res.status(500).json({ error: err.message || 'Failed to delete category' });
+    }
+});
+
+// POST /api/products/bulk (admin)
+router.post('/bulk', verifyToken, requireAdmin, async (req: AuthRequest, res: Response) => {
+    try {
+        const { products, categoryId } = req.body;
+        
+        if (!Array.isArray(products)) {
+            return res.status(400).json({ error: 'Products must be an array' });
+        }
+
+        const results = await Promise.all(products.map(async (p: any) => {
+            const slug = p.slug || p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            
+            // If categoryId is provided in body, use it. Otherwise try to find category by slug if available in product data
+            let targetCategoryId = categoryId;
+            if (!targetCategoryId && p.categorySlug) {
+                const cat = await prisma.category.findUnique({ where: { slug: p.categorySlug } });
+                if (cat) targetCategoryId = cat.id;
+            }
+
+            if (!targetCategoryId) {
+                throw new Error(`Category not found for product: ${p.name}`);
+            }
+
+            // Auto-generate SKU from Slug if empty
+            const finalSku = p.sku && p.sku.trim() !== '' ? p.sku.trim() : slug.toUpperCase();
+
+            // Fallback massage for Bulk string lists to JSON
+            let formattedImages = p.images || null;
+            if (formattedImages && typeof formattedImages === 'string' && !formattedImages.trim().startsWith('[')) {
+                formattedImages = JSON.stringify(formattedImages.split(',').map((s: string) => s.trim()).filter(Boolean));
+            }
+
+            let formattedSpecs = p.specifications || null;
+            if (formattedSpecs && typeof formattedSpecs === 'string' && !formattedSpecs.trim().startsWith('{')) {
+                const obj: Record<string, string> = {};
+                const rows = formattedSpecs.includes('\n') ? formattedSpecs.split('\n') : formattedSpecs.split(';');
+                rows.forEach((line: string) => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const key = parts[0].trim();
+                        const value = parts.slice(1).join(':').trim();
+                        if (key) obj[key] = value;
+                    }
+                });
+                // Defensive fallback: If no colons were found, save it as a "Details" row instead of empty object
+                if (Object.keys(obj).length === 0 && formattedSpecs.trim() !== '') {
+                    obj['Details'] = formattedSpecs.trim();
+                }
+                formattedSpecs = JSON.stringify(obj);
+            }
+
+            return prisma.product.upsert({
+                where: { slug },
+                update: {
+                    name: p.name,
+                    sku: finalSku,
+                    description: p.description,
+                    price: Number(p.price),
+                    categoryId: Number(targetCategoryId),
+                    imageUrl: p.imageUrl,
+                    images: formattedImages,
+                    specifications: formattedSpecs,
+                    rating: Number(p.rating) || 0,
+                    reviewCount: Number(p.reviewCount) || 0,
+                    stock: Number(p.stock) || 100,
+                    active: p.active !== 'false' && p.active !== false,
+                    featured: p.featured === 'true' || p.featured === true
+                },
+                create: {
+                    name: p.name,
+                    slug,
+                    sku: finalSku,
+                    description: p.description,
+                    price: Number(p.price),
+                    categoryId: Number(targetCategoryId),
+                    imageUrl: p.imageUrl,
+                    images: formattedImages,
+                    specifications: formattedSpecs,
+                    rating: Number(p.rating) || 0,
+                    reviewCount: Number(p.reviewCount) || 0,
+                    stock: Number(p.stock) || 100,
+                    active: p.active !== 'false' && p.active !== false,
+                    featured: p.featured === 'true' || p.featured === true
+                }
+            });
+        }));
+
+        res.json({ message: `Successfully processed ${results.length} products`, count: results.length });
+    } catch (err: any) {
+        res.status(500).json({ error: err.message || 'Failed to bulk-load products' });
+    }
+});
+
 // GET /api/products/:id
 router.get('/:id', async (req: Request, res: Response) => {
     try {
@@ -56,13 +192,15 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST /api/products (admin)
 router.post('/', verifyToken, requireAdmin, uploadImage.single('image'), async (req: AuthRequest, res: Response) => {
     try {
-        const { name, description, price, categoryId, rating, reviewCount, stock, active, featured } = req.body;
+        const { name, description, price, categoryId, rating, reviewCount, stock, active, featured, sku, images, specifications } = req.body;
         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const finalSku = sku && sku.trim() !== '' ? sku.trim() : slug.toUpperCase();
         const imageUrl = req.file ? `/uploads/images/${req.file.filename}` : req.body.imageUrl;
         const product = await prisma.product.create({
             data: {
-                name, slug, description, price: Number(price), categoryId: Number(categoryId),
-                imageUrl, rating: Number(rating) || 0, reviewCount: Number(reviewCount) || 0,
+                name, slug, sku: finalSku, description, price: Number(price), categoryId: Number(categoryId),
+                imageUrl, images: images || null, specifications: specifications || null,
+                rating: Number(rating) || 0, reviewCount: Number(reviewCount) || 0,
                 stock: Number(stock) || 100, active: active !== 'false', featured: featured === 'true',
             },
             include: { category: true },
@@ -77,13 +215,17 @@ router.post('/', verifyToken, requireAdmin, uploadImage.single('image'), async (
 // PUT /api/products/:id (admin)
 router.put('/:id', verifyToken, requireAdmin, uploadImage.single('image'), async (req: AuthRequest, res: Response) => {
     try {
-        const { name, description, price, categoryId, rating, reviewCount, stock, active, featured, imageUrl: bodyImageUrl } = req.body;
+        const { name, description, price, categoryId, rating, reviewCount, stock, active, featured, imageUrl: bodyImageUrl, sku, images, specifications } = req.body;
         const imageUrl = req.file ? `/uploads/images/${req.file.filename}` : bodyImageUrl;
         const updateData: Record<string, unknown> = {
             description, price: Number(price), categoryId: Number(categoryId),
             rating: Number(rating), reviewCount: Number(reviewCount),
             stock: Number(stock), active: active !== 'false', featured: featured === 'true',
         };
+        if (sku !== undefined) updateData.sku = sku || null;
+        if (images !== undefined) updateData.images = images || null;
+        if (specifications !== undefined) updateData.specifications = specifications || null;
+        
         if (name) {
             updateData.name = name;
             updateData.slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

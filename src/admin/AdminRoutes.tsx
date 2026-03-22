@@ -15,6 +15,7 @@ const SiteContent = lazy(() => import('./pages/SiteContent'));
 const HomepageEditor = lazy(() => import('./pages/HomepageEditor'));
 const PagesManager = lazy(() => import('./pages/PagesManager'));
 const PageEditor = lazy(() => import('./pages/PageEditor'));
+const Categories = lazy(() => import('./pages/Categories'));
 
 const isLoggedIn = () => !!localStorage.getItem('cm_admin_token');
 
@@ -45,6 +46,7 @@ function AdminRoutes() {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<Suspense fallback={<Loader />}><Dashboard /></Suspense>} />
         <Route path="products" element={<Suspense fallback={<Loader />}><Products /></Suspense>} />
+        <Route path="categories" element={<Suspense fallback={<Loader />}><Categories /></Suspense>} />
         <Route path="blog" element={<Suspense fallback={<Loader />}><Blog /></Suspense>} />
         <Route path="orders" element={<Suspense fallback={<Loader />}><Orders /></Suspense>} />
         <Route path="users" element={<Suspense fallback={<Loader />}><Users /></Suspense>} />
