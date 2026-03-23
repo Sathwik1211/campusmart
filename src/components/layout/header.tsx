@@ -106,12 +106,8 @@ const MainHeader = () => {
           {/* Logo */}
           <div ref={logoRef} className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <div className="relative font-poppins font-black text-slate-800 leading-none">
-                {/* Vector Cap Icon Overlay perfectly transparent inside node scaling */}
-                <div className="absolute -top-[8px] left-[1px] flex flex-col items-center">
-                   <div className="w-[14px] h-[14px] bg-slate-800 rotate-45 rounded-[2px]" />
-                </div>
-                <span className="text-2xl md:text-3xl tracking-tight lowercase">campusmart</span>
+              <div className="h-10 md:h-12 flex items-center mix-blend-multiply">
+                 <img src="/logo.png" alt="CampusMart" className="h-full w-auto object-contain" />
               </div>
             </Link>
           </div>
