@@ -120,14 +120,14 @@ const Shop = () => {
                     <div className="p-3.5 flex-grow flex flex-col justify-between border-t border-slate-50">
                       <div>
                         <Link to={`/product/${product.slug}`} className="cursor-pointer group">
-                          <h3 className="font-black text-cm-blue-dark text-xs sm:text-sm tracking-tight mb-1 cursor-pointer group-hover:text-cm-blue transition-colors leading-snug line-clamp-2 min-h-[32px] sm:min-h-[36px]" title={product.name}>
+                          <h3 className="font-semibold text-cm-blue-dark text-xs sm:text-sm tracking-tight mb-1 cursor-pointer group-hover:text-cm-blue transition-colors leading-snug line-clamp-2 min-h-[32px] sm:min-h-[36px]" title={product.name}>
                             {product.name}
                           </h3>
                         </Link>
                       </div>
 
                       <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100/60">
-                        <span className="text-sm sm:text-base font-black text-cm-blue tracking-tight">{formatPrice(product.price)}</span>
+                        <span className="text-sm sm:text-base font-bold text-cm-blue tracking-tight">{formatPrice(product.price)}</span>
                         <button className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-cm-blue text-white rounded-lg hover:bg-cm-blue-dark transition-all duration-200 font-bold text-xs shadow-sm hover:shadow focus:ring-2 focus:ring-cm-blue/20">
                           <ShoppingCart className="w-3.5 h-3.5" />
                           <span className="hidden xl:inline-block">Add</span>
