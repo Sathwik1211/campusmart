@@ -105,9 +105,13 @@ const MainHeader = () => {
         <div className={`header-inner flex items-center justify-between ${isScrolled ? 'h-16' : 'h-20'}`}>
           {/* Logo */}
           <div ref={logoRef} className="flex-shrink-0">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="h-10 md:h-12 flex items-center">
-                 <img src="/logo.png" alt="CampusMart" className="h-full w-auto object-contain" />
+            <Link to="/" className="flex items-center">
+              <div className="relative font-poppins font-black text-slate-800 leading-none">
+                {/* Vector Cap Icon Overlay perfectly transparent inside node scaling */}
+                <div className="absolute -top-[8px] left-[1px] flex flex-col items-center">
+                   <div className="w-[14px] h-[14px] bg-slate-800 rotate-45 rounded-[2px]" />
+                </div>
+                <span className="text-2xl md:text-3xl tracking-tight lowercase">campusmart</span>
               </div>
             </Link>
           </div>
