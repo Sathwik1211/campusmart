@@ -106,9 +106,8 @@ const MainHeader = () => {
           {/* Logo */}
           <div ref={logoRef} className="flex-shrink-0">
             <Link to="/" className="flex items-center gap-2">
-              <div className="text-2xl md:text-3xl font-poppins font-bold text-cm-blue-dark">
-                <span className="block leading-none">CAMPUS</span>
-                <span className="block leading-none text-sm tracking-[0.3em]">MART</span>
+              <div className="h-10 md:h-12 flex items-center">
+                 <img src="/logo.png" alt="CampusMart" className="h-full w-auto object-contain" />
               </div>
             </Link>
           </div>
