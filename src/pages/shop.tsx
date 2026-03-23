@@ -109,11 +109,11 @@ const Shop = () => {
                 {products.map((product) => (
                   <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col">
                     <Link to={`/product/${product.slug}`} className="cursor-pointer group">
-                      <div className="aspect-[3/4] overflow-hidden bg-slate-100">
+                      <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">
                         <img
                           src={product.imageUrl || 'https://via.placeholder.com/400x300'}
                           alt={product.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                          className="w-full h-full object-contain group-hover:scale-105 transition-all duration-500"
                         />
                       </div>
                     </Link>
