@@ -105,29 +105,33 @@ const Shop = () => {
                 <div className="w-8 h-8 border-4 border-cm-blue border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col">
-                    <Link to={`/product/${product.slug}`} className="cursor-pointer group">
-                      <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">
+                  <div key={product.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100/80 shadow-sm hover:shadow-md hover:border-slate-200/60 transition-all duration-300 hover:-translate-y-1 flex flex-col group/card">
+                    <Link to={`/product/${product.slug}`} className="cursor-pointer">
+                      <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center p-2 group-hover/card:bg-slate-50/50 transition-colors">
                         <img
                           src={product.imageUrl || 'https://via.placeholder.com/400x300'}
                           alt={product.name}
-                          className="w-full h-full object-contain group-hover:scale-105 transition-all duration-500"
+                          className="max-h-full max-w-full object-contain group-hover/card:scale-105 transition-all duration-500"
                         />
                       </div>
                     </Link>
-                    <div className="p-4 flex-grow flex flex-col">
-                      <Link to={`/product/${product.slug}`} className="cursor-pointer group">
-                        <h3 className="font-bold text-cm-blue-dark mb-2 group-hover:text-cm-blue transition-colors leading-tight line-clamp-1">
-                          {product.name}
-                        </h3>
-                      </Link>
-                      {/* Removed Review Stars */}
-                      <div className="flex items-center justify-between mt-auto pt-3 border-t border-slate-50">
-                        <span className="text-lg font-black text-cm-blue">{formatPrice(product.price)}</span>
-                        <button className="px-4 py-2 bg-cm-blue text-white rounded-xl hover:bg-cm-blue-dark transition-colors font-bold text-sm">
-                          Add to Cart
+                    <div className="p-3.5 flex-grow flex flex-col justify-between border-t border-slate-50">
+                      <div>
+                        <Link to={`/product/${product.slug}`} className="cursor-pointer group">
+                          <h3 className="font-black text-cm-blue-dark text-xs sm:text-sm tracking-tight mb-1 cursor-pointer group-hover:text-cm-blue transition-colors leading-snug line-clamp-2 min-h-[32px] sm:min-h-[36px]" title={product.name}>
+                            {product.name}
+                          </h3>
+                        </Link>
+                      </div>
+
+                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100/60">
+                        <span className="text-sm sm:text-base font-black text-cm-blue tracking-tight">{formatPrice(product.price)}</span>
+                        <button className="flex items-center justify-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-cm-blue text-white rounded-lg hover:bg-cm-blue-dark transition-all duration-200 font-bold text-xs shadow-sm hover:shadow focus:ring-2 focus:ring-cm-blue/20">
+                          <ShoppingCart className="w-3.5 h-3.5" />
+                          <span className="hidden xl:inline-block">Add</span>
+                          <span className="inline-block xl:hidden">Add</span>
                         </button>
                       </div>
                     </div>
