@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Check, Share2, Award, Truck, ShieldCheck, Heart } from 'lucide-react';
+import { ShoppingCart, Check, Share2, Award, Truck, ShieldCheck, Heart, ArrowLeft } from 'lucide-react';
 import api from '@/api/client';
 
 interface Product {
@@ -79,9 +79,15 @@ const ProductDetail = () => {
 
   return (
     <main className="bg-slate-50 min-h-screen pb-12">
-      {/* Breadcrumb */}
+      {/* Breadcrumb & Back Action */}
       <div className="bg-white border-b border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-2 text-sm text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-2 text-sm text-slate-500 font-medium">
+          <Link to="/shop" className="flex items-center gap-1 text-cm-blue font-black text-xs mr-1 bg-cm-blue/5 px-2.5 py-1.5 rounded-lg hover:bg-cm-blue/10 transition-all">
+             <ArrowLeft className="w-3.5 h-3.5" />
+             <span>Back to List</span>
+          </Link>
+          <div className="h-4 w-px bg-slate-200 mr-1" />
+          
           <Link to="/" className="hover:text-cm-blue transition-colors">Home</Link>
           <span>/</span>
           {product.category && (
@@ -90,7 +96,7 @@ const ProductDetail = () => {
               <span>/</span>
             </>
           )}
-          <span className="text-slate-800 font-medium truncate">{product.name}</span>
+          <span className="text-slate-800 font-bold truncate">{product.name}</span>
         </div>
       </div>
 
