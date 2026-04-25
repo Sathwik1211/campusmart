@@ -26,8 +26,7 @@ const Registration = () => {
     setError('');
     setSending(true);
     try {
-      const res = await (api.post('/auth/register', formData) as any);
-      const { data } = res;
+      await (api.post('/auth/register', formData) as any);
       // Then send OTP for email verification
       await (api.post('/auth/send-otp', { email: formData.email, purpose: 'verify' }) as any);
       setStep('otp');

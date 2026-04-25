@@ -14,7 +14,7 @@ const Shop = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/products/categories').then(({ data }) => setCategories(data));
+    (api.get('/products/categories') as any).then(({ data }: any) => setCategories(data));
   }, []);
 
   useEffect(() => {
