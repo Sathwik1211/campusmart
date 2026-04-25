@@ -107,7 +107,7 @@ const Shop = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100/80 shadow-sm hover:shadow-md hover:border-slate-200/60 transition-all duration-300 hover:-translate-y-1 flex flex-col group/card">
+                  <div key={product.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100/80 shadow-sm hover:shadow-md hover:border-slate-200/60 transition-all duration-300  flex flex-col group/card">
                     <Link to={`/product/${product.slug}`} className="cursor-pointer">
                       <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center p-2 group-hover/card:bg-slate-50/50 transition-colors">
                         <img

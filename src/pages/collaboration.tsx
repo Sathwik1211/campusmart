@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { Users, MessageSquare, Video, Presentation } from 'lucide-react';
+import { Users, MessageSquare, Video, Presentation, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
 
 interface CardItem { title: string; description: string; }
@@ -57,20 +58,109 @@ const Collaboration = () => {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Standard Corporate Hero */}
-      <section ref={heroRef} className="bg-cm-blue py-10 md:py-14">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-            {heroTitle}
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed font-opensans">
-            {heroSubtitle}
-          </p>
+      {/* Synergy Bento Hero */}
+      <section className="bg-white py-4 md:py-6 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+            {/* Top Left: Main Message */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="md:col-span-7 bg-[#EBF1FA] rounded-[40px] p-10 md:p-14 flex flex-col justify-center border border-cm-blue/10 shadow-sm"
+            >
+              <div className="flex items-center gap-2 mb-6">
+                 <div className="w-2 h-2 rounded-full bg-cm-blue" />
+                 <span className="text-[10px] font-black text-cm-blue uppercase tracking-widest">Connection Live</span>
+              </div>
+              <h1 className="text-4xl md:text-7xl font-black text-cm-blue-dark leading-none tracking-tighter uppercase mb-8">
+                SYNERGY<br/>NETWORK.
+              </h1>
+              <p className="text-gray-500 text-base md:text-lg font-bold leading-tight max-w-sm mb-10">
+                {heroSubtitle}
+              </p>
+              <Link to="/contact-us" className="w-max bg-cm-blue text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl transition-transform flex items-center gap-3">
+                START SYNC <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            {/* Top Right: Dynamic Image */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="md:col-span-5 rounded-[40px] overflow-hidden border-4 border-cm-gray shadow-xl relative group h-[300px] md:h-auto"
+            >
+               <img 
+                 src="/images/heroes/collaboration.png" 
+                 alt="Collaboration" 
+                 className="w-full h-full object-cover transition-transform duration-700" 
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-cm-blue-dark/40 to-transparent pointer-events-none" />
+               <div className="absolute bottom-6 left-6 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-cm-yellow flex items-center justify-center shadow-lg">
+                     <Users className="w-5 h-5 text-cm-blue-dark" />
+                  </div>
+                  <span className="text-white text-[10px] font-black uppercase tracking-widest">Active Collab</span>
+               </div>
+            </motion.div>
+
+            {/* Bottom Left: Social Proof / Status */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="md:col-span-4 bg-slate-900 rounded-[40px] p-8 text-white flex flex-col justify-between shadow-xl"
+            >
+               <div className="flex -space-x-3 mb-6">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="w-12 h-12 rounded-full border-4 border-slate-900 bg-cm-gray overflow-hidden">
+                      <img src={`https://i.pravatar.cc/100?img=${i+20}`} alt="user" />
+                    </div>
+                  ))}
+                  <div className="w-12 h-12 rounded-full border-4 border-slate-900 bg-cm-blue flex items-center justify-center text-[10px] font-black">
+                    +12
+                  </div>
+               </div>
+               <div>
+                  <h3 className="text-xl font-black uppercase tracking-tighter leading-none mb-1">Global Reach</h3>
+                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest leading-none">Connecting Institutions</p>
+               </div>
+            </motion.div>
+
+            {/* Bottom Right: Quick Action / Metric */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="md:col-span-8 bg-cm-gray rounded-[40px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between border border-gray-100 shadow-sm"
+            >
+               <div className="flex items-center gap-6 mb-6 md:mb-0">
+                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-gray-100">
+                     <MessageSquare className="w-7 h-7 text-cm-blue" />
+                  </div>
+                  <div>
+                     <h4 className="text-lg font-black text-cm-blue-dark uppercase tracking-tighter leading-none mb-1">Sync Phase</h4>
+                     <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest leading-none">Instant Communication</p>
+                  </div>
+               </div>
+               <div className="flex items-center gap-8">
+                  <div className="text-center">
+                     <div className="text-2xl font-black text-cm-blue">100%</div>
+                     <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Uptime</div>
+                  </div>
+                  <div className="h-8 w-[1px] bg-gray-200" />
+                  <div className="text-center">
+                     <div className="text-2xl font-black text-cm-yellow">0.2s</div>
+                     <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Latency</div>
+                  </div>
+               </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Structured Synergy Features */}
-      <section className="py-10 md:py-14 overflow-hidden">
+      <section className="py-8 md:py-12 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-12 items-center mb-10">
             <div className="lg:w-1/2">
@@ -105,7 +195,7 @@ const Collaboration = () => {
                 const Icon = ICONS[i % ICONS.length];
                 return (
                   <div key={card.title} 
-                       className="group p-8 bg-white border border-gray-100 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col items-start shadow-sm">
+                       className="group p-8 bg-white border border-gray-100 rounded-2xl hover:shadow-2xl transition-all duration-300 flex flex-col items-start shadow-sm">
                     <div className="w-16 h-16 bg-cm-blue/5 rounded-2xl flex items-center justify-center mb-6 border border-cm-blue/10 group-hover:bg-cm-blue transition-all duration-500 shadow-inner">
                       <Icon className="w-8 h-8 text-cm-blue group-hover:text-white" />
                     </div>

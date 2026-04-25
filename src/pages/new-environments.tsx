@@ -131,13 +131,13 @@ const NewEnvironments = () => {
               <Link
                 key={env.title}
                 to={env.href}
-                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2"
+                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 "
               >
                 <div className="h-48 overflow-hidden">
                   <img
                     src={env.image}
                     alt={env.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group- transition-transform duration-500"
                   />
                 </div>
                 <div className="p-6">

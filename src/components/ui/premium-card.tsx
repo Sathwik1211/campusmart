@@ -16,11 +16,11 @@ const PremiumCard = ({ title, description, image, href, badge, badgeColor = 'bg-
   return (
     <Link 
       to={href} 
-      className={`group relative overflow-hidden rounded-[2.5rem] bg-gray-900 shadow-2xl transition-all duration-700 hover:-translate-y-2 hover:shadow-cm-blue/20 ${!h ? 'aspect-[4/5] md:aspect-[3/4]' : ''} ${className}`}
+      className={`group relative overflow-hidden rounded-[2.5rem] bg-gray-900 shadow-2xl transition-all duration-700  hover:shadow-cm-blue/20 ${!h ? 'aspect-[4/5] md:aspect-[3/4]' : ''} ${className}`}
       style={h ? { height: h } : {}}
     >
       {/* Background Image */}
-      <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-110">
+      <div className="absolute inset-0 transition-transform duration-1000 group-">
         <img 
           src={image} 
           alt={title} 
@@ -42,7 +42,7 @@ const PremiumCard = ({ title, description, image, href, badge, badgeColor = 'bg-
 
       {/* Content */}
       <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-        <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight transform group-hover:-translate-y-2 transition-transform duration-500">
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight transform group- transition-transform duration-500">
           {title}
         </h3>
         <p className="text-white/60 text-sm font-medium leading-relaxed mb-6 line-clamp-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">

@@ -139,7 +139,7 @@ const DigitalSolutions = () => {
                 <img
                   src={image}
                   alt={title}
-                  className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
+                  className="w-full h-64 md:h-80 object-cover  transition-transform duration-500"
                 />
               </div>
               <div className="solution-content">

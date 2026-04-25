@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { PenSquare, X, CheckCircle2 } from 'lucide-react';
+import { PenSquare, X, CheckCircle2, ArrowRight } from 'lucide-react';
 import api from '@/api/client';
 
 interface Card { title: string; description: string; }
@@ -110,18 +111,68 @@ const Innovation = () => {
       {isAdmin && (
          <button 
            onClick={() => setIsEditModalOpen(true)}
-           className="fixed bottom-6 right-6 p-4 bg-slate-900 text-white rounded-full shadow-2xl z-[500] hover:scale-105 transition-transform flex items-center gap-2 font-bold text-sm"
+           className="fixed bottom-6 right-6 p-4 bg-slate-900 text-white rounded-full shadow-2xl z-[500]  transition-transform flex items-center gap-2 font-bold text-sm"
          >
            <PenSquare className="w-5 h-5 text-cm-yellow" /> Edit Page
          </button>
       )}
 
-      {/* Hero Banner Title */}
-      <section className="bg-cm-blue py-12 md:py-16 text-center text-white px-4">
-        <div className="max-w-5xl mx-auto">
-           <h1 className="text-2xl md:text-5xl font-black tracking-tight leading-tight md:leading-snug">
-             {heroTitle}
-           </h1>
+      {/* Neo-Bento Innovation Hero */}
+      <section className="bg-white py-6 md:py-10 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+            {/* Left Text Card */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="md:col-span-7 bg-[#EDE9E0] rounded-[40px] p-10 md:p-14 flex flex-col justify-center shadow-md border border-gray-200/50"
+            >
+              <div className="bg-cm-blue text-white w-max px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                SCHOOL DESIGN 2025
+              </div>
+              <h1 className="text-4xl md:text-6xl font-black text-cm-blue leading-none uppercase tracking-tighter mb-6">
+                CREATING<br/>LEARNING SPACES.
+              </h1>
+              <p className="text-gray-600 text-lg font-bold leading-tight max-w-md">
+                {heroTitle}
+              </p>
+            </motion.div>
+
+            {/* Right Image Card */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="md:col-span-5 rounded-[40px] overflow-hidden bg-slate-200 shadow-lg relative h-[300px] md:h-auto"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                alt="Architecture" 
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 " 
+              />
+            </motion.div>
+          </div>
+
+          {/* Bottom Blue Banner */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-4 bg-cm-blue rounded-[40px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between shadow-xl"
+          >
+            <div className="flex items-center gap-6 mb-6 md:mb-0">
+               <div className="w-16 h-16 bg-cm-yellow rounded-2xl flex items-center justify-center shadow-lg transform -rotate-3">
+                 <PenSquare className="w-8 h-8 text-cm-blue-dark" />
+               </div>
+               <div>
+                 <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-none mb-1">Architecture & Planning</h3>
+                 <p className="text-white/60 text-xs font-bold uppercase tracking-widest">NEP 2020 Compliant Designs</p>
+               </div>
+            </div>
+            <Link to="/contact-us" className="bg-cm-yellow text-cm-blue-dark px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl  transition-transform">
+              Start Project
+            </Link>
+          </motion.div>
         </div>
       </section>
 

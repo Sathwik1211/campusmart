@@ -119,7 +119,7 @@ const Resources = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
               </div>
@@ -135,14 +135,14 @@ const Resources = () => {
 
               {/* Bottom Read More Box */}
               <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end h-full">
-                <h3 className="text-white font-extrabold text-xl md:text-2xl leading-tight mb-2 drop-shadow-lg group-hover:-translate-y-1 transition-transform duration-300">
+                <h3 className="text-white font-extrabold text-xl md:text-2xl leading-tight mb-2 drop-shadow-lg group- transition-transform duration-300">
                   {item.title}
                 </h3>
-                <p className="text-white/80 text-sm md:text-base leading-relaxed mb-4 group-hover:-translate-y-1 transition-transform duration-300 delay-75">
+                <p className="text-white/80 text-sm md:text-base leading-relaxed mb-4 group- transition-transform duration-300 delay-75">
                   {item.description}
                 </p>
 
-                <div className="flex items-center gap-2 group-hover:-translate-y-1 transition-transform duration-300 delay-150">
+                <div className="flex items-center gap-2 group- transition-transform duration-300 delay-150">
                   <span
                     className="text-xs font-bold uppercase tracking-widest flex items-center gap-1"
                     style={{ color: item.color }}

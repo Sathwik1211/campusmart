@@ -245,7 +245,7 @@ const Footer = () => {
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-cm-yellow hover:text-cm-blue-dark hover:scale-110 transition-all duration-200"
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-cm-yellow hover:text-cm-blue-dark  transition-all duration-200"
                   >
                     <Icon className="w-4 h-4" />
                   </a>

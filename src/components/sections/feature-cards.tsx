@@ -117,7 +117,7 @@ const FeatureCards = () => {
                     <img
                       src={image}
                       alt={title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-"
                     />
 
                     {/* Permanent subtle vignette */}
@@ -247,7 +247,7 @@ const FeatureCards = () => {
               <a
                 key={title}
                 href={href}
-                className="block w-full py-4 px-4 rounded-xl text-center transition-all hover:brightness-95 hover:-translate-y-0.5 shadow-md border-b-4 border-black/10"
+                className="block w-full py-4 px-4 rounded-xl text-center transition-all  .5 shadow-md border-b-4 border-black/10"
                 style={{ background: bg }}
               >
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60">{queryText}</p>

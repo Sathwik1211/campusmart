@@ -132,7 +132,7 @@ const Blog = () => {
                           <img
                             src={post.imageUrl || 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80'}
                             alt={post.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            className="w-full h-full object-cover group- transition-transform duration-700"
                           />
                           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                         </div>

@@ -116,7 +116,7 @@ const Catalogues = () => {
             {catalogues.map((catalogue: any) => (
               <div
                 key={catalogue.title}
-                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2"
+                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-sm-hover transition-all duration-300 "
               >
                 <div className="h-48 overflow-hidden">
                   <img

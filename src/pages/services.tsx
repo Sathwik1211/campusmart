@@ -89,7 +89,7 @@ const Services = () => {
                                 to={service.href} 
                                 className="service-card group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all p-8 flex gap-6"
                             >
-                                <div className={`w-16 h-16 rounded-xl ${service.color} flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform`}>
+                                <div className={`w-16 h-16 rounded-xl ${service.color} flex items-center justify-center text-white shrink-0 group- transition-transform`}>
                                     <Icon className="w-8 h-8" />
                                 </div>
                                 <div>

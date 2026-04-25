@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { Building2, Ruler, PenTool, CheckCircle } from 'lucide-react';
+import { Building2, Ruler, PenTool, CheckCircle, ArrowRight, Star, Users } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
 
 interface Card { title: string; description: string; image?: string; }
@@ -77,25 +78,78 @@ const CampusDesign = () => {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Standard Corporate Hero - Side by Side */}
-      <section ref={heroRef} className="bg-cm-blue py-10 px-4 sm:px-6 lg:px-8 overflow-hidden relative shadow-inner">
-         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10">
-          <div className="lg:w-1/2 text-left text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              {heroTitle}
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed font-opensans max-w-xl">
-              {heroSubtitle}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link to="/request-quote" className="btn-secondary px-8 py-3 text-base">
-                Start Planning
-              </Link>
-            </div>
-          </div>
-          <div className="lg:w-1/2 relative">
-            <div className="absolute -inset-4 bg-cm-blue-dark/20 rounded-[3rem] blur-2xl" />
-            <img src={heroImage} alt={heroTitle} className="rounded-[2rem] shadow-2xl w-full h-[400px] object-cover border-4 border-cm-blue-dark relative z-10" />
+      {/* Bento Grid Hero */}
+      <section className="bg-[#FAFAFA] py-12 px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[200px] md:auto-rows-[160px]">
+            {/* Main Title Block */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="md:col-span-8 md:row-span-2 bg-cm-blue text-white rounded-[2rem] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden"
+            >
+              <div className="relative z-10 max-w-xl">
+                <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight leading-tight">
+                  {heroTitle}
+                </h1>
+                <p className="text-lg text-white/80 leading-relaxed font-opensans max-w-lg mb-8">
+                  {heroSubtitle}
+                </p>
+                <Link to="/request-quote" className="inline-flex items-center gap-2 bg-cm-yellow text-cm-blue-dark px-6 py-3 rounded-full font-bold hover:bg-white transition-colors">
+                  Start Planning <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+              {/* Decorative Background Element */}
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            </motion.div>
+
+            {/* Image Block */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              className="md:col-span-4 md:row-span-2 rounded-[2rem] overflow-hidden relative"
+            >
+              <img src={heroImage} alt={heroTitle} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6">
+                <span className="text-white font-bold text-lg">Award Winning Designs</span>
+              </div>
+            </motion.div>
+
+            {/* Stats Block 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              className="md:col-span-4 md:row-span-1 bg-white rounded-[2rem] p-6 border border-gray-100 flex flex-col justify-center items-center text-center shadow-sm"
+            >
+              <Star className="w-8 h-8 text-cm-yellow mb-2" />
+              <h3 className="text-3xl font-bold text-cm-blue-dark">500+</h3>
+              <p className="text-sm text-gray-500">Campuses Designed</p>
+            </motion.div>
+
+            {/* Stats Block 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+              className="md:col-span-4 md:row-span-1 bg-cm-blue-dark rounded-[2rem] p-6 flex flex-col justify-center items-center text-center text-white"
+            >
+              <Users className="w-8 h-8 text-cm-blue mb-2" />
+              <h3 className="text-3xl font-bold text-white">1M+</h3>
+              <p className="text-sm text-white/70">Students Impacted</p>
+            </motion.div>
+
+            {/* Accent Block */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+              className="md:col-span-4 md:row-span-1 rounded-[2rem] overflow-hidden relative"
+            >
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Interior" className="w-full h-full object-cover" />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -118,10 +172,10 @@ const CampusDesign = () => {
             {cards.map((service) => (
               <div 
                 key={service.title} 
-                className="group bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-100 flex flex-col"
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl  border border-gray-100 flex flex-col"
               >
                 <div className="aspect-[16/10] overflow-hidden relative">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-" />
                   <div className="absolute inset-0 bg-cm-blue-dark/10 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -151,7 +205,7 @@ const CampusDesign = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10 text-center">
               {PROCESS_STEPS.map((step) => (
                 <div key={step.title} className="group flex flex-col items-center">
-                  <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 group-hover:bg-white group-hover:rotate-12 transition-all duration-500 shadow-xl">
+                  <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 group-hover:bg-white group- transition-all duration-500 shadow-xl">
                     <step.icon className="w-7 h-7 text-cm-yellow group-hover:text-cm-blue-dark" />
                   </div>
                   <h3 className="text-lg font-bold mb-2 tracking-tighter">{step.title}</h3>

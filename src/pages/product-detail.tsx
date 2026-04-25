@@ -151,7 +151,7 @@ const ProductDetail = () => {
                   >+</button>
                 </div>
 
-                <button className="h-12 flex-1 bg-cm-blue hover:bg-cm-blue-dark text-white rounded-xl shadow-lg shadow-cm-blue/20 font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5">
+                <button className="h-12 flex-1 bg-cm-blue hover:bg-cm-blue-dark text-white rounded-xl shadow-lg shadow-cm-blue/20 font-bold flex items-center justify-center gap-2 transition-all .5">
                   <ShoppingCart className="w-5 h-5" />
                   Add to Cart
                 </button>

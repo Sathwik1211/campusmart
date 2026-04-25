@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { BookOpen, Search, Laptop, Users } from 'lucide-react';
+import { BookOpen, Search, Laptop, Users, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
 
 interface CardItem { title: string; description: string; }
@@ -57,19 +58,72 @@ const Libraries = () => {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Standard Corporate Hero */}
-      <section ref={heroRef} className="bg-cm-blue py-10 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto text-center text-white">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-            {heroTitle}
-          </h1>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-            {heroSubtitle}
-          </p>
-          <div className="mt-8">
-            <Link to="/request-quote" className="btn-secondary px-8 py-3 text-base">
-              Explore Catalog
-            </Link>
+      {/* Knowledge Spire Hero */}
+      <section className="bg-white py-4 md:py-6 px-4 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-12 items-center">
+            {/* Left Image Stack */}
+            <div className="md:w-1/2 relative">
+               <motion.div 
+                 initial={{ opacity: 0, x: -50 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 className="relative z-10 rounded-[60px] overflow-hidden border-8 border-cm-gray shadow-2xl h-[400px] md:h-[550px]"
+               >
+                 <img 
+                   src="/images/heroes/libraries.png" 
+                   alt="Modern Library" 
+                   className="w-full h-full object-cover" 
+                 />
+               </motion.div>
+               {/* Floating Badge */}
+               <div className="absolute -top-6 -right-6 z-20 w-32 h-32 bg-cm-yellow rounded-full flex flex-col items-center justify-center shadow-2xl border-4 border-white text-cm-blue-dark">
+                  <BookOpen className="w-8 h-8 mb-1" />
+                  <span className="text-[10px] font-black uppercase tracking-widest leading-none">Resource</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest leading-none">Hub</span>
+               </div>
+            </div>
+
+            {/* Right Content */}
+            <div className="md:w-1/2">
+               <motion.div 
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 className="inline-block px-4 py-1 bg-cm-gray rounded-full text-[10px] font-black text-cm-blue uppercase tracking-[0.2em] mb-8 shadow-sm"
+               >
+                 v2.0-CLEAN
+               </motion.div>
+               <motion.h1 
+                 initial={{ opacity: 0, y: 30 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.1 }}
+                 className="text-5xl md:text-8xl font-black text-cm-blue-dark leading-none tracking-tighter uppercase mb-8"
+               >
+                 INFINITE<br/>KNOWLEDGE.
+               </motion.h1>
+               <motion.p 
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.2 }}
+                 className="text-gray-500 text-lg md:text-xl font-bold leading-tight max-w-md mb-10"
+               >
+                 {heroSubtitle}
+               </motion.p>
+               <motion.div 
+                 initial={{ opacity: 0, y: 20 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.3 }}
+                 className="flex items-center gap-6"
+               >
+                 <Link to="/contact-us" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl transition-transform flex items-center gap-3">
+                   START PROJECT <ArrowRight className="w-4 h-4" />
+                 </Link>
+                 <div className="h-12 w-[1px] bg-gray-200 hidden sm:block" />
+                 <div className="hidden sm:block">
+                    <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Global Access</div>
+                    <div className="text-sm font-black text-cm-blue-dark uppercase tracking-widest">Ready for Sync</div>
+                 </div>
+               </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -89,7 +143,7 @@ const Libraries = () => {
             {cards.map((f, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
-                <div key={f.title} className="group p-8 bg-white border border-gray-100 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center shadow-sm">
+                <div key={f.title} className="group p-8 bg-white border border-gray-100 rounded-2xl hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center shadow-sm">
                   <div className="w-16 h-16 bg-cm-blue/5 rounded-full flex items-center justify-center mb-6 border border-cm-blue/10 group-hover:bg-cm-blue transition-all duration-500 shadow-inner">
                     <Icon className="w-8 h-8 text-cm-blue group-hover:text-white" />
                   </div>
@@ -129,7 +183,7 @@ const Libraries = () => {
             </div>
             
             <div className="relative group p-2 bg-white rounded-[2.5rem] shadow-xl">
-               <img src={heroImage} alt="Library" className="rounded-[2rem] w-full h-[350px] object-cover shadow-2xl transition-transform duration-700 group-hover:scale-[1.02]" />
+               <img src={heroImage} alt="Library" className="rounded-[2rem] w-full h-[350px] object-cover shadow-2xl transition-transform duration-700" />
             </div>
           </div>
         </div>

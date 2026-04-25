@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle } from 'lucide-react';
@@ -79,26 +80,80 @@ const Furniture = () => {
 
   return (
     <main className="min-h-screen bg-white text-opensans">
-      {/* Elegant Hero - Side by Side Corporate Style */}
-      <section ref={heroRef} className="bg-cm-blue py-10 px-4 sm:px-6 relative shadow-inner">
-         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10">
-          <div className="lg:w-1/2 text-left text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              {heroTitle}
-            </h1>
-            <p className="text-lg text-white/80 leading-relaxed max-w-xl">
-              {heroSubtitle}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link to="/shop" className="btn-secondary px-8 py-3 text-base">
-                View Collections
-              </Link>
+      {/* Neo-Bento Hero Section */}
+      <section className="bg-white py-6 md:py-10 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+            {/* Left Image Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="md:col-span-8 relative rounded-[40px] overflow-hidden bg-[#8AB933] h-[300px] md:h-[400px] shadow-lg group"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                alt="Furniture" 
+                className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80 transition-transform duration-700 group-" 
+              />
+              <div className="absolute top-6 left-6 md:top-10 md:left-10">
+                <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-4 py-1.5 text-[10px] md:text-xs font-black text-white uppercase tracking-[0.2em] mb-4">
+                  Furniture Series 2024
+                </div>
+                <h1 className="text-3xl md:text-6xl font-black text-white leading-none uppercase tracking-tighter max-w-lg">
+                  {heroTitle}
+                </h1>
+              </div>
+            </motion.div>
+
+            {/* Right Stack */}
+            <div className="md:col-span-4 flex flex-col gap-4">
+              {/* Store Action Card */}
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-cm-blue rounded-[40px] p-8 md:p-10 flex flex-col justify-center items-center text-center shadow-lg  transition-all cursor-pointer group flex-1"
+              >
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 border border-white/20 group-hover:bg-cm-yellow transition-all duration-500">
+                  <ArrowRight className="w-8 h-8 text-white group-hover:text-cm-blue-dark" />
+                </div>
+                <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-none mb-2">SCHOOLMART.STORE</h2>
+                <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Instant Fulfillment</p>
+              </motion.div>
+
+              {/* Status Card */}
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-cm-gray rounded-[40px] p-6 flex flex-col justify-center shadow-sm border border-gray-100"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-cm-blue animate-pulse" />
+                  <span className="text-[10px] font-black text-cm-blue uppercase tracking-widest">Quality Audit Passed</span>
+                </div>
+                <p className="text-xs text-gray-500 font-bold">Standardized Institution Setups</p>
+              </motion.div>
             </div>
           </div>
-          <div className="lg:w-1/2 relative">
-            <div className="absolute -inset-4 bg-cm-blue-dark/20 rounded-[3rem] blur-2xl" />
-            <img src={heroImage} alt={heroTitle} className="rounded-2xl shadow-xl w-full h-[350px] object-cover border-4 border-cm-blue-dark relative z-10" />
-          </div>
+
+          {/* Bottom Yellow Banner */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-4 bg-cm-yellow rounded-[40px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between shadow-md"
+          >
+            <div className="flex items-center gap-4 mb-4 md:mb-0">
+               <div className="h-10 w-1 bg-cm-blue-dark rounded-full hidden md:block" />
+               <p className="text-sm md:text-lg font-black text-cm-blue-dark uppercase tracking-tight">
+                 {heroSubtitle}
+               </p>
+            </div>
+            <Link to="/contact-us" className="bg-cm-blue-dark text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-cm-blue transition-colors whitespace-nowrap">
+              Talk to Expert
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -115,10 +170,10 @@ const Furniture = () => {
               <Link 
                 key={cat.title} 
                 to="/shop" 
-                className="group bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-100 flex flex-col"
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl  border border-gray-100 flex flex-col"
               >
                 <div className="aspect-[16/10] overflow-hidden relative">
-                  <img src={cat.image} alt={cat.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={cat.image} alt={cat.title} className="w-full h-full object-cover transition-transform duration-700 group-" />
                   <div className="absolute inset-0 bg-cm-blue-dark/5 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -156,9 +211,9 @@ const Furniture = () => {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {dbProducts.map((p) => (
-                <div key={p.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100 group flex flex-col">
+                <div key={p.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300  border border-slate-100 group flex flex-col">
                   <div className="aspect-square overflow-hidden relative bg-slate-100">
-                    <img src={p.imageUrl || 'https://via.placeholder.com/300'} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={p.imageUrl || 'https://via.placeholder.com/300'} alt={p.name} className="w-full h-full object-cover group- transition-transform duration-500" />
                   </div>
                   <div className="p-4 flex-grow flex flex-col">
                     <h3 className="font-bold text-slate-900 text-sm group-hover:text-cm-blue transition-colors mb-1 line-clamp-1">{p.name}</h3>

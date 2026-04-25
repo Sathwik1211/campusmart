@@ -33,7 +33,7 @@ const Classifieds = () => {
         <div className="w-full mx-auto px-2 sm:px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {listings.map((item) => (
-              <Link key={item.title} to={item.link} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-sm-hover transition-all duration-300 hover:-translate-y-2">
+              <Link key={item.title} to={item.link} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-sm-hover transition-all duration-300 ">
                 <item.icon className="w-12 h-12 text-cm-blue mb-4" />
                 <h3 className="text-xl font-bold text-cm-blue-dark mb-2">{item.title}</h3>
                 <p className="text-gray-600 mb-4">{item.desc}</p>

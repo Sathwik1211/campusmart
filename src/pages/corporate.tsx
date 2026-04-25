@@ -142,7 +142,7 @@ const Corporate = () => {
           <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8 md:divide-x divide-cm-gray">
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="text-center md:px-4 group">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-cm-blue/5 flex items-center justify-center border border-cm-blue/10 group-hover:bg-cm-blue group-hover:scale-105 transition-all duration-500 shadow-md">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-cm-blue/5 flex items-center justify-center border border-cm-blue/10 group-hover:bg-cm-blue group- transition-all duration-500 shadow-md">
                   <Icon className="w-7 h-7 text-cm-blue group-hover:text-white" />
                 </div>
                 <div className="text-3xl font-bold text-cm-blue-dark mb-1 tracking-tighter">{value}</div>
@@ -158,7 +158,7 @@ const Corporate = () => {
         <div className="w-full mx-auto px-4 sm:px-8 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative group">
-              <div className="absolute -inset-6 bg-cm-blue/10 rounded-[3rem] group-hover:rotate-1 transition-transform duration-1000" />
+              <div className="absolute -inset-6 bg-cm-blue/10 rounded-[3rem] group- transition-transform duration-1000" />
               <img
                 src={data.missionImage || DEFAULTS.missionImage}
                 alt="Mission"
@@ -201,8 +201,8 @@ const Corporate = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="bg-white p-10 rounded-[2.5rem] hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 border border-cm-gray group shadow-sm">
-                <div className="w-16 h-16 rounded-full bg-cm-blue flex items-center justify-center mb-8 shadow-md group-hover:scale-110 transition-transform duration-500">
+              <div key={title} className="bg-white p-10 rounded-[2.5rem] hover:shadow-lg transition-all duration-500 transform  border border-cm-gray group shadow-sm">
+                <div className="w-16 h-16 rounded-full bg-cm-blue flex items-center justify-center mb-8 shadow-md group- transition-transform duration-500">
                   <Icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-cm-blue-dark mb-4 tracking-tight">{title}</h3>
@@ -256,7 +256,7 @@ const Corporate = () => {
                   <img
                     src={member.image || 'https://via.placeholder.com/150'}
                     alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-cm-blue-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute bottom-6 left-6 text-white opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all">
@@ -284,7 +284,7 @@ const Corporate = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {(data.partners && data.partners.length > 0 ? data.partners : DEFAULTS.partners).map((partner: string) => (
               <div key={partner} className="bg-white border border-cm-gray rounded-[2rem] p-6 flex flex-col items-center justify-center aspect-video shadow-sm hover:shadow-xl hover:border-cm-blue transition-all duration-500 group">
-                <div className="w-10 h-10 bg-cm-gray/30 rounded-full flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-cm-blue group-hover:scale-110 transition-all">
+                <div className="w-10 h-10 bg-cm-gray/30 rounded-full flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-cm-blue group- transition-all">
                   <Handshake className="w-5 h-5 text-gray-400 group-hover:text-white" />
                 </div>
                 <span className="text-xs font-bold text-cm-blue-dark text-center uppercase tracking-tight leading-none">{partner}</span>
@@ -298,7 +298,7 @@ const Corporate = () => {
       <section id="careers" className="relative group overflow-hidden py-32 mx-4 mb-8 rounded-[4rem] shadow-2xl border-4 border-white/20">
         <div className="absolute inset-0 bg-cm-blue transition-colors duration-1000 group-hover:bg-cm-blue-dark" />
         <div className="relative z-10 w-full mx-auto px-4 sm:px-8 text-center text-white">
-          <h2 className="text-5xl md:text-8xl font-bold mb-10 tracking-tighter leading-none transform group-hover:scale-105 transition-transform">Be the change.</h2>
+          <h2 className="text-5xl md:text-8xl font-bold mb-10 tracking-tighter leading-none transform group- transition-transform">Be the change.</h2>
           <p className="text-2xl text-white/70 max-w-2xl mx-auto mb-16 leading-relaxed">
             Join a consortium that's redefining how India learns. Your expertise can shape the future of thousands of campuses.
           </p>

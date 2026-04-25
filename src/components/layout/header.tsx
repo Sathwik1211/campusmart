@@ -101,13 +101,13 @@ const MainHeader = () => {
       ref={headerRef}
       className={`main-header relative z-[70] ${isScrolled ? 'scrolled' : ''}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`header-inner flex items-center justify-between ${isScrolled ? 'h-16' : 'h-20'}`}>
+      <div className="max-w-7xl mx-auto px-4">
+        <div className={`header-inner flex items-center justify-between ${isScrolled ? 'h-12' : 'h-14'}`}>
           {/* Logo */}
           <div ref={logoRef} className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <div className="h-12 md:h-[60px] flex items-center">
-                 <img src="/logo.png" alt="CampusMart" className="h-full w-auto object-contain" />
+              <div className="h-10 md:h-[45px] flex items-center">
+                <img src="/logo.png" alt="CampusMart" className="h-full w-auto object-contain" />
               </div>
             </Link>
           </div>

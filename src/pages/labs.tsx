@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Microscope, FlaskConical, Atom, Monitor, CheckCircle } from 'lucide-react';
@@ -68,20 +69,77 @@ const Labs = () => {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Standard Corporate Hero - Side by Side */}
-      <section ref={heroRef} className="bg-cm-blue py-12 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2 text-left text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-              {heroTitle}
-            </h1>
-            <p className="text-lg text-white/80 leading-relaxed font-opensans max-w-xl">
-              {heroSubtitle}
-            </p>
+      {/* Neo-Bento Science Hero */}
+      <section className="bg-white py-6 md:py-10 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Left Beige Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-[#EDE9E0] rounded-[40px] p-8 md:p-10 shadow-sm border border-gray-200/50 flex flex-col justify-between h-[300px] md:h-[400px]"
+            >
+              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+                <FlaskConical className="w-6 h-6 text-[#059669]" />
+              </div>
+              <div>
+                <div className="text-[10px] font-black text-[#059669] uppercase tracking-widest mb-2">Setup v2.0</div>
+                <h2 className="text-2xl md:text-3xl font-black text-cm-blue-dark uppercase tracking-tighter leading-none mb-4">MODERN LABS.</h2>
+                <p className="text-gray-500 text-xs font-bold leading-tight">Advanced institutional research setups.</p>
+              </div>
+            </motion.div>
+
+            {/* Middle Mint Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-[#D1FAE5] rounded-[40px] p-8 md:p-10 shadow-sm border border-emerald-100 flex flex-col justify-center h-[300px] md:h-[400px]"
+            >
+              <h1 className="text-4xl md:text-6xl font-black text-[#059669] leading-none uppercase tracking-tighter mb-6">
+                ADVANCED<br/>SCIENCE.
+              </h1>
+              <Link to="/contact-us" className="bg-white text-[#059669] px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-widest shadow-md flex items-center gap-2 w-max  transition-transform">
+                EXPLORE LABS <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            {/* Right Teal Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-[#059669] rounded-[40px] overflow-hidden shadow-lg h-[300px] md:h-[400px] relative group"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                alt="Science" 
+                className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50 transition-transform duration-700 group-" 
+              />
+              <div className="absolute bottom-10 left-10">
+                <h3 className="text-2xl font-black text-white uppercase tracking-tighter leading-none mb-2">Bio-Tech Hub</h3>
+                <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest">NABL Compliant</p>
+              </div>
+            </motion.div>
           </div>
-          <div className="lg:w-1/2">
-            <img src={heroImage} alt={heroTitle} className="rounded-2xl shadow-xl w-full h-[350px] object-cover border-4 border-cm-blue-dark" />
-          </div>
+
+          {/* Bottom Yellow Banner */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-4 bg-cm-yellow rounded-[40px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between shadow-md"
+          >
+            <div className="flex items-center gap-4 mb-4 md:mb-0">
+               <div className="h-10 w-1 bg-cm-blue-dark rounded-full hidden md:block" />
+               <p className="text-sm md:text-lg font-black text-cm-blue-dark uppercase tracking-tight">
+                 {heroSubtitle}
+               </p>
+            </div>
+            <Link to="/contact-us" className="bg-cm-blue-dark text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-cm-blue transition-colors">
+              Talk to Expert
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -99,11 +157,11 @@ const Labs = () => {
             {cards.map((lab, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
-                <div key={lab.title} className="group bg-white border border-gray-100 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col shadow-sm overflow-hidden">
+                <div key={lab.title} className="group bg-white border border-gray-100 rounded-2xl hover:shadow-2xl transition-all duration-300  flex flex-col shadow-sm overflow-hidden">
                   <div className="aspect-[16/10] overflow-hidden relative">
-                    <img src={lab.image} alt={lab.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={lab.image} alt={lab.title} className="w-full h-full object-cover transition-transform duration-700 group-" />
                     <div className="absolute inset-0 bg-cm-blue-dark/20 group-hover:bg-transparent transition-colors duration-500" />
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-cm-blue group-hover:scale-110 transition-all duration-500">
+                    <div className="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-cm-blue group- transition-all duration-500">
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                   </div>
@@ -140,9 +198,9 @@ const Labs = () => {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {dbProducts.map((p) => (
-                <div key={p.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100 group flex flex-col">
+                <div key={p.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300  border border-slate-100 group flex flex-col">
                   <div className="aspect-square overflow-hidden relative bg-slate-100">
-                    <img src={p.imageUrl || 'https://via.placeholder.com/300'} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={p.imageUrl || 'https://via.placeholder.com/300'} alt={p.name} className="w-full h-full object-cover group- transition-transform duration-500" />
                   </div>
                   <div className="p-4 flex-grow flex flex-col">
                     <h3 className="font-bold text-slate-900 text-sm group-hover:text-cm-blue transition-colors mb-1 line-clamp-1">{p.name}</h3>
@@ -180,7 +238,7 @@ const Labs = () => {
                   'Turnkey Execution Strategy'
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 group">
-                    <div className="w-5 h-5 bg-cm-yellow rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                    <div className="w-5 h-5 bg-cm-yellow rounded-full flex items-center justify-center group- transition-transform shadow-sm">
                       <CheckCircle className="w-3 h-3 text-black" />
                     </div>
                     <span className="text-white/80 group-hover:text-white transition-opacity">{item}</span>
@@ -197,7 +255,7 @@ const Labs = () => {
                   { title: 'Installation', desc: 'NABL compliant setup' },
                   { title: 'Certification', desc: 'Safety & quality audits' },
                 ].map((service) => (
-                  <div key={service.title} className="p-6 bg-white border border-gray-100 rounded-2xl hover:shadow-md transition-all transform hover:-translate-y-1 shadow-sm font-opensans">
+                  <div key={service.title} className="p-6 bg-white border border-gray-100 rounded-2xl hover:shadow-md transition-all transform  shadow-sm font-opensans">
                     <h4 className="font-bold text-cm-blue-dark mb-1 tracking-tight text-sm">{service.title}</h4>
                     <p className="text-gray-500 text-[11px] leading-tight">{service.desc}</p>
                   </div>

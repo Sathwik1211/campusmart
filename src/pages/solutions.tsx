@@ -98,7 +98,7 @@ const Solutions = () => {
                             >
                                 <div className={`h-2 ${sol.color}`} />
                                 <div className="p-8">
-                                    <div className={`w-12 h-12 rounded-lg ${sol.color} flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform`}>
+                                    <div className={`w-12 h-12 rounded-lg ${sol.color} flex items-center justify-center text-white mb-6 group- transition-transform`}>
                                         <Icon className="w-6 h-6" />
                                     </div>
                                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-cm-blue transition-colors">

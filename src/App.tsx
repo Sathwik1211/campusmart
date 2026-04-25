@@ -15,7 +15,7 @@ const Home = lazy(() => import('@/pages/home'));
 const Login = lazy(() => import('@/pages/login'));
 const Registration = lazy(() => import('@/pages/registration'));
 const NotFound = lazy(() => import('@/pages/not-found'));
-const AdminRoutes = lazy(() => import('@/admin/AdminRoutes'));
+// const AdminRoutes = lazy(() => import('@/admin/AdminRoutes'));
 const PaymentPolicy = lazy(() => import('@/pages/payment-policy'));
 const OrderRejection = lazy(() => import('@/pages/order-rejection'));
 const ReplacementReturn = lazy(() => import('@/pages/replacement-return'));
@@ -141,7 +141,7 @@ function App() {
             <Route path="/login" element={<Layout><Login /></Layout>} />
             <Route path="/registration" element={<Layout><Registration /></Layout>} />
             <Route path="/product/:slug" element={<Layout><ProductDetail /></Layout>} />
-            <Route path="/admin/*" element={<AdminRoutes />} />
+            {/* <Route path="/admin/*" element={<AdminRoutes />} /> */}
 
             {/* Static pages explicitly mapped so they always work */}
             {Object.keys(PageTemplates).map((path) => {
