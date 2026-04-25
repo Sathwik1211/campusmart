@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { BookOpen, Search, Laptop, Users, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
@@ -23,34 +22,15 @@ const DEFAULTS = {
 const ICONS = [Search, Laptop, BookOpen, Users];
 
 const Libraries = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const { data } = usePageData('libraries');
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(heroRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power2.out' });
-      
-      const cards = cardsRef.current?.children;
-      if (cards) {
-        gsap.fromTo(cards, 
-          { opacity: 0, y: 30 }, 
-          { 
-            opacity: 1, y: 0, 
-            duration: 0.8, 
-            stagger: 0.1, 
-            scrollTrigger: {
-              trigger: cardsRef.current,
-              start: 'top 85%',
-            }
-          }
-        );
-      }
-    });
-    return () => ctx.revert();
+    // Animations removed to maintain static professional aesthetic
   }, []);
 
   const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
+  const heroImage = data.heroImage ?? DEFAULTS.heroImage;
   const section1Title = data.section1Title ?? DEFAULTS.section1Title;
   const cards: CardItem[] = (data.cards && data.cards.length > 0) ? data.cards : DEFAULTS.cards;
 

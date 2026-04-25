@@ -29,7 +29,7 @@ const Registration = () => {
       const res = await (api.post('/auth/register', formData) as any);
       const { data } = res;
       // Then send OTP for email verification
-      await api.post('/auth/send-otp', { email: formData.email, purpose: 'verify' });
+      await (api.post('/auth/send-otp', { email: formData.email, purpose: 'verify' }) as any);
       setStep('otp');
     } catch (err: any) {
       setError(err.response?.data?.error || 'Registration failed. Please try again.');
@@ -43,12 +43,12 @@ const Registration = () => {
     setError('');
     setLoading(true);
     try {
-      await api.post('/auth/verify-otp', { email: formData.email, code: otp, purpose: 'verify' });
+      await (api.post('/auth/verify-otp', { email: formData.email, code: otp, purpose: 'verify' }) as any);
       // Auto-login after verification
-      const { data } = await api.post('/auth/login', {
+      const { data } = await (api.post('/auth/login', {
         email: formData.email,
         password: formData.password,
-      });
+      }) as any);
       localStorage.setItem('cm_token', data.accessToken);
       localStorage.setItem('cm_user', JSON.stringify(data.user));
       setStep('done');

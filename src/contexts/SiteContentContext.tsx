@@ -20,7 +20,7 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const refresh = async () => {
         try {
             setLoading(true);
-            const { data } = await api.get('/content');
+            const { data } = (await api.get('/content')) as any;
 
             // Parse JSON values if possible
             const parsedContent: Record<string, any> = {};

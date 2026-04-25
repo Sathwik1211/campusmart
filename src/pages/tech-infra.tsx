@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { Monitor, Wifi, Server, Shield, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
@@ -23,31 +22,11 @@ const DEFAULTS = {
 const ICONS = [Monitor, Wifi, Server, Shield];
 
 const TechInfra = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const { data } = usePageData('tech-infra');
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(heroRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
-      
-      const cards = cardsRef.current?.children;
-      if (cards) {
-        gsap.fromTo(cards, 
-          { opacity: 0, y: 30 }, 
-          { 
-            opacity: 1, y: 0, 
-            duration: 0.6, 
-            stagger: 0.1, 
-            scrollTrigger: {
-              trigger: cardsRef.current,
-              start: 'top 85%',
-            }
-          }
-        );
-      }
-    });
-    return () => ctx.revert();
+    // Animations removed to maintain static professional aesthetic
   }, []);
 
   const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;

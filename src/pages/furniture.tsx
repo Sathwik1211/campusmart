@@ -72,7 +72,6 @@ const Furniture = () => {
 
   const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
   const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
-  const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
   const section1Title = data.section1Title ?? DEFAULTS.section1Title;
   const section2Title = data.section2Title ?? DEFAULTS.section2Title;
   const cards: Card[] = (data.cards && data.cards.length > 0) ? data.cards : DEFAULTS.cards;

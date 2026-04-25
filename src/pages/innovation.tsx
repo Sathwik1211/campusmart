@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { PenSquare, X, CheckCircle2, ArrowRight } from 'lucide-react';
+import { PenSquare, X, CheckCircle2 } from 'lucide-react';
 import api from '@/api/client';
 
 interface Card { title: string; description: string; }
@@ -59,8 +59,8 @@ const Innovation = () => {
   const [editData, setEditData] = useState<any>({});
 
   const fetchData = () => {
-     api.get('/pages/innovation')
-       .then(res => {
+     (api.get('/pages/innovation') as any)
+       .then((res: any) => {
           try {
              const parsed = res.data.pageData ? JSON.parse(res.data.pageData) : {};
              setData(parsed);
