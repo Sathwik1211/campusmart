@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import gsap from 'gsap';
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Brain, Cpu, Database, Code, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
@@ -24,7 +23,6 @@ const DEFAULTS = {
 const ICONS = [Brain, Database, Code, Cpu];
 
 const AIML = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const { data } = usePageData('ai-ml');
 
@@ -32,9 +30,7 @@ const AIML = () => {
     // Animations removed to maintain static professional aesthetic
   }, []);
 
-  const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
   const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
-  const heroImage = data.heroImage ?? DEFAULTS.heroImage;
   const section1Title = data.section1Title ?? DEFAULTS.section1Title;
   const section2Title = data.section2Title ?? DEFAULTS.section2Title;
   const cards: Card[] = (data.cards && data.cards.length > 0) ? data.cards : DEFAULTS.cards;

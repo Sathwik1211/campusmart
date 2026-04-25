@@ -19,11 +19,9 @@ const Shop = () => {
 
   useEffect(() => {
     setLoading(true);
-    const params: Record<string, string> = { limit: '50' };
-    if (selectedCategory !== 'all') params.category = selectedCategory;
-    if (searchQuery) params.search = searchQuery;
-    api.get('/products', { params })
-      .then(({ data }) => setProducts(data.products))
+    (api.get('/products') as any)
+      .then(({ data }: any) => setProducts(data.products || []))
+      .catch(() => setProducts([]))
       .finally(() => setLoading(false));
   }, [selectedCategory, searchQuery]);
 

@@ -41,11 +41,11 @@ const Blog = () => {
     if (activeCategory) params.set('category', activeCategory);
 
     Promise.all([
-      api.get('/blog?' + params.toString()),
-      api.get('/blog/categories')
+      api.get('/blog?' + params.toString()) as any,
+      api.get('/blog/categories') as any
     ]).then(([postsRes, catRes]) => {
-      setPosts(postsRes.data.posts);
-      setCategories(catRes.data);
+      setPosts(postsRes.data.posts || []);
+      setCategories(catRes.data || []);
     }).finally(() => setLoading(false));
   };
 

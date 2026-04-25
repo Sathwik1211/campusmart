@@ -15,10 +15,7 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
-      const { data } = await api.post('/auth/login', {
-        email: formData.email,
-        password: formData.password,
-      });
+      const { data } = await (api.post('/auth/login', formData) as any);
       localStorage.setItem('cm_token', data.accessToken);
       localStorage.setItem('cm_user', JSON.stringify(data.user));
       if (data.user?.role === 'admin') {

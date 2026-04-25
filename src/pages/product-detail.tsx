@@ -30,8 +30,9 @@ const ProductDetail = () => {
   useEffect(() => {
     setLoading(true);
     // Use the get single product endpoint
-    api.get(`/products/${slug}`)
-      .then(({ data }) => {
+    (api.get(`/products/${slug}`) as any)
+      .then((res: any) => {
+        const { data } = res;
         setProduct(data);
         setMainImage(data.imageUrl || 'https://via.placeholder.com/600x450');
         

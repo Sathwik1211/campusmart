@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { Monitor, Wifi, Server, Shield, ChevronRight, ArrowRight } from 'lucide-react';
+import { Monitor, Wifi, Server, Shield, ArrowRight } from 'lucide-react';
 import { usePageData } from '@/hooks/usePageData';
 
 interface CardItem { title: string; description: string; }

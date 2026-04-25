@@ -41,8 +41,8 @@ const Furniture = () => {
   const [loadingProducts, setLoadingProducts] = useState(true);
 
   useEffect(() => {
-    api.get('/products', { params: { category: 'furniture', limit: '4' } })
-      .then(({ data }) => setDbProducts(data.products || []))
+    (api.get('/products') as any)
+      .then(({ data }: any) => setDbProducts(data.products || []))
       .catch(() => setDbProducts([]))
       .finally(() => setLoadingProducts(false));
   }, []);
@@ -72,7 +72,7 @@ const Furniture = () => {
 
   const heroTitle = data.heroTitle ?? DEFAULTS.heroTitle;
   const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
-  const heroImage = data.heroImage ?? DEFAULTS.heroImage;
+  const heroSubtitle = data.heroSubtitle ?? DEFAULTS.heroSubtitle;
   const section1Title = data.section1Title ?? DEFAULTS.section1Title;
   const section2Title = data.section2Title ?? DEFAULTS.section2Title;
   const cards: Card[] = (data.cards && data.cards.length > 0) ? data.cards : DEFAULTS.cards;

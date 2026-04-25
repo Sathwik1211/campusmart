@@ -16,8 +16,8 @@ export function usePageData<T = Record<string, any>>(slug: string): {
 
     useEffect(() => {
         let alive = true;
-        api.get(`/pages/${slug}`)
-            .then(res => {
+        (api.get(`/pages/${slug}`) as any)
+            .then((res: any) => {
                 if (!alive) return;
                 try {
                     const parsed = res.data.pageData ? JSON.parse(res.data.pageData) : {};

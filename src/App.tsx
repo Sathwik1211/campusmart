@@ -91,15 +91,17 @@ const DynamicPageRoute = () => {
   const { slug } = useParams();
   const [pageStatus, setPageStatus] = useState<number>(0);
   const [templateId, setTemplateId] = useState<string | null>(null);
+  const [pageData, setPageData] = useState<any>(null);
 
   useEffect(() => {
     const verifyPage = async () => {
       try {
-        const { data } = await api.get(`/pages/${slug}`);
-        if (!data.published) {
+        const { data } = (await api.get(`/pages/${slug}`)) as any;
+        if (!data || !data.published) {
           setPageStatus(404);
         } else {
           setTemplateId(data.template);
+          setPageData(data.pageData);
           setPageStatus(200);
         }
       } catch (err: any) {
